@@ -39,13 +39,22 @@ public class MajorRegisterController {
     public MajorRegisterDTO getByMajorIdAndSeasonDisabledIsFalse(@PathVariable("majorId") Long majorId, @RequestParam("disabled") boolean disabled) {
         return majorRegisterService.findByMajorIdAndSeasonDisabled(majorId, disabled);
     }
-    @GetMapping("/majorRegisters/list/student/{studentId}")
-    public List<MajorRegisterDTO> getListByStudentId(@PathVariable("studentId") Long studentId) {
-        return majorRegisterService.findAllByStudentId(studentId);
+    @GetMapping("/majorRegisters/list/student/{studentId}/courses/{coursesId}")
+    public List<MajorRegisterDTO> getListByStudentIdAndCoursesId(@PathVariable("studentId") Long studentId,
+                                                                 @PathVariable("coursesId") Long coursesId) {
+        return majorRegisterService.findAllByStudentIdAndCoursesId(studentId, coursesId);
     }
     @GetMapping("/majorRegisters/student/{studentId}")
     public MajorRegisterDTO getByStudentIdAndSeasonWithOpenRegister(@PathVariable("studentId") Long studentId,
-                                           @RequestParam("openRegister") boolean openRegister) {
-        return majorRegisterService.findByStudentIdAndSeasonNotDisabledAndOpenRegister(studentId, openRegister);
+                                           @RequestParam("openRegister") boolean openRegister,
+                                                                    @RequestParam("coursesIdOfStudent") Long coursesIdOfStudent) {
+        return majorRegisterService.findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(studentId, openRegister, coursesIdOfStudent);
     }
+
+    @GetMapping("/majorRegisters/student/{studentId}/season/{seasonId}")
+    public MajorRegisterDTO getByStudentIdAndSeasonId(@PathVariable("studentId") Long studentId,
+                                                      @PathVariable("seasonId") Long seasonId) {
+        return majorRegisterService.findByStudentIdAndSeasonId(studentId, seasonId);
+    }
+
 }

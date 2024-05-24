@@ -22,9 +22,11 @@ public class Register extends Base{
     private Grade grade;
     @OneToMany(mappedBy = "targetRegister", cascade = CascadeType.ALL)
     private List<Transaction> transactions = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "major_register_id")
     private MajorRegister majorRegister;
+
     private boolean openTransaction;
 
     @Transient

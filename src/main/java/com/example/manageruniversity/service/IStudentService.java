@@ -5,6 +5,6 @@ import com.example.manageruniversity.dto.StudentDTO;
 
 import java.util.List;
 
-public interface IStudentService extends IGenericService<StudentDTO> {
+public interface IStudentService extends IGenericService<StudentDTO,StudentDTO> {
     List<StudentDTO> getListStudentBySubjectGroupId(Long subjectGroupId);
 }

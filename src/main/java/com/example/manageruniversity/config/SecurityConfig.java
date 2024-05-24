@@ -25,7 +25,8 @@ public class SecurityConfig {
             "/api/v1/notifications/**",
             "/api/v1/export/**",
             "/vnpay-payment",
-            "/api/v1/mail/**"
+            "/api/v1/mail/**",
+            "/api/v1/aspirations/**"
     };
     private static final String[] LIST_URL_ACCESS_BY_ADMIN = {
             "/api/v1/courses/**",
@@ -39,7 +40,7 @@ public class SecurityConfig {
             "/api/v1/roomClasses/**",
             "/api/v1/majors/**",
             "/api/v1/majorRegister/**",
-            "/api/v1/grades/**"
+            "/api/v1/grades/**",
     };
     private static final String[] LIST_URL_ACCESS_BY_TEACHER = {
             "/api/v1/grades/**"
@@ -57,7 +58,7 @@ public class SecurityConfig {
                             .permitAll()
                             .requestMatchers(HttpMethod.GET, "/api/v1/file/**").permitAll()
                             .requestMatchers(HttpMethod.POST, LIST_URL_ACCESS_BY_ADMIN).hasAuthority(Role.ADMIN.name())
-                            .requestMatchers(LIST_URL_ACCESS_BY_TEACHER).hasAuthority(Role.STUDENT.name())
+                            .requestMatchers(LIST_URL_ACCESS_BY_TEACHER).hasAuthority(Role.TEACHER.name())
                             .anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

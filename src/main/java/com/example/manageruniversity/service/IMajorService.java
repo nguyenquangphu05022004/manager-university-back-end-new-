@@ -5,7 +5,7 @@ import com.example.manageruniversity.dto.MajorDTO;
 
 import java.util.List;
 
-public interface IMajorService extends IGenericService<MajorDTO> {
+public interface IMajorService extends IGenericService<MajorDTO,MajorDTO> {
 
 
 }

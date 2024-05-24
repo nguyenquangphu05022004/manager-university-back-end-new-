@@ -5,11 +5,13 @@ import com.example.manageruniversity.dto.SeasonDTO;
 
 import java.util.List;
 
-public interface ISeasonService extends IGenericService<SeasonDTO> {
+public interface ISeasonService extends IGenericService<SeasonDTO,SeasonDTO> {
 
     SeasonDTO findById(Long seasonId);
 
     List<SeasonDTO> getListSeasonByCoursesId(Long coursesId);
 
     List<SeasonDTO> getListSeasonByDisabled(boolean disabled);
+
+    List<SeasonDTO> getListSeasonExtraByStudentId(Long studentId);
 }

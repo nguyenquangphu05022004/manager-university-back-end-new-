@@ -14,5 +14,4 @@ import java.util.List;
 @NoArgsConstructor
 public class RoomClassDTO extends BaseDTO {
     private String name;
-    private List<TimeDTO> timeDTOS = new ArrayList<>();
 }

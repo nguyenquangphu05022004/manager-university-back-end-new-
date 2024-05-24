@@ -16,7 +16,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T16:00:59+0700",
+    date = "2024-05-23T20:07:34+0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (Oracle Corporation)"
 )
 public class TimeMapperImpl implements TimeMapper {
@@ -40,6 +40,7 @@ public class TimeMapperImpl implements TimeMapper {
         time.setEndTime( timeDTO.getEndTime() );
         time.setStartDate( timeDTO.getStartDate() );
         time.setEndDate( timeDTO.getEndDate() );
+        time.setRoomClass( roomClassDTOToRoomClass( timeDTO.getRoomClass() ) );
 
         return time;
     }
@@ -52,7 +53,6 @@ public class TimeMapperImpl implements TimeMapper {
 
         TimeDTO timeDTO = new TimeDTO();
 
-        timeDTO.setRoomClassDTO( roomClassToRoomClassDTO( time.getRoomClass() ) );
         timeDTO.setId( time.getId() );
         timeDTO.setCreatedDate( time.getCreatedDate() );
         timeDTO.setCreatedBy( time.getCreatedBy() );
@@ -63,6 +63,7 @@ public class TimeMapperImpl implements TimeMapper {
         timeDTO.setEndTime( time.getEndTime() );
         timeDTO.setStartDate( time.getStartDate() );
         timeDTO.setEndDate( time.getEndDate() );
+        timeDTO.setRoomClass( roomClassToRoomClassDTO( time.getRoomClass() ) );
 
         return timeDTO;
     }
@@ -140,6 +141,23 @@ public class TimeMapperImpl implements TimeMapper {
         subjectGroup.setNumberOfStudentCurrent( subjectGroupDTO.getNumberOfStudentCurrent() );
 
         return subjectGroup;
+    }
+
+    protected RoomClass roomClassDTOToRoomClass(RoomClassDTO roomClassDTO) {
+        if ( roomClassDTO == null ) {
+            return null;
+        }
+
+        RoomClass roomClass = new RoomClass();
+
+        roomClass.setId( roomClassDTO.getId() );
+        roomClass.setCreatedDate( roomClassDTO.getCreatedDate() );
+        roomClass.setCreatedBy( roomClassDTO.getCreatedBy() );
+        roomClass.setModifiedDate( roomClassDTO.getModifiedDate() );
+        roomClass.setModifiedBy( roomClassDTO.getModifiedBy() );
+        roomClass.setName( roomClassDTO.getName() );
+
+        return roomClass;
     }
 
     protected RoomClassDTO roomClassToRoomClassDTO(RoomClass roomClass) {

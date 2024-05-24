@@ -9,6 +9,7 @@ import com.example.manageruniversity.repository.auth.UserRepository;
 import com.example.manageruniversity.service.IFilesStorageService;
 import com.example.manageruniversity.utils.SystemUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,17 @@ public class FilesStorageServiceImpl implements IFilesStorageService {
 
     private final AvatarRepository avatarRepository;
     private final UserRepository userRepository;
-    private final Path path = Paths.get(SystemUtils.FOLDER_STORAGE_FILE);
+
+    @Value("${path.folder.uploads}")
+    private String folderUploads;
+    private  Path path = null;
 
     @Override
     @Transactional
     public AvatarResponse uploads(MultipartFile multipartFile) {
+        if(path == null) {
+            path  = Paths.get(folderUploads);
+        }
         try {
             FileOutputStream fileOut = new FileOutputStream(path.
                     resolve(multipartFile.getOriginalFilename())
@@ -39,7 +46,7 @@ public class FilesStorageServiceImpl implements IFilesStorageService {
                     .findByUsername(SystemUtils.getUsername())
                     .orElseThrow(() -> new NotFoundIdException("user", "username", SystemUtils.getUsername()));
             Avatar avatar = new Avatar(multipartFile.getOriginalFilename(),
-                    SystemUtils.FOLDER_STORAGE_FILE,
+                    folderUploads,
                     user);
             if(user.getAvatar() != null) {
                 delete(user.getAvatar().getAvatarName());
@@ -60,6 +67,9 @@ public class FilesStorageServiceImpl implements IFilesStorageService {
     }
 
     private void delete(String fileName) {
+        if(path == null) {
+            path  = Paths.get(folderUploads);
+        }
         try {
             Files.delete(path.resolve(fileName));
         } catch (FileNotFoundException e) {
@@ -71,6 +81,9 @@ public class FilesStorageServiceImpl implements IFilesStorageService {
 
     @Override
     public Resource readFile(String fileName) {
+        if(path == null) {
+            path  = Paths.get(folderUploads);
+        }
         try {
             FileInputStream fileInput = new FileInputStream(path.resolve(fileName).toUri().getPath());
             Resource resource = new ByteArrayResource(fileInput.readAllBytes());

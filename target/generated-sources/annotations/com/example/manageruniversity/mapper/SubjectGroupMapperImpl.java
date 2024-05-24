@@ -1,9 +1,11 @@
 package com.example.manageruniversity.mapper;
 
+import com.example.manageruniversity.dto.RoomClassDTO;
 import com.example.manageruniversity.dto.SubjectDTO;
 import com.example.manageruniversity.dto.SubjectGroupDTO;
 import com.example.manageruniversity.dto.TeacherDTO;
 import com.example.manageruniversity.dto.TimeDTO;
+import com.example.manageruniversity.entity.RoomClass;
 import com.example.manageruniversity.entity.Subject;
 import com.example.manageruniversity.entity.SubjectGroup;
 import com.example.manageruniversity.entity.Teacher;
@@ -14,7 +16,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T16:00:59+0700",
+    date = "2024-05-23T20:07:34+0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (Oracle Corporation)"
 )
 public class SubjectGroupMapperImpl implements SubjectGroupMapper {
@@ -84,6 +86,23 @@ public class SubjectGroupMapperImpl implements SubjectGroupMapper {
         return subject;
     }
 
+    protected RoomClass roomClassDTOToRoomClass(RoomClassDTO roomClassDTO) {
+        if ( roomClassDTO == null ) {
+            return null;
+        }
+
+        RoomClass roomClass = new RoomClass();
+
+        roomClass.setId( roomClassDTO.getId() );
+        roomClass.setCreatedDate( roomClassDTO.getCreatedDate() );
+        roomClass.setCreatedBy( roomClassDTO.getCreatedBy() );
+        roomClass.setModifiedDate( roomClassDTO.getModifiedDate() );
+        roomClass.setModifiedBy( roomClassDTO.getModifiedBy() );
+        roomClass.setName( roomClassDTO.getName() );
+
+        return roomClass;
+    }
+
     protected Time timeDTOToTime(TimeDTO timeDTO) {
         if ( timeDTO == null ) {
             return null;
@@ -101,6 +120,7 @@ public class SubjectGroupMapperImpl implements SubjectGroupMapper {
         time.setEndTime( timeDTO.getEndTime() );
         time.setStartDate( timeDTO.getStartDate() );
         time.setEndDate( timeDTO.getEndDate() );
+        time.setRoomClass( roomClassDTOToRoomClass( timeDTO.getRoomClass() ) );
 
         return time;
     }
@@ -179,6 +199,23 @@ public class SubjectGroupMapperImpl implements SubjectGroupMapper {
         return teacherDTO;
     }
 
+    protected RoomClassDTO roomClassToRoomClassDTO(RoomClass roomClass) {
+        if ( roomClass == null ) {
+            return null;
+        }
+
+        RoomClassDTO roomClassDTO = new RoomClassDTO();
+
+        roomClassDTO.setId( roomClass.getId() );
+        roomClassDTO.setCreatedDate( roomClass.getCreatedDate() );
+        roomClassDTO.setCreatedBy( roomClass.getCreatedBy() );
+        roomClassDTO.setModifiedDate( roomClass.getModifiedDate() );
+        roomClassDTO.setModifiedBy( roomClass.getModifiedBy() );
+        roomClassDTO.setName( roomClass.getName() );
+
+        return roomClassDTO;
+    }
+
     protected TimeDTO timeToTimeDTO(Time time) {
         if ( time == null ) {
             return null;
@@ -196,6 +233,7 @@ public class SubjectGroupMapperImpl implements SubjectGroupMapper {
         timeDTO.setEndTime( time.getEndTime() );
         timeDTO.setStartDate( time.getStartDate() );
         timeDTO.setEndDate( time.getEndDate() );
+        timeDTO.setRoomClass( roomClassToRoomClassDTO( time.getRoomClass() ) );
 
         return timeDTO;
     }

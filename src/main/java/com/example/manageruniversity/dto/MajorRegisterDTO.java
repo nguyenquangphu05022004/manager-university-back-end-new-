@@ -12,6 +12,8 @@ public class MajorRegisterDTO extends BaseDTO {
     private MajorDTO majorDTO;
     private SeasonDTO seasonDTO;
     private TuitionDTO tuitionDTO;
+    //(this register of only student when login to system)
+    //i must filter list register by username and season not end of course current
     private List<RegisterDTO> registerDTOS = new ArrayList<>();
     private boolean openRegister;
     private PaymentResponse paymentOfPerStudentAtCurrentSeason;

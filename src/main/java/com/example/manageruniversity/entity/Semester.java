@@ -14,7 +14,9 @@ import java.util.List;
 @Data
 @Setter
 public class Semester extends Base{
+    private String semesterCode;
     private String semesterName;
+    private boolean isExtraSemester;
     @OneToMany(mappedBy = "semester")
     private List<Season> seasons = new ArrayList<>();
 }

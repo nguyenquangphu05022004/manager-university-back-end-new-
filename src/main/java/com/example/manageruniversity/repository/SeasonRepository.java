@@ -13,8 +13,15 @@ import java.util.Optional;
 public interface SeasonRepository extends JpaRepository<Season, Long> {
 
     List<Season> findAllByDisabled(boolean disabled);
-    @Query("select s from Season s inner join Courses c on s.courses.id = c.id " +
+    @Query("select s from Season s " +
+            "inner join Courses c on s.courses.id = c.id " +
             "where c.id = :coursesId " +
             "order by s.id desc ")
     List<Season> findAllByCoursesIdAndOrderByIdDesc(@PathVariable("coursesId") Long coursesId);
+
+    @Query("select s from Season s inner join AspirationOfStudent  aspi " +
+            "on s.id = aspi.season.id inner join Student st on aspi.student.id = st.id " +
+            "where st.id = :studentId and aspi.approval = true " +
+            "order by s.id desc ")
+    List<Season> findSeasonExtraByStudentId(Long studentId);
 }

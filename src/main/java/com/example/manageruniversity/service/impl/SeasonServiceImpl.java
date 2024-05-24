@@ -82,4 +82,12 @@ public class SeasonServiceImpl implements ISeasonService {
                 .map(e -> SeasonMapper.mapper.seasonToDTO(e))
                 .toList();
     }
+
+    @Override
+    public List<SeasonDTO> getListSeasonExtraByStudentId(Long studentId) {
+        List<Season> listExtraSeasonOfStudent = seasonRepository.findSeasonExtraByStudentId(studentId);
+        return listExtraSeasonOfStudent.stream()
+                .map(e -> SeasonMapper.mapper.seasonToDTO(e))
+                .toList();
+    }
 }

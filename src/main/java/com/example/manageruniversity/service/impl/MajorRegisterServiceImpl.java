@@ -2,9 +2,11 @@ package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.MajorRegisterDTO;
 import com.example.manageruniversity.dto.PaymentResponse;
+import com.example.manageruniversity.dto.RegisterDTO;
 import com.example.manageruniversity.entity.*;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.MajorRegisterMapper;
+import com.example.manageruniversity.mapper.RegisterMapper;
 import com.example.manageruniversity.mapper.SeasonMapper;
 import com.example.manageruniversity.repository.MajorRegisterRepository;
 import com.example.manageruniversity.repository.PaymentRepository;
@@ -28,7 +30,7 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     public MajorRegisterDTO saveOrUpdate(MajorRegisterDTO majorRegisterDTO) {
         MajorRegister majorRegister = majorRegisterRepository
                 .findBySeasonIdAndMajorId(majorRegisterDTO.getSeasonDTO().getId(),
-                majorRegisterDTO.getMajorDTO().getId()).orElseThrow();
+                majorRegisterDTO.getMajorDTO().getId());
         if(majorRegister != null) {
             List<Subject> subjects = majorRegister.getSubjects();
             for(var s : majorRegisterDTO.getSubjectDTOS()) {
@@ -41,8 +43,8 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
         } else {
             majorRegister = MajorRegisterMapper.mapper.majorRegisterDTOToEntity(majorRegisterDTO);
         }
-        majorRegister = majorRegisterRepository.save(majorRegister);
-        return majorRegisterDTO;
+         majorRegisterRepository.save(majorRegister);
+        return null;
     }
 
     private int checkSubjectIdIsExistsInList(List<Subject> subjects, Long id, int l, int r) {
@@ -85,14 +87,15 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     }
 
     @Override
-    public List<MajorRegisterDTO> findAllByStudentId(Long studentId) {
-        List<MajorRegister> majorRegisters = majorRegisterRepository.findAllByStudentId(studentId);
+    public List<MajorRegisterDTO> findAllByStudentIdAndCoursesId(Long studentId, Long coursesId) {
+        List<MajorRegister> majorRegisters = majorRegisterRepository.findAllByStudentIdAndCoursesId(studentId, coursesId);
         for(MajorRegister m : majorRegisters) {
             List<Register> registers = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, m.getId());
             m.setRegisters(registers);
         }
          return majorRegisters.stream()
                 .map(majorRegister -> {
+
                     MajorRegisterDTO majorResponse = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
                     Optional<Payment> payment = paymentRepository.findByStudentIdAndMajorRegisterId(studentId, majorRegister.getId());
                     if(payment.isPresent()) {
@@ -110,11 +113,29 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     }
 
     @Override
-    public MajorRegisterDTO findByStudentIdAndSeasonNotDisabledAndOpenRegister(Long studentId, boolean openRegister) {
-        MajorRegister majorRegister = majorRegisterRepository.findByStudentIdAndSeasonNotDisabledAndOpenRegister(studentId, openRegister)
+    public MajorRegisterDTO findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(Long studentId, boolean openRegister, Long coursesIdOfStudent) {
+        MajorRegister majorRegister = majorRegisterRepository.findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(studentId, openRegister,coursesIdOfStudent)
                 .orElseThrow(() -> new NotFoundIdException("MajorRegister", "StudentId - OpenRegister", studentId + " - " + openRegister));
-        List<Register> registers = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId());
-        majorRegister.setRegisters(registers);
-        return MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
+        List<RegisterDTO> list = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId())
+                .stream().map(e -> RegisterMapper.mapper.registerToDTO(e))
+                .toList();
+        MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
+        majorRegisterDTO.setRegisterDTOS(list);
+        return majorRegisterDTO;
+    }
+
+    @Override
+    public MajorRegisterDTO findByStudentIdAndSeasonId(Long studentId, Long seasonId) {
+        Optional<MajorRegister> optional = majorRegisterRepository.findByStudentIdAndSeasonId(studentId, seasonId);
+        if(optional.isEmpty()) {
+            optional = majorRegisterRepository.findByStudentIdAndSeasonIdExtra(studentId, seasonId);
+        }
+        var majorRegister = optional.orElseThrow(()     -> new NotFoundIdException("MajorRegister", "Student-Season", studentId + " - " + seasonId));
+        List<RegisterDTO> list = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId())
+                .stream().map(e -> RegisterMapper.mapper.registerToDTO(e))
+                .toList();
+        MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
+        majorRegisterDTO.setRegisterDTOS(list);
+        return majorRegisterDTO;
     }
 }

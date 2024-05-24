@@ -23,8 +23,6 @@ public class SeasonDTO extends BaseDTO{
         stringBuilder.append(" ");
         stringBuilder.append(semester.getSemesterName());
         stringBuilder.append(" của khóa ");
-        stringBuilder.append(courses.getName());
-        stringBuilder.append("_");
         stringBuilder.append(courses.getCode());
         return stringBuilder.toString();
     }

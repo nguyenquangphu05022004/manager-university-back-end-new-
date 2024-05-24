@@ -5,6 +5,6 @@ import com.example.manageruniversity.dto.SubjectGroupDTO;
 
 import java.util.List;
 
-public interface ISubjectGroupService extends IGenericService<SubjectGroupDTO> {
+public interface ISubjectGroupService extends IGenericService<SubjectGroupDTO,SubjectGroupDTO> {
     List<SubjectGroupDTO> findAllBySubjectId(Long subjectId);
 }

@@ -51,13 +51,13 @@ public class GradeServiceImpl implements IGradeService {
 
     @Override
     public void initGradeByMajorRegisterId(Long majorRegister) {
-        List<Register> registers = registerRepository.findAllByMajorRegisterId(majorRegister);
-        registers.stream().forEach(register -> {
-                    if(register.getGrade() == null) {
-                        Grade grade = new Grade();
-                        grade.setRegister(register);
-                        gradeRepository.save(grade);
-                    }
-                });
+//        List<Register> registers = registerRepository.findAllByMajorRegisterId(majorRegister);
+//        registers.stream().forEach(register -> {
+//                    if(register.getGrade() == null) {
+//                        Grade grade = new Grade();
+//                        grade.setRegister(register);
+//                        gradeRepository.save(grade);
+//                    }
+//                });
     }
 }

@@ -6,6 +6,7 @@ import com.example.manageruniversity.dto.GradeDTO;
 import com.example.manageruniversity.dto.MajorDTO;
 import com.example.manageruniversity.dto.MajorRegisterDTO;
 import com.example.manageruniversity.dto.RegisterDTO;
+import com.example.manageruniversity.dto.RoomClassDTO;
 import com.example.manageruniversity.dto.StudentDTO;
 import com.example.manageruniversity.dto.SubjectDTO;
 import com.example.manageruniversity.dto.SubjectGroupDTO;
@@ -18,6 +19,7 @@ import com.example.manageruniversity.entity.Grade;
 import com.example.manageruniversity.entity.Major;
 import com.example.manageruniversity.entity.MajorRegister;
 import com.example.manageruniversity.entity.Register;
+import com.example.manageruniversity.entity.RoomClass;
 import com.example.manageruniversity.entity.Student;
 import com.example.manageruniversity.entity.Subject;
 import com.example.manageruniversity.entity.SubjectGroup;
@@ -30,7 +32,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-19T16:00:59+0700",
+    date = "2024-05-23T20:07:35+0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (Oracle Corporation)"
 )
 public class RegisterMapperImpl implements RegisterMapper {
@@ -45,7 +47,6 @@ public class RegisterMapperImpl implements RegisterMapper {
 
         registerDTO.setSubjectGroup( subjectGroupToSubjectGroupDTO( register.getSubjectGroup() ) );
         registerDTO.setStudentDTO( studentToStudentDTO( register.getStudent() ) );
-        registerDTO.setMajorRegisterDTO( majorRegisterToMajorRegisterDTO( register.getMajorRegister() ) );
         registerDTO.setId( register.getId() );
         registerDTO.setCreatedDate( register.getCreatedDate() );
         registerDTO.setCreatedBy( register.getCreatedBy() );
@@ -119,6 +120,23 @@ public class RegisterMapperImpl implements RegisterMapper {
         return teacherDTO;
     }
 
+    protected RoomClassDTO roomClassToRoomClassDTO(RoomClass roomClass) {
+        if ( roomClass == null ) {
+            return null;
+        }
+
+        RoomClassDTO roomClassDTO = new RoomClassDTO();
+
+        roomClassDTO.setId( roomClass.getId() );
+        roomClassDTO.setCreatedDate( roomClass.getCreatedDate() );
+        roomClassDTO.setCreatedBy( roomClass.getCreatedBy() );
+        roomClassDTO.setModifiedDate( roomClass.getModifiedDate() );
+        roomClassDTO.setModifiedBy( roomClass.getModifiedBy() );
+        roomClassDTO.setName( roomClass.getName() );
+
+        return roomClassDTO;
+    }
+
     protected TimeDTO timeToTimeDTO(Time time) {
         if ( time == null ) {
             return null;
@@ -136,6 +154,7 @@ public class RegisterMapperImpl implements RegisterMapper {
         timeDTO.setEndTime( time.getEndTime() );
         timeDTO.setStartDate( time.getStartDate() );
         timeDTO.setEndDate( time.getEndDate() );
+        timeDTO.setRoomClass( roomClassToRoomClassDTO( time.getRoomClass() ) );
 
         return timeDTO;
     }
@@ -246,23 +265,6 @@ public class RegisterMapperImpl implements RegisterMapper {
         studentDTO.setUser( userToUserDTO( student.getUser() ) );
 
         return studentDTO;
-    }
-
-    protected MajorRegisterDTO majorRegisterToMajorRegisterDTO(MajorRegister majorRegister) {
-        if ( majorRegister == null ) {
-            return null;
-        }
-
-        MajorRegisterDTO majorRegisterDTO = new MajorRegisterDTO();
-
-        majorRegisterDTO.setId( majorRegister.getId() );
-        majorRegisterDTO.setCreatedDate( majorRegister.getCreatedDate() );
-        majorRegisterDTO.setCreatedBy( majorRegister.getCreatedBy() );
-        majorRegisterDTO.setModifiedDate( majorRegister.getModifiedDate() );
-        majorRegisterDTO.setModifiedBy( majorRegister.getModifiedBy() );
-        majorRegisterDTO.setOpenRegister( majorRegister.isOpenRegister() );
-
-        return majorRegisterDTO;
     }
 
     protected ComponentGradeDTO componentGradeToComponentGradeDTO(ComponentGrade componentGrade) {
@@ -393,6 +395,23 @@ public class RegisterMapperImpl implements RegisterMapper {
         return subject;
     }
 
+    protected RoomClass roomClassDTOToRoomClass(RoomClassDTO roomClassDTO) {
+        if ( roomClassDTO == null ) {
+            return null;
+        }
+
+        RoomClass roomClass = new RoomClass();
+
+        roomClass.setId( roomClassDTO.getId() );
+        roomClass.setCreatedDate( roomClassDTO.getCreatedDate() );
+        roomClass.setCreatedBy( roomClassDTO.getCreatedBy() );
+        roomClass.setModifiedDate( roomClassDTO.getModifiedDate() );
+        roomClass.setModifiedBy( roomClassDTO.getModifiedBy() );
+        roomClass.setName( roomClassDTO.getName() );
+
+        return roomClass;
+    }
+
     protected Time timeDTOToTime(TimeDTO timeDTO) {
         if ( timeDTO == null ) {
             return null;
@@ -410,6 +429,7 @@ public class RegisterMapperImpl implements RegisterMapper {
         time.setEndTime( timeDTO.getEndTime() );
         time.setStartDate( timeDTO.getStartDate() );
         time.setEndDate( timeDTO.getEndDate() );
+        time.setRoomClass( roomClassDTOToRoomClass( timeDTO.getRoomClass() ) );
 
         return time;
     }

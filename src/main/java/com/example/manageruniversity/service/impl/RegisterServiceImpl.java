@@ -1,20 +1,16 @@
 package com.example.manageruniversity.service.impl;
 
+import com.example.manageruniversity.dto.AvatarResponse;
 import com.example.manageruniversity.dto.RegisterDTO;
 import com.example.manageruniversity.dto.TransactionDTO;
+import com.example.manageruniversity.entity.Avatar;
 import com.example.manageruniversity.entity.Register;
 import com.example.manageruniversity.entity.SubjectGroup;
-import com.example.manageruniversity.entity.Transaction;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.RegisterMapper;
-import com.example.manageruniversity.repository.RegisterRepository;
-import com.example.manageruniversity.repository.SubjectGroupRepository;
-import com.example.manageruniversity.repository.TransactionRepository;
+import com.example.manageruniversity.repository.*;
 import com.example.manageruniversity.service.IRegisterService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,18 +25,19 @@ public class RegisterServiceImpl implements IRegisterService {
     private final RegisterRepository registerRepository;
     private final TransactionRepository transactionRepository;
     private final SubjectGroupRepository subjectGroupRepository;
-
+    private final StudentRepository studentRepository;
+    private final SeasonRepository seasonRepository;
     @Override
     @Transactional
-    public RegisterDTO saveOrUpdate(RegisterDTO registerDTO) {
-        Register register = RegisterMapper.mapper.registerDTOToEntity(registerDTO);
-        SubjectGroup subjectGroup = subjectGroupRepository.findById(register.getSubjectGroup().getId())
-                .orElseThrow(() -> new NotFoundIdException("SubjectGroup", "Id", ""));
+    public RegisterDTO saveOrUpdate(RegisterDTO request) {
+        Register register = RegisterMapper.mapper.registerDTOToEntity(request);
+        SubjectGroup subjectGroup = subjectGroupRepository.findById(request.getSubjectGroup().getId())
+                .orElseThrow(() -> new NotFoundIdException("SubjectGroup", "Id", request.getSubjectGroup().getId() +""));
         if (subjectGroup.getNumberOfStudent() >= subjectGroup.getNumberOfStudentCurrent()) {
             subjectGroup.setNumberOfStudentCurrent(subjectGroup.getNumberOfStudentCurrent() + 1);
             register.setSubjectGroup(subjectGroup);
             registerRepository.save(register);
-            return registerDTO;
+            return request;
         }
         throw new RuntimeException("student quantity in class was full");
     }
@@ -79,8 +76,7 @@ public class RegisterServiceImpl implements IRegisterService {
 
     @Override
     public List<RegisterDTO> getRegisterByStudentIdAndSeasonDisabled(Long studentId,
-                                                                     boolean disabled,
-                                                                     HttpServletResponse response) {
+                                                                     boolean disabled) {
         List<Register> registers = registerRepository.findAllByStudentIdAndMajorRegisterSeasonDisabled(studentId, disabled);
         return convertList(registers);
     }
@@ -95,6 +91,14 @@ public class RegisterServiceImpl implements IRegisterService {
         List<RegisterDTO> registerList = registers.stream()
                 .map(register -> {
                     RegisterDTO registerDTO = RegisterMapper.mapper.registerToDTO(register);
+                    Avatar avatar = register.getStudent().getUser().getAvatar();
+                    if(avatar != null) {
+                        AvatarResponse response = AvatarResponse.builder()
+                                .fileName(avatar.getAvatarName())
+                                .folderStorage(avatar.getFolderStorage())
+                                .build();
+                        registerDTO.getStudentDTO().getUser().setAvatarResponse(response);
+                    }
                     List<TransactionDTO> transactionList = new ArrayList<>();
                     for (Register r : register.getListRegisterOfSubject()) {
                         r.setTransactions(new ArrayList<>());

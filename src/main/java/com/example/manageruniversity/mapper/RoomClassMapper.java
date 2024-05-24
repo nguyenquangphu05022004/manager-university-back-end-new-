@@ -15,7 +15,6 @@ public interface RoomClassMapper {
     @Mapping(target = "id",source = "roomClassDTO.id")
     RoomClass roomClassDTOToEntity(RoomClassDTO roomClassDTO);
 
-    @Mapping(target = "timeDTOS", source = "roomClass.times")
     RoomClassDTO roomClassToDTO(RoomClass roomClass);
 
 }

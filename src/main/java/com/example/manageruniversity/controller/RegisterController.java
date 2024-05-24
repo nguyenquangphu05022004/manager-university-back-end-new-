@@ -1,10 +1,7 @@
 package com.example.manageruniversity.controller;
 
 import com.example.manageruniversity.dto.RegisterDTO;
-import com.example.manageruniversity.entity.Register;
 import com.example.manageruniversity.service.IRegisterService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +22,9 @@ public class RegisterController {
 
     @PostMapping("/registers")
     @ResponseStatus(HttpStatus.CREATED)
-    public RegisterDTO createRegister(@RequestBody RegisterDTO registerDTO) {
+    public RegisterDTO createRegister(@RequestBody RegisterDTO request) {
 
-        return registerService.saveOrUpdate(registerDTO);
+        return registerService.saveOrUpdate(request);
     }
     @DeleteMapping("/registers/{registerId}")
     public void deleteRegister(@PathVariable("registerId") Long registerId) {
@@ -36,9 +33,8 @@ public class RegisterController {
 
     @GetMapping("/registers/student/{studentId}")
     public List<RegisterDTO> getRegisterListByStudentIdAndSeasonNotDisable(@PathVariable("studentId") Long studentId,
-                                                                           @RequestParam("disabled") boolean disabled,
-                                                                           HttpServletResponse response) {
-        return registerService.getRegisterByStudentIdAndSeasonDisabled(studentId, disabled, response);
+                                                                           @RequestParam("disabled") boolean disabled) {
+        return registerService.getRegisterByStudentIdAndSeasonDisabled(studentId, disabled);
     }
 
     @PutMapping("/registers/transaction/{registerId}")

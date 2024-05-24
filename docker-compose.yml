@@ -1,0 +1,29 @@
+version: "3.1"  # Adjust version if needed
+services:
+  mysql_db:
+    image: mysql:8.0
+    volumes:
+      - mangerUniversityData:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: irohas2004
+  manager-university-backend-app:
+    image: irohas2004/manager-university-backend:latest
+    volumes:
+      - uploadsImage:/app/uploads
+    ports:
+      - 8081:8081
+  mamager-university-fronend-app:
+    image: irohas2004/manager-university-frontend:latest
+    ports:
+      - 3000:3000
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8085:80
+    environment:
+      - PMA_HOST=mysql_db
+    depends_on:
+      - mysql_db
+volumes:
+  mangerUniversityData:
+  uploadsImage:

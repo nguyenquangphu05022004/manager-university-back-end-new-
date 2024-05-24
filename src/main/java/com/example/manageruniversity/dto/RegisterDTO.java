@@ -16,5 +16,4 @@ public class RegisterDTO extends BaseDTO{
     private MajorRegisterDTO majorRegisterDTO;
     private List<TransactionDTO> transactionList = new ArrayList<>();
 
-
 }

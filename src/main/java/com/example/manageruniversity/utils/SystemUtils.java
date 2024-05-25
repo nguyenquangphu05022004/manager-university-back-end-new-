@@ -12,6 +12,7 @@ public class SystemUtils {
     public static final DateTimeFormatter PATTERN_DATE_VIE = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
     public static final String FOLDER_STORAGE_FILE = "uploads";
     public static final int NUMBER_OF_MINUTE_EXPIRE_FORGET_CODE = 5;
+    public static final String ANONYMOUS = "ANONYMOUS";
     public static String getUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {

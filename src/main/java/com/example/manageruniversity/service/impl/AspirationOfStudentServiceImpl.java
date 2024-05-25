@@ -7,6 +7,7 @@ import com.example.manageruniversity.entity.Season;
 import com.example.manageruniversity.entity.Subject;
 import com.example.manageruniversity.entity.auth.User;
 import com.example.manageruniversity.exception.NotFoundIdException;
+import com.example.manageruniversity.mapper.SeasonMapper;
 import com.example.manageruniversity.mapper.StudentMapper;
 import com.example.manageruniversity.mapper.SubjectMapper;
 import com.example.manageruniversity.repository.AspirationOfStudentRepository;
@@ -59,6 +60,8 @@ public class AspirationOfStudentServiceImpl implements IAspirationOfStudentServi
         AspirationResponse response = AspirationResponse.builder()
                 .subject(SubjectMapper.mapper.subjectToDTO(aspirationOfStudent.getSubject()))
                 .student(StudentMapper.mapper.studentToDTO(aspirationOfStudent.getStudent()))
+                .season(SeasonMapper.mapper.seasonToDTO(aspirationOfStudent.getSeason()))
+                .approval(aspirationOfStudent.isApproval())
                 .build();
         response.setId(aspirationOfStudent.getId());
         return response;
@@ -66,9 +69,9 @@ public class AspirationOfStudentServiceImpl implements IAspirationOfStudentServi
     }
 
     @Override
-    public List<AspirationResponse> getListAspirationByStudentId(Long studentId) {
+    public List<AspirationResponse> getListAspirationByStudentIdAndSeasonId(Long studentId, Long seasonId) {
         List<AspirationResponse> listResponseByStudent = aspirationOfStudentRepository
-                .findAllByStudentId(studentId)
+                .findAllByStudentIdAndSeasonId(studentId, seasonId)
                 .stream()
                 .map(this::getToDto)
                 .toList();

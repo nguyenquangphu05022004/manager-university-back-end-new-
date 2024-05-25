@@ -14,4 +14,6 @@ public interface ISeasonService extends IGenericService<SeasonDTO,SeasonDTO> {
     List<SeasonDTO> getListSeasonByDisabled(boolean disabled);
 
     List<SeasonDTO> getListSeasonExtraByStudentId(Long studentId);
+
+    List<SeasonDTO> getListSeasonExtra();
 }

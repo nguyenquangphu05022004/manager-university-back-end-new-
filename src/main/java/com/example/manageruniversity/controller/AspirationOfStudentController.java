@@ -24,9 +24,10 @@ public class AspirationOfStudentController {
     public List<AspirationResponse> getListAspiration() {
         return aspirationOfStudentService.records();
     }
-    @GetMapping("/aspirations/student/{studentId}")
-    public List<AspirationResponse> getListAspirationByStudentId(@PathVariable("studentId") Long studentId) {
-        return aspirationOfStudentService.getListAspirationByStudentId(studentId);
+    @GetMapping("/aspirations/student/{studentId}/season/{seasonId}")
+    public List<AspirationResponse> getListAspirationByStudentIdAndSeasonId(@PathVariable("studentId") Long studentId,
+                                                                 @PathVariable("seasonId") Long seasonId) {
+        return aspirationOfStudentService.getListAspirationByStudentIdAndSeasonId(studentId, seasonId);
     }
     @DeleteMapping("/aspirations/{aspirationId}")
     public void deleteAspiration(@PathVariable("aspirationId") Long aspiration) {

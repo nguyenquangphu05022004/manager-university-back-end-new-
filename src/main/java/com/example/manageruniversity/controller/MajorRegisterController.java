@@ -57,4 +57,11 @@ public class MajorRegisterController {
         return majorRegisterService.findByStudentIdAndSeasonId(studentId, seasonId);
     }
 
+    /*
+        this method get all list season extra student registered
+     */
+        @GetMapping("/majorRegisters/extra/student/{studentId}")
+    public List<MajorRegisterDTO> getListExtraOfStudent(@PathVariable("studentId") Long studentId) {
+       return  majorRegisterService.getListExtraOfStudentByStudentId(studentId);
+    }
 }

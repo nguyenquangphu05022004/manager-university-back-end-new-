@@ -8,5 +8,5 @@ import java.util.List;
 public interface IAspirationOfStudentService extends
         IGenericService<AspirationRequest, AspirationResponse> {
 
-    List<AspirationResponse> getListAspirationByStudentId(Long studentId);
+    List<AspirationResponse>    getListAspirationByStudentIdAndSeasonId(Long studentId, Long seasonId);
 }

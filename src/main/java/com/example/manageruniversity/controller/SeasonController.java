@@ -54,4 +54,8 @@ public class SeasonController {
     public List<SeasonDTO> getListSeasonExtraOfStudent(@PathVariable("studentId") Long studentId) {
         return seasonService.getListSeasonExtraByStudentId(studentId);
     }
+    @GetMapping("/seasons/extra")
+    public List<SeasonDTO> getListSeasonExtraOfStudent() {
+        return seasonService.getListSeasonExtra();
+    }
 }

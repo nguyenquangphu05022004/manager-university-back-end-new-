@@ -1,12 +1,10 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.entity.Major;
 import com.example.manageruniversity.entity.MajorRegister;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,4 +39,10 @@ public interface MajorRegisterRepository extends JpaRepository<MajorRegister, Lo
             "where s.id = :studentId and sea.id = :seasonId")
     Optional<MajorRegister> findByStudentIdAndSeasonIdExtra(@Param("studentId") Long studentId,
                                                             @Param("seasonId") Long seasonId);
+
+    @Query("select mr from MajorRegister  mr inner join Season sea on mr.season.id = sea.id " +
+            "inner join AspirationOfStudent  aspi on aspi.season.id = sea.id " +
+            "inner join Student st on st.id = aspi.student.id " +
+            "where st.id = :studentId")
+    List<MajorRegister> findAllExtraByStudentId(Long studentId);
 }

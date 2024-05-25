@@ -10,6 +10,7 @@ import lombok.Setter;
 public class AspirationResponse extends BaseDTO{
     private SubjectDTO subject;
     private StudentDTO student;
+    private SeasonDTO season;
     private boolean approval;
     public String getMessage() {
         if(approval) {

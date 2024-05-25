@@ -138,4 +138,30 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
         majorRegisterDTO.setRegisterDTOS(list);
         return majorRegisterDTO;
     }
+
+    @Override
+    public List<MajorRegisterDTO> getListExtraOfStudentByStudentId(Long studentId) {
+        var majorRegisters = majorRegisterRepository.findAllExtraByStudentId(studentId);
+        for(MajorRegister m : majorRegisters) {
+            List<Register> registers = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, m.getId());
+            m.setRegisters(registers);
+        }
+        return majorRegisters.stream()
+                .map(majorRegister -> {
+
+                    MajorRegisterDTO majorResponse = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
+                    Optional<Payment> payment = paymentRepository.findByStudentIdAndMajorRegisterId(studentId, majorRegister.getId());
+                    if(payment.isPresent()) {
+                        PaymentResponse paymentResponse = PaymentResponse.builder()
+                                .description(payment.get().getDescription())
+                                .amountPaid(payment.get().getAmountPaid())
+                                .transactionId(payment.get().getTransactionId())
+                                .complete(payment.get().getComplete())
+                                .build();
+                        majorResponse.setPaymentOfPerStudentAtCurrentSeason(paymentResponse);
+                    }
+                    return majorResponse;
+                })
+                .toList();
+    }
 }

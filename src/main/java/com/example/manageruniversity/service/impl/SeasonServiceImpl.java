@@ -12,6 +12,7 @@ import com.example.manageruniversity.mapper.SubjectMapper;
 import com.example.manageruniversity.repository.RegisterRepository;
 import com.example.manageruniversity.repository.SeasonRepository;
 import com.example.manageruniversity.service.ISeasonService;
+import com.example.manageruniversity.utils.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,14 @@ public class SeasonServiceImpl implements ISeasonService {
     public List<SeasonDTO> getListSeasonExtraByStudentId(Long studentId) {
         List<Season> listExtraSeasonOfStudent = seasonRepository.findSeasonExtraByStudentId(studentId);
         return listExtraSeasonOfStudent.stream()
+                .map(e -> SeasonMapper.mapper.seasonToDTO(e))
+                .toList();
+    }
+
+    @Override
+    public List<SeasonDTO> getListSeasonExtra() {
+        List<Season> list = seasonRepository.findSeasonExtraByAnonymous(SystemUtils.ANONYMOUS);
+        return list.stream()
                 .map(e -> SeasonMapper.mapper.seasonToDTO(e))
                 .toList();
     }

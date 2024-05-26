@@ -1,6 +1,7 @@
 package com.example.manageruniversity.controller;
 
-import com.example.manageruniversity.dto.TestScheduleDTO;
+import com.example.manageruniversity.dto.TestScheduleRequest;
+import com.example.manageruniversity.dto.TestScheduleResponse;
 import com.example.manageruniversity.service.ITestScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,13 +18,13 @@ public class TestScheduleController {
 
     @PostMapping("/testSchedules")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createTestSchedule(@RequestBody TestScheduleDTO testScheduleDTO) {
-        testScheduleService.saveOrUpdate(testScheduleDTO);
+    public void createTestSchedule(@RequestBody TestScheduleRequest request) {
+        testScheduleService.saveOrUpdate(request);
     }
 
     @GetMapping("/testSchedules")
-    public List<TestScheduleDTO> getListBySeasonAndStudent(@RequestParam("seasonId") Long seasonId,
-                                                           @RequestParam("studentId") Long studentId) {
+    public List<TestScheduleResponse> getListBySeasonAndStudent(@RequestParam("seasonId") Long seasonId,
+                                                                @RequestParam("studentId") Long studentId) {
         return testScheduleService.getListBySeasonIdAndStudentId(seasonId, studentId);
     }
 }

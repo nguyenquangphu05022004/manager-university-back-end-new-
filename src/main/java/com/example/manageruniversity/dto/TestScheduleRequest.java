@@ -12,14 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class TestScheduleDTO extends BaseDTO {
-    private SeasonDTO seasonDTO;
-    private Integer roomNumber;
-    private RoomClassDTO roomClass;
+public class TestScheduleRequest  {
+    private Integer testGroup;
     private Integer numberOfStudent;
     private LocalDate startDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    private TestType testType;
-    private SubjectDTO subject;
+    private ExamRequest examRequest;
 }

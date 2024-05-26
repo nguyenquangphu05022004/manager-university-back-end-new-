@@ -15,6 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomClass extends Base{
+    public RoomClass(Long id) {
+        super(id);
+    }
     private String name;
     @OneToMany(mappedBy = "roomClass")
     private List<Time> times = new ArrayList<>();

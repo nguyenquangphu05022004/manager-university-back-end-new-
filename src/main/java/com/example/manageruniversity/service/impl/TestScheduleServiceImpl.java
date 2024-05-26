@@ -1,11 +1,10 @@
 package com.example.manageruniversity.service.impl;
 
-import com.example.manageruniversity.dto.TestScheduleDTO;
-import com.example.manageruniversity.entity.Student;
-import com.example.manageruniversity.entity.TestSchedule;
-import com.example.manageruniversity.mapper.RoomClassMapper;
-import com.example.manageruniversity.mapper.SeasonMapper;
-import com.example.manageruniversity.mapper.SubjectMapper;
+import com.example.manageruniversity.dto.ExamResponse;
+import com.example.manageruniversity.dto.TestScheduleRequest;
+import com.example.manageruniversity.dto.TestScheduleResponse;
+import com.example.manageruniversity.entity.*;
+import com.example.manageruniversity.repository.ExamRepository;
 import com.example.manageruniversity.repository.StudentRepository;
 import com.example.manageruniversity.repository.TestScheduleRepository;
 import com.example.manageruniversity.service.ITestScheduleService;
@@ -14,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,59 +23,67 @@ import java.util.Optional;
 public class TestScheduleServiceImpl implements ITestScheduleService {
     private final TestScheduleRepository testScheduleRepository;
     private final StudentRepository studentRepository;
-
+    private final ExamRepository examRepository;
+    @Transactional
     @Override
-    public void saveOrUpdate(TestScheduleDTO testScheduleDTO) {
-        Pageable pageable = PageRequest.of(testScheduleDTO.getRoomNumber() - 1, testScheduleDTO.getNumberOfStudent());
+    public void saveOrUpdate(TestScheduleRequest request) {
+        Optional<Exam> optionalExam = examRepository.findBySeasonIdAndSubjectIdAndRoomClassId(
+                request.getExamRequest().getSeasonId(),
+                request.getExamRequest().getSubjectId(),
+                request.getExamRequest().getClassRoomId()
+        );
+        Pageable pageable = PageRequest.of(request.getTestGroup() - 1, request.getNumberOfStudent());
         Page<Student> studentPage = studentRepository
-                .findAllBySubjectId(testScheduleDTO.getSubject().getId(),
+                .findAllBySubjectIdAndSeasonId(
+                        request.getExamRequest().getSubjectId(),
+                        request.getExamRequest().getSeasonId(),
                         pageable);
-        Optional<TestSchedule> optionalTestSchedule = testScheduleRepository
-                .findBySeasonId(testScheduleDTO
-                        .getSeasonDTO()
-                        .getId());
-        TestSchedule schedule = new TestSchedule();
-//        if(optionalTestSchedule.isPresent()) {
-//
-//        } else {
-//            schedule = mapToEntity(testScheduleDTO);
-//            schedule.setStudents(students);
-//        }
-//        testScheduleRepository.save(schedule);
+        TestSchedule schedule = mapToEntity(request);
+        schedule.setStudents(studentPage.getContent());
+        if(optionalExam.isPresent()) {
+            schedule.setExam(optionalExam.get());
+        } else {
+            Exam exam = new Exam(
+                    new Season(request.getExamRequest().getSeasonId()),
+                    new RoomClass(request.getExamRequest().getClassRoomId()),
+                    new Subject(request.getExamRequest().getSubjectId()),
+                    request.getExamRequest().getTestType()
+                    );
+            schedule.setExam(exam);
+        }
+        testScheduleRepository.save(schedule);
     }
 
     @Override
-    public List<TestScheduleDTO> getListBySeasonIdAndStudentId(Long seasonId, Long studentId) {
+    public List<TestScheduleResponse> getListBySeasonIdAndStudentId(Long seasonId, Long studentId) {
         List<TestSchedule> testSchedules = testScheduleRepository.findAllBySeasonIdAndStudentId(seasonId, studentId);
         return testSchedules.stream().map(this::mapToDto).toList();
     }
 
-    private TestScheduleDTO mapToDto(TestSchedule schedule) {
-        TestScheduleDTO testSchedule = TestScheduleDTO.builder()
-                .seasonDTO(SeasonMapper.mapper.seasonToDTO(schedule.getSeason()))
+    private TestScheduleResponse mapToDto(TestSchedule schedule) {
+        TestScheduleResponse testSchedule = TestScheduleResponse.builder()
                 .startDate(schedule.getStartDate())
                 .startTime(schedule.getStartTime())
                 .endTime(schedule.getEndTime())
                 .numberOfStudent(schedule.getNumberOfStudent())
-                .roomNumber(schedule.getRoomNumber())
-                .testType(schedule.getTestType())
-                .roomClass(RoomClassMapper.mapper.roomClassToDTO(schedule.getRoomClass()))
-                .subject(SubjectMapper.mapper.subjectToDTO(schedule.getSubject()))
+                .testGroup(schedule.getTestGroup())
+                .examResponse(ExamResponse.builder()
+                        .id(schedule.getExam().getId())
+                        .testType(schedule.getExam().getTestType())
+                        .subjectName(schedule.getExam().getSubject().getSubjectName())
+                        .roomClass(schedule.getExam().getRoomClass().getName())
+                        .build())
                 .build();
         return testSchedule;
     }
 
-    private TestSchedule mapToEntity(TestScheduleDTO testScheduleDTO) {
+    private TestSchedule mapToEntity(TestScheduleRequest request) {
         TestSchedule studentsTestRoom = TestSchedule.builder()
-                .season(SeasonMapper.mapper.seasonDTOToEntity(testScheduleDTO.getSeasonDTO()))
-                .startDate(testScheduleDTO.getStartDate())
-                .startTime(testScheduleDTO.getStartTime())
-                .endTime(testScheduleDTO.getEndTime())
-                .numberOfStudent(testScheduleDTO.getNumberOfStudent())
-                .roomNumber(testScheduleDTO.getRoomNumber())
-                .testType(testScheduleDTO.getTestType())
-                .roomClass(RoomClassMapper.mapper.roomClassDTOToEntity(testScheduleDTO.getRoomClass()))
-                .subject(SubjectMapper.mapper.subjectDTOToEntity(testScheduleDTO.getSubject()))
+                .startDate(request.getStartDate())
+                .startTime(request.getStartTime())
+                .endTime(request.getEndTime())
+                .numberOfStudent(request.getNumberOfStudent())
+                .testGroup(request.getTestGroup())
                 .build();
         return studentsTestRoom;
     }

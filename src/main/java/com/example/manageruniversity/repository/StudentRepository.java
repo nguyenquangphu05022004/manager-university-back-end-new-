@@ -11,11 +11,20 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    @Query("select st from Student st inner join Register r on st.id=r.student.id " +
-            "inner join SubjectGroup sg on r.subjectGroup.id = sg.id " +
-            "inner join Subject s on sg.subject.id = s.id " +
-            "where s.id = :subjectId")
-    Page<Student> findAllBySubjectId(@Param("subjectId") Long subjectId, Pageable pageable);
+    @Query(value = "select st.*,\n" +
+            "       mr.id as 'major register id'\n" +
+            "from students st\n" +
+            "         inner join registers r on st.id = r.student_id\n" +
+            "         inner join subject_group sub on r.subject_group_id = sub.id\n" +
+            "         inner join subjects s on sub.subject_id = s.id\n" +
+            "         inner join major_register_subject mrs on s.id = mrs.subject_id\n" +
+            "         inner join major_registers mr on mrs.major_register_id = mr.id and mr.id = r.major_register_id\n" +
+            "         inner join seasons sea on mr.season_id = sea.id\n" +
+            "where s.id = :subjectId\n" +
+            "  and sea.id = :seasonId", nativeQuery = true)
+    Page<Student> findAllBySubjectIdAndSeasonId(@Param("subjectId") Long subjectId,
+                                     @Param("seasonId") Long seasonId,
+                                     Pageable pageable);
 
 
     @Query(value = "select\n" +

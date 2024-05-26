@@ -3,6 +3,8 @@ package com.example.manageruniversity.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +12,12 @@ import java.util.List;
 @Entity
 @Table(name = "seasons")
 @Getter
-@Data
+@Setter
+@NoArgsConstructor
 public class Season extends Base{
+    public Season(Long id){
+        super(id);
+    }
     @ManyToOne
     @JoinColumn(name = "season_semester")
     private Semester semester;
@@ -26,9 +32,6 @@ public class Season extends Base{
 
     @OneToMany(mappedBy = "season")
     private List<MajorRegister> majorRegisters = new ArrayList<>();
-
-    @OneToMany(mappedBy = "season")
-    private List<TestSchedule> testSchedules = new ArrayList<>();
 
     private boolean disabled;
 

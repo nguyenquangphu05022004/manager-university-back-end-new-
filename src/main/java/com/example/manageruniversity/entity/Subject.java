@@ -1,10 +1,7 @@
 package com.example.manageruniversity.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,10 +12,14 @@ import java.util.Set;
 @Table(name = "subjects")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Subject extends Base{
     private String subjectName;
     private String subjectCode;
     private Integer credit;
+    public Subject(Long id) {
+        super(id);
+    }
     @OneToMany(mappedBy = "subject")
     private List<SubjectGroup> subjectGroups = new ArrayList<>();
     @ManyToMany(mappedBy = "subjects")

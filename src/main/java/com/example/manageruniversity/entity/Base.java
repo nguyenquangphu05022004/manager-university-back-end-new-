@@ -18,6 +18,12 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public abstract class Base {
+    public Base() {
+
+    }
+    public Base(Long id) {
+        this.id = id;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,10 +1,11 @@
 package com.example.manageruniversity.service;
 
-import com.example.manageruniversity.dto.TestScheduleDTO;
+import com.example.manageruniversity.dto.TestScheduleRequest;
+import com.example.manageruniversity.dto.TestScheduleResponse;
 
 import java.util.List;
 
 public interface ITestScheduleService {
-    void saveOrUpdate(TestScheduleDTO testScheduleDTO);
-    List<TestScheduleDTO> getListBySeasonIdAndStudentId(Long seasonId, Long studentId);
+    void saveOrUpdate(TestScheduleRequest testScheduleRequest);
+    List<TestScheduleResponse> getListBySeasonIdAndStudentId(Long seasonId, Long studentId);
 }

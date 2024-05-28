@@ -1,6 +1,7 @@
 package com.example.manageruniversity.controller;
 
-import com.example.manageruniversity.dto.EventRegisterDTO;
+import com.example.manageruniversity.dto.EventRegisterRequest;
+import com.example.manageruniversity.dto.EventRegisterResponse;
 import com.example.manageruniversity.service.IEventRegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,11 @@ public class EventRegisterController {
     private final IEventRegisterService eventRegisterService;
 
     @PostMapping("/events")
-    public void createEventRegister(@RequestBody EventRegisterDTO eventRegisterDTO) {
-        eventRegisterService.saveOrUpdate(eventRegisterDTO);
+    public void createEventRegister(@RequestBody EventRegisterRequest eventRegisterRequest) {
+        eventRegisterService.saveOrUpdate(eventRegisterRequest);
     }
     @GetMapping("/events")
-    public List<EventRegisterDTO> getListEventRegister()  {
+    public List<EventRegisterResponse> getListEventRegister()  {
         return eventRegisterService.records();
     }
 }

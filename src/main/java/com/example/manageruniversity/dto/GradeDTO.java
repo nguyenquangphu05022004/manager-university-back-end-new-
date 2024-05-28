@@ -14,7 +14,6 @@ public class GradeDTO {
     private float finalTest;
     private float practiceTest;
     private ComponentGradeDTO componentGrade;
-
     public float getSubjectAverage() {
         if(componentGrade == null) return 0;
         float a =  (attend * componentGrade.getAttend() * 0.01f +
@@ -23,5 +22,19 @@ public class GradeDTO {
                         practiceTest * componentGrade.getPracticeTest() * 0.01f);
         return a;
     }
+    public EnumGrade getAverageWithFourGrade() {
+        float gpa = getSubjectAverage();
+        if(gpa >= 9.0) {
+            return EnumGrade.A_PLUS;
+        } else if(gpa >= 8.5) return EnumGrade.A;
+        else if(gpa >= 8.0) return EnumGrade.B_PLUS;
+        else if(gpa >= 7.0) return EnumGrade.B;
+        else if(gpa >= 6.5) return EnumGrade.C_PLUS;
+        else if(gpa >= 5.5) return EnumGrade.C;
+        else if(gpa >= 5.0) return EnumGrade.D_PLUS;
+        else if(gpa >= 4.0) return EnumGrade.D;
+        else return EnumGrade.F;
+    }
+
 
 }

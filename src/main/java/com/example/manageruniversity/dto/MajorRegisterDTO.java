@@ -17,6 +17,7 @@ public class MajorRegisterDTO extends BaseDTO {
     private List<RegisterDTO> registerDTOS = new ArrayList<>();
     private boolean openRegister;
     private PaymentResponse paymentOfPerStudentAtCurrentSeason;
+    private EventRegisterResponse eventRegisterResponse;
     public Integer getTotalCreditOfStudent() {
         var t = 0;
         for(var s : registerDTOS) {
@@ -43,12 +44,15 @@ public class MajorRegisterDTO extends BaseDTO {
     public double getSeasonGradeAverage() {
         if(registerDTOS.size() == 0) return 0;
         double a = 0;
+        int totalCredit = 0;
         for(int i = 0; i < registerDTOS.size(); i++) {
             RegisterDTO r = registerDTOS.get(i);
             if(r.getGrade() != null) {
-                a += r.getGrade().getSubjectAverage();
+                a += r.getSubjectGroup().getSubject().getCredit() *
+                        r.getGrade().getAverageWithFourGrade().getValue();
+                totalCredit += r.getSubjectGroup().getSubject().getCredit();
             }
         }
-        return a/(registerDTOS.size());
+        return a/(totalCredit);
     }
 }

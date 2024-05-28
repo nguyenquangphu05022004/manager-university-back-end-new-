@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,21 @@ public class MajorRegister extends Base{
 
     @OneToOne(mappedBy = "majorRegister")
     private Tuition tuition;
-    private boolean openRegister;
+
+    @ManyToOne
+    @JoinColumn(name = "event_register_id")
+    //openRegister
+    private EventRegister eventRegister;
+
+    @Transient
+    public boolean getOpenRegister() {
+        if(eventRegister != null) {
+            if(eventRegister.getStart().isAfter(LocalDateTime.now())) return false;
+            else if(LocalDateTime.now().isBefore(eventRegister.getEnd())) return true;
+            return false;
+        }
+        return false;
+    }
+
 
 }

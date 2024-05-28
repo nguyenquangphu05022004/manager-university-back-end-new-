@@ -1,9 +1,6 @@
 package com.example.manageruniversity.entity;
 
-import com.example.manageruniversity.dto.EventRegisterDTO;
-import com.example.manageruniversity.repository.event.Event;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +21,7 @@ public class Major extends Base{
     private List<Student> students = new ArrayList<>();
     @OneToMany(mappedBy = "major")
     private List<Teacher> teachers = new ArrayList<>();
-    @ManyToMany(mappedBy = "majors")
-    private List<EventRegister> eventRegisters = new ArrayList<>();
+
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Major) {

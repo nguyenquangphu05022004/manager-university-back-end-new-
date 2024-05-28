@@ -18,4 +18,6 @@ public interface IMajorRegisterService extends IGenericService<MajorRegisterDTO,
     MajorRegisterDTO findByStudentIdAndSeasonId(Long studentId, Long seasonId);
 
     List<MajorRegisterDTO> getListExtraOfStudentByStudentId(Long studentId);
+
+
 }

@@ -13,7 +13,6 @@ import com.example.manageruniversity.repository.PaymentRepository;
 import com.example.manageruniversity.repository.RegisterRepository;
 import com.example.manageruniversity.service.IMajorRegisterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -71,6 +70,7 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
                     .majorRegisterToDTO(majorRegister);
             var re = majorRegister.getSeason(); re.setMajorRegisters(new ArrayList<>());
             majorRegisterDTO.setSeasonDTO(SeasonMapper.mapper.seasonToDTO(re));
+            majorRegisterDTO.setOpenRegister(majorRegister.getOpenRegister());
             return majorRegisterDTO;
         }).collect(Collectors.toList());
     }
@@ -83,7 +83,9 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     @Override
     public MajorRegisterDTO findByMajorIdAndSeasonDisabled(Long majorId, boolean disabled) {
         MajorRegister majorRegister = majorRegisterRepository.findByMajorIdAndSeasonDisabled(majorId, disabled);
-        return MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
+        MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
+        majorRegisterDTO.setOpenRegister(majorRegister.getOpenRegister());
+        return majorRegisterDTO;
     }
 
     @Override
@@ -107,6 +109,7 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
                                 .build();
                         majorResponse.setPaymentOfPerStudentAtCurrentSeason(paymentResponse);
                     }
+                    majorResponse.setOpenRegister(majorRegister.getOpenRegister());
                     return majorResponse;
                 })
                 .toList();
@@ -114,14 +117,16 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
 
     @Override
     public MajorRegisterDTO findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(Long studentId, boolean openRegister, Long coursesIdOfStudent) {
-        MajorRegister majorRegister = majorRegisterRepository.findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(studentId, openRegister,coursesIdOfStudent)
-                .orElseThrow(() -> new NotFoundIdException("MajorRegister", "StudentId - OpenRegister", studentId + " - " + openRegister));
-        List<RegisterDTO> list = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId())
-                .stream().map(e -> RegisterMapper.mapper.registerToDTO(e))
-                .toList();
-        MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
-        majorRegisterDTO.setRegisterDTOS(list);
-        return majorRegisterDTO;
+//        MajorRegister majorRegister = majorRegisterRepository.findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(studentId, openRegister,coursesIdOfStudent)
+//                .orElseThrow(() -> new NotFoundIdException("MajorRegister", "StudentId - OpenRegister", studentId + " - " + openRegister));
+//        List<RegisterDTO> list = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId())
+//                .stream().map(e -> RegisterMapper.mapper.registerToDTO(e))
+//                .toList();
+//        MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
+//        majorRegisterDTO.setRegisterDTOS(list);
+//        majorRegisterDTO.setOpenRegister(majorRegister.getOpenRegister());
+//        return majorRegisterDTO;
+        return null;
     }
 
     @Override
@@ -136,6 +141,7 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
                 .toList();
         MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
         majorRegisterDTO.setRegisterDTOS(list);
+        majorRegisterDTO.setOpenRegister(majorRegister.getOpenRegister());
         return majorRegisterDTO;
     }
 
@@ -160,8 +166,11 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
                                 .build();
                         majorResponse.setPaymentOfPerStudentAtCurrentSeason(paymentResponse);
                     }
+                    majorResponse.setOpenRegister(majorRegister.getOpenRegister());
                     return majorResponse;
                 })
                 .toList();
     }
+
+
 }

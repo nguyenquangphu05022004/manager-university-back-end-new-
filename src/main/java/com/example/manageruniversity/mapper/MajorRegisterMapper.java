@@ -19,6 +19,7 @@ public interface MajorRegisterMapper {
     @Mapping(target = "subjectDTOS", source = "majorRegister.subjects")
     @Mapping(target = "tuitionDTO", source = "majorRegister.tuition")
     @Mapping(target = "registerDTOS", source = "majorRegister.registers")
+    @Mapping(target = "eventRegisterResponse", source = "majorRegister.eventRegister")
     MajorRegisterDTO majorRegisterToDTO(MajorRegister majorRegister);
 
 

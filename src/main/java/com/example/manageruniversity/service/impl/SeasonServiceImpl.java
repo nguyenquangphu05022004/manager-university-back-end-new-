@@ -30,14 +30,22 @@ public class SeasonServiceImpl implements ISeasonService {
 
     @Override
     public SeasonDTO saveOrUpdate(SeasonDTO seasonDTO) {
-        Season season = null;
-        if(seasonDTO.getId() != null) {
-
-        } else {
-            season = SeasonMapper.mapper.seasonDTOToEntity(seasonDTO);
+        Optional<Season> byCondition = seasonRepository.findByCoursesIdAndSchoolYearIdAndSemesterId(
+                seasonDTO.getCourses().getId(),
+                seasonDTO.getSchoolYear().getId(),
+                seasonDTO.getSemester().getId()
+        );
+        if(byCondition.isPresent()) {
+            throw new RuntimeException(String
+                    .format("Đã tồn tại Season với courses: %s schoolYear: %s and Semester: %s",
+                    seasonDTO.getCourses().getId(),
+                    seasonDTO.getSchoolYear().getId(),
+                    seasonDTO.getSemester().getId()
+                    ));
         }
-        season = seasonRepository.save(season);
-        return SeasonMapper.mapper.seasonToDTO(season);
+        Season season = SeasonMapper.mapper.seasonDTOToEntity(seasonDTO);
+        seasonRepository.save(season);
+        return null;
     }
 
     @Override

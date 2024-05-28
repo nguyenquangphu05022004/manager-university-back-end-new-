@@ -36,7 +36,7 @@ public class SchoolYearServiceImpl implements ISchoolYearService {
 
     @Override
     public List<SchoolYearDTO> records() {
-        List<SchoolYear> schoolYears = schoolYearRepository.findAll();
+        List<SchoolYear> schoolYears = schoolYearRepository.findAllOrderByIdDESC();
         return schoolYears.stream().map(schoolYear -> {
             return SchoolYearMapper.mapper.schoolYearToDTO(schoolYear);
         }).collect(Collectors.toList());

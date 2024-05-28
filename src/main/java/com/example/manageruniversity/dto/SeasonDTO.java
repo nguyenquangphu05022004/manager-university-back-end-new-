@@ -15,13 +15,22 @@ public class SeasonDTO extends BaseDTO{
     private boolean disabled;
     private List<MajorRegisterDTO> majorRegisterDTOS = new ArrayList<>();
 
-
     public String getNameSeason() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Năm học ");
         stringBuilder.append(schoolYear.getName());
         stringBuilder.append(" ");
         stringBuilder.append(semester.getSemesterName());
+        return stringBuilder.toString();
+    }
+    public String getFullNameSeason() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Năm học ");
+        stringBuilder.append(schoolYear.getName());
+        stringBuilder.append(" ");
+        stringBuilder.append(semester.getSemesterName());
+        stringBuilder.append(" của khóa ");
+        stringBuilder.append(courses.getCode());
         return stringBuilder.toString();
     }
 }

@@ -26,7 +26,15 @@ public class SecurityConfig {
             "/api/v1/export/**",
             "/vnpay-payment",
             "/api/v1/mail/**",
-            "/api/v1/aspirations/**"
+            "/api/v1/aspirations/**",
+    };
+    private static final String[] LIST_URL_ACCESS_BY_STUDENT = {
+            "/api/v1/seasons/**",
+            "/api/v1/testSchedules/**",
+            "/api/v1/file/**",
+            "/api/v1/subjects/**",
+            "/api/v1/subjectGroups/**",
+            "/api/v1/majorRegister/**"
     };
     private static final String[] LIST_URL_ACCESS_BY_ADMIN = {
             "/api/v1/courses/**",
@@ -56,8 +64,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req-> {
                     req.requestMatchers(WHITE_LIST_URL)
                             .permitAll()
-                            .requestMatchers(HttpMethod.GET, "/api/v1/file/**").permitAll()
-                            .requestMatchers(HttpMethod.POST, LIST_URL_ACCESS_BY_ADMIN).hasAuthority(Role.ADMIN.name())
+                            .requestMatchers(HttpMethod.GET, LIST_URL_ACCESS_BY_STUDENT).permitAll()
+                            .requestMatchers(LIST_URL_ACCESS_BY_ADMIN).hasAuthority(Role.ADMIN.name())
                             .requestMatchers(LIST_URL_ACCESS_BY_TEACHER).hasAuthority(Role.TEACHER.name())
                             .anyRequest().authenticated();
                 })

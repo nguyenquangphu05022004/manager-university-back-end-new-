@@ -2,6 +2,7 @@ package com.example.manageruniversity.mapper;
 
 import com.example.manageruniversity.dto.ComponentGradeDTO;
 import com.example.manageruniversity.dto.CoursesDTO;
+import com.example.manageruniversity.dto.EventRegisterResponse;
 import com.example.manageruniversity.dto.GradeDTO;
 import com.example.manageruniversity.dto.MajorDTO;
 import com.example.manageruniversity.dto.MajorRegisterDTO;
@@ -17,6 +18,7 @@ import com.example.manageruniversity.dto.TimeDTO;
 import com.example.manageruniversity.dto.TuitionDTO;
 import com.example.manageruniversity.entity.ComponentGrade;
 import com.example.manageruniversity.entity.Courses;
+import com.example.manageruniversity.entity.EventRegister;
 import com.example.manageruniversity.entity.Grade;
 import com.example.manageruniversity.entity.Major;
 import com.example.manageruniversity.entity.MajorRegister;
@@ -36,7 +38,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-26T10:58:29+0700",
+    date = "2024-05-28T10:37:07+0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (Oracle Corporation)"
 )
 public class MajorRegisterMapperImpl implements MajorRegisterMapper {
@@ -57,7 +59,6 @@ public class MajorRegisterMapperImpl implements MajorRegisterMapper {
         majorRegister.setCreatedBy( majorRegisterDTO.getCreatedBy() );
         majorRegister.setModifiedDate( majorRegisterDTO.getModifiedDate() );
         majorRegister.setModifiedBy( majorRegisterDTO.getModifiedBy() );
-        majorRegister.setOpenRegister( majorRegisterDTO.isOpenRegister() );
 
         return majorRegister;
     }
@@ -75,12 +76,13 @@ public class MajorRegisterMapperImpl implements MajorRegisterMapper {
         majorRegisterDTO.setSubjectDTOS( subjectListToSubjectDTOList( majorRegister.getSubjects() ) );
         majorRegisterDTO.setTuitionDTO( tuitionToTuitionDTO( majorRegister.getTuition() ) );
         majorRegisterDTO.setRegisterDTOS( registerListToRegisterDTOList( majorRegister.getRegisters() ) );
+        majorRegisterDTO.setEventRegisterResponse( eventRegisterToEventRegisterResponse( majorRegister.getEventRegister() ) );
         majorRegisterDTO.setId( majorRegister.getId() );
         majorRegisterDTO.setCreatedDate( majorRegister.getCreatedDate() );
         majorRegisterDTO.setCreatedBy( majorRegister.getCreatedBy() );
         majorRegisterDTO.setModifiedDate( majorRegister.getModifiedDate() );
         majorRegisterDTO.setModifiedBy( majorRegister.getModifiedBy() );
-        majorRegisterDTO.setOpenRegister( majorRegister.isOpenRegister() );
+        majorRegisterDTO.setOpenRegister( majorRegister.getOpenRegister() );
 
         return majorRegisterDTO;
     }
@@ -507,5 +509,19 @@ public class MajorRegisterMapperImpl implements MajorRegisterMapper {
         }
 
         return list1;
+    }
+
+    protected EventRegisterResponse eventRegisterToEventRegisterResponse(EventRegister eventRegister) {
+        if ( eventRegister == null ) {
+            return null;
+        }
+
+        EventRegisterResponse.EventRegisterResponseBuilder eventRegisterResponse = EventRegisterResponse.builder();
+
+        eventRegisterResponse.id( eventRegister.getId() );
+        eventRegisterResponse.start( eventRegister.getStart() );
+        eventRegisterResponse.end( eventRegister.getEnd() );
+
+        return eventRegisterResponse.build();
     }
 }

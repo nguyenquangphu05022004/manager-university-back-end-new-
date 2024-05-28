@@ -5,6 +5,7 @@ import com.example.manageruniversity.dto.SubjectGroupDTO;
 import com.example.manageruniversity.mapper.SubjectGroupMapper;
 import com.example.manageruniversity.service.ISubjectGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,5 +44,11 @@ public class SubjectGroupController {
     @GetMapping("/subjectGroups/subject/{subjectId}")
     public List<SubjectGroupDTO> subjectGroupList(@PathVariable("subjectId") Long subjectId) {
         return subjectGroupService.findAllBySubjectId(subjectId);
+    }
+    @PutMapping("/subjectGroups/{subjectGroupId}/teacher")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateTeacher(@PathVariable("subjectGroupId") Long subjectGroupId,
+                              @RequestParam("teacherCode") String teacherCode) {
+        subjectGroupService.updateTeacher(subjectGroupId, teacherCode);
     }
 }

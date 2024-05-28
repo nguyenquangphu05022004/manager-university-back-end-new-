@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MajorRegisterRepository extends JpaRepository<MajorRegister, Long> {
-
     MajorRegister findBySeasonIdAndMajorId(Long seasonId, Long majorId);
     MajorRegister findByMajorIdAndSeasonDisabled(Long majorId, boolean disabled);
     @Query("select mr from Courses c inner join Season se on c.id = se.courses.id " +
@@ -20,13 +19,12 @@ public interface MajorRegisterRepository extends JpaRepository<MajorRegister, Lo
                                            @Param("coursesId") Long coursesId);
 
 
-    @Query("select mr from Courses c inner join Season s on c.id = s.courses.id " +
-            "inner join MajorRegister mr on s.id = mr.season.id inner join Major m on mr.major.id = m.id " +
-            "inner join Student st on m.id = st.major.id " +
-            "where st.id = :studentId and s.disabled = false and mr.openRegister = :openRegister and c.id = :coursesIdOfStudent")
-    Optional<MajorRegister> findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(Long studentId,
-                                                                                                  boolean openRegister,
-                                                                                                  Long coursesIdOfStudent);
+//    @Query("select mr from Courses c inner join Season s on c.id = s.courses.id " +
+//            "inner join MajorRegister mr on s.id = mr.season.id inner join Major m on mr.major.id = m.id " +
+//            "inner join Student st on m.id = st.major.id " +
+//            "where st.id = :studentId and s.disabled = false and c.id = :coursesIdOfStudent")
+//    Optional<MajorRegister> findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(Long studentId,
+//                                                                                                  Long coursesIdOfStudent);
     @Query("select mr from Season sea inner join MajorRegister mr on sea.id = mr.season.id" +
             " inner join Major major on mr.major.id = major.id " +
             "inner join Student s on s.major.id = major.id " +

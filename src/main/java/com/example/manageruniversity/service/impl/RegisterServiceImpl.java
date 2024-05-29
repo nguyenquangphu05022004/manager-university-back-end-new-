@@ -87,7 +87,7 @@ public class RegisterServiceImpl implements IRegisterService {
         return convertList(registers);
     }
 
-    private List<RegisterDTO> convertList(List<Register> registers) {
+    public static List<RegisterDTO> convertList(List<Register> registers) {
         List<RegisterDTO> registerList = registers.stream()
                 .map(register -> {
                     RegisterDTO registerDTO = RegisterMapper.mapper.registerToDTO(register);

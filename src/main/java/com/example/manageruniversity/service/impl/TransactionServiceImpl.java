@@ -56,12 +56,12 @@ public class TransactionServiceImpl implements ITransactionService {
         Register targetRegister = findRegisterById(targetRegisterId);
         Register requestRegister = findRegisterById(requestRegisterId);
 
-        Student targetStudent = targetRegister.getStudent();
+        var targetSubjectGroup = targetRegister.getSubjectGroup();
         //update targetRegister for requestStudent and opposite
-        targetRegister.setStudent(requestRegister.getStudent());
+        targetRegister.setSubjectGroup(requestRegister.getSubjectGroup());
         targetRegister.setOpenTransaction(false);
         //
-        requestRegister.setStudent(targetStudent);
+        requestRegister.setSubjectGroup(targetSubjectGroup);
         requestRegister.setOpenTransaction(false);
         //save it:
         registerRepository.save(targetRegister);
@@ -70,7 +70,7 @@ public class TransactionServiceImpl implements ITransactionService {
         //delete request of all student
         transactionRepository.deleteAllByTargetRegisterId(requestRegisterId);
         transactionRepository.deleteAllByTargetRegisterId(targetRegisterId);
-        //delete request of current student to all different student
+        //delete request of current register student to all different student
         transactionRepository.deleteAllRequest(requestRegister.getStudent().getId(),
                 requestRegister.getSubjectGroup().getSubject().getId());
         transactionRepository.deleteAllRequest(targetRegister.getStudent().getId(),

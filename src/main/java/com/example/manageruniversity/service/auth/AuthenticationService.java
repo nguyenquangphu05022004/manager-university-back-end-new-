@@ -110,6 +110,7 @@ public class AuthenticationService {
                         .fileName(user.getAvatar() != null ? user.getAvatar().getAvatarName() : null)
                         .folderStorage(user.getAvatar() != null ? user.getAvatar().getFolderStorage() : null)
                         .build())
+                .expired(jwtService.extractExpiration(jwt))
                 .build();
     }
 

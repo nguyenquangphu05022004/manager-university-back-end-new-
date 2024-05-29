@@ -5,6 +5,8 @@ import com.example.manageruniversity.dto.StudentDTO;
 import com.example.manageruniversity.entity.Role;
 import lombok.*;
 
+import java.util.Date;
+
 @Builder
 @Getter
 @NoArgsConstructor
@@ -14,5 +16,6 @@ public class AuthenticationResponse {
     private Role role;
     private Object person;
     private AvatarResponse avatarResponse;
+    private Date expired;
 
 }

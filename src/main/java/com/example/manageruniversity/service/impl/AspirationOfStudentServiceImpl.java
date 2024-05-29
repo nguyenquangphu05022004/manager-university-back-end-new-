@@ -36,8 +36,10 @@ public class AspirationOfStudentServiceImpl implements IAspirationOfStudentServi
         Subject subject = subjectRepository.findBySubjectCode(aspirationRequest.getSubjectCode())
                 .orElseThrow(() -> new NotFoundIdException("Subject", "SubjectCode",
                         aspirationRequest.getSubjectCode()));
+
         Season season = seasonRepository.findById(aspirationRequest.getSeasonId())
                 .orElseThrow(() -> new NotFoundIdException("Season", "Id", aspirationRequest.getSeasonId()));
+
         AspirationOfStudent aspirationOfStudent = new AspirationOfStudent(user.getStudent(), subject, season, false);
         AspirationOfStudent saved = aspirationOfStudentRepository.save(aspirationOfStudent);
 

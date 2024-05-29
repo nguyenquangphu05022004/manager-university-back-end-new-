@@ -91,28 +91,7 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     @Override
     public List<MajorRegisterDTO> findAllByStudentIdAndCoursesId(Long studentId, Long coursesId) {
         List<MajorRegister> majorRegisters = majorRegisterRepository.findAllByStudentIdAndCoursesId(studentId, coursesId);
-        for(MajorRegister m : majorRegisters) {
-            List<Register> registers = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, m.getId());
-            m.setRegisters(registers);
-        }
-         return majorRegisters.stream()
-                .map(majorRegister -> {
-
-                    MajorRegisterDTO majorResponse = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
-                    Optional<Payment> payment = paymentRepository.findByStudentIdAndMajorRegisterId(studentId, majorRegister.getId());
-                    if(payment.isPresent()) {
-                        PaymentResponse paymentResponse = PaymentResponse.builder()
-                                .description(payment.get().getDescription())
-                                .amountPaid(payment.get().getAmountPaid())
-                                .transactionId(payment.get().getTransactionId())
-                                .complete(payment.get().getComplete())
-                                .build();
-                        majorResponse.setPaymentOfPerStudentAtCurrentSeason(paymentResponse);
-                    }
-                    majorResponse.setOpenRegister(majorRegister.getOpenRegister());
-                    return majorResponse;
-                })
-                .toList();
+        return getMajorRegisterDTOS(studentId, majorRegisters);
     }
 
     @Override
@@ -136,9 +115,7 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
             optional = majorRegisterRepository.findByStudentIdAndSeasonIdExtra(studentId, seasonId);
         }
         var majorRegister = optional.orElseThrow(()     -> new NotFoundIdException("MajorRegister", "Student-Season", studentId + " - " + seasonId));
-        List<RegisterDTO> list = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId())
-                .stream().map(e -> RegisterMapper.mapper.registerToDTO(e))
-                .toList();
+        List<RegisterDTO> list = RegisterServiceImpl.convertList(registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId()));
         MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
         majorRegisterDTO.setRegisterDTOS(list);
         majorRegisterDTO.setOpenRegister(majorRegister.getOpenRegister());
@@ -148,16 +125,19 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     @Override
     public List<MajorRegisterDTO> getListExtraOfStudentByStudentId(Long studentId) {
         var majorRegisters = majorRegisterRepository.findAllExtraByStudentId(studentId);
+        return getMajorRegisterDTOS(studentId, majorRegisters);
+    }
+
+    private List<MajorRegisterDTO> getMajorRegisterDTOS(Long studentId, List<MajorRegister> majorRegisters) {
         for(MajorRegister m : majorRegisters) {
             List<Register> registers = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, m.getId());
             m.setRegisters(registers);
         }
         return majorRegisters.stream()
                 .map(majorRegister -> {
-
                     MajorRegisterDTO majorResponse = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
                     Optional<Payment> payment = paymentRepository.findByStudentIdAndMajorRegisterId(studentId, majorRegister.getId());
-                    if(payment.isPresent()) {
+                    if (payment.isPresent()) {
                         PaymentResponse paymentResponse = PaymentResponse.builder()
                                 .description(payment.get().getDescription())
                                 .amountPaid(payment.get().getAmountPaid())

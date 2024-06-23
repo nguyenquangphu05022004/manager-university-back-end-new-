@@ -22,8 +22,10 @@ public interface SeasonRepository extends JpaRepository<Season, Long> {
             "order by s.id desc ")
     List<Season> findAllByCoursesIdAndOrderByIdDesc(@PathVariable("coursesId") Long coursesId);
 
-    @Query("select s from Season s inner join AspirationOfStudent  aspi " +
-            "on s.id = aspi.season.id inner join Student st on aspi.student.id = st.id " +
+    @Query("select s from Season s inner join AspirationRegister  aspiRegister " +
+            "on s.id = aspiRegister.season.id inner join AspirationOfStudent aspi " +
+            "on aspiRegister.id = aspi.aspirationRegister.id " +
+            "inner join Student st on aspi.student.id = st.id " +
             "where st.id = :studentId and aspi.approval = true " +
             "order by s.id desc ")
     List<Season> findSeasonExtraByStudentId(Long studentId);

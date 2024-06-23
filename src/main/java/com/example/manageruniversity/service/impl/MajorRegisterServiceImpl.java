@@ -95,20 +95,6 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     }
 
     @Override
-    public MajorRegisterDTO findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(Long studentId, boolean openRegister, Long coursesIdOfStudent) {
-//        MajorRegister majorRegister = majorRegisterRepository.findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(studentId, openRegister,coursesIdOfStudent)
-//                .orElseThrow(() -> new NotFoundIdException("MajorRegister", "StudentId - OpenRegister", studentId + " - " + openRegister));
-//        List<RegisterDTO> list = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId())
-//                .stream().map(e -> RegisterMapper.mapper.registerToDTO(e))
-//                .toList();
-//        MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
-//        majorRegisterDTO.setRegisterDTOS(list);
-//        majorRegisterDTO.setOpenRegister(majorRegister.getOpenRegister());
-//        return majorRegisterDTO;
-        return null;
-    }
-
-    @Override
     public MajorRegisterDTO findByStudentIdAndSeasonId(Long studentId, Long seasonId) {
         Optional<MajorRegister> optional = majorRegisterRepository.findByStudentIdAndSeasonId(studentId, seasonId);
         if(optional.isEmpty()) {

@@ -32,14 +32,16 @@ public interface MajorRegisterRepository extends JpaRepository<MajorRegister, Lo
     Optional<MajorRegister> findByStudentIdAndSeasonId(@Param("studentId") Long studentId,
                                                        @Param("seasonId") Long seasonId);
     @Query("select mr from Student s inner join AspirationOfStudent asp on s.id = asp.student.id " +
-            "inner join Season sea on asp.season.id = sea.id " +
+            "inner join AspirationRegister aspiRegister on asp.aspirationRegister.id = aspiRegister.id " +
+            "inner join Season sea on aspiRegister.season.id = sea.id " +
             "inner join MajorRegister mr on sea.id = mr.season.id " +
             "where s.id = :studentId and sea.id = :seasonId")
     Optional<MajorRegister> findByStudentIdAndSeasonIdExtra(@Param("studentId") Long studentId,
                                                             @Param("seasonId") Long seasonId);
 
-    @Query("select mr from MajorRegister  mr inner join Season sea on mr.season.id = sea.id " +
-            "inner join AspirationOfStudent  aspi on aspi.season.id = sea.id " +
+    @Query("select mr from MajorRegister  mr inner join " +
+            "Season sea on mr.season.id = sea.id inner join AspirationRegister  aspiRegister on sea.id = aspiRegister.season.id " +
+            "inner join AspirationOfStudent  aspi on aspi.aspirationRegister.id = aspiRegister.id " +
             "inner join Student st on st.id = aspi.student.id " +
             "where st.id = :studentId")
     List<MajorRegister> findAllExtraByStudentId(Long studentId);

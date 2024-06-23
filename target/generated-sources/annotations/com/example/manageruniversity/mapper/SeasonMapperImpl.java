@@ -5,20 +5,18 @@ import com.example.manageruniversity.dto.MajorRegisterDTO;
 import com.example.manageruniversity.dto.SchoolYearDTO;
 import com.example.manageruniversity.dto.SeasonDTO;
 import com.example.manageruniversity.dto.SemesterDTO;
-import com.example.manageruniversity.dto.SubjectDTO;
 import com.example.manageruniversity.entity.Courses;
 import com.example.manageruniversity.entity.MajorRegister;
 import com.example.manageruniversity.entity.SchoolYear;
 import com.example.manageruniversity.entity.Season;
 import com.example.manageruniversity.entity.Semester;
-import com.example.manageruniversity.entity.Subject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-28T10:37:07+0700",
+    date = "2024-06-23T10:44:42+0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (Oracle Corporation)"
 )
 public class SeasonMapperImpl implements SeasonMapper {
@@ -64,26 +62,6 @@ public class SeasonMapperImpl implements SeasonMapper {
         seasonDTO.setDisabled( season.isDisabled() );
 
         return seasonDTO;
-    }
-
-    @Override
-    public SubjectDTO subjectToDto(Subject subject) {
-        if ( subject == null ) {
-            return null;
-        }
-
-        SubjectDTO subjectDTO = new SubjectDTO();
-
-        subjectDTO.setId( subject.getId() );
-        subjectDTO.setCreatedDate( subject.getCreatedDate() );
-        subjectDTO.setCreatedBy( subject.getCreatedBy() );
-        subjectDTO.setModifiedDate( subject.getModifiedDate() );
-        subjectDTO.setModifiedBy( subject.getModifiedBy() );
-        subjectDTO.setSubjectName( subject.getSubjectName() );
-        subjectDTO.setSubjectCode( subject.getSubjectCode() );
-        subjectDTO.setCredit( subject.getCredit() );
-
-        return subjectDTO;
     }
 
     protected Semester semesterDTOToSemester(SemesterDTO semesterDTO) {

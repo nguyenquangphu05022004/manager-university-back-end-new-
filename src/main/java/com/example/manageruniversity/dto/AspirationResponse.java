@@ -1,5 +1,6 @@
 package com.example.manageruniversity.dto;
 
+import com.example.manageruniversity.entity.AspirationRegister;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +11,8 @@ import lombok.Setter;
 public class AspirationResponse extends BaseDTO{
     private SubjectDTO subject;
     private StudentDTO student;
-    private SeasonDTO season;
     private boolean approval;
+    private AspirationRegisterDTO aspirationRegister;
     public String getMessage() {
         if(approval) {
             return "Đã xem xét và số lượng sinh viên lớn hơn mong đợi => Mở lớp";

@@ -23,7 +23,7 @@ public class AspirationOfStudent extends Base{
     @JoinColumn(name = "subject_id")
     private Subject subject;
     @ManyToOne
-    @JoinColumn(name = "season_id")
-    private Season season;
+    @JoinColumn(name = "aspiration_registers")
+    private AspirationRegister aspirationRegister;
     private boolean approval;
 }

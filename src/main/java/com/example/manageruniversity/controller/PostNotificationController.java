@@ -19,7 +19,9 @@ public class PostNotificationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPost(@RequestBody PostNotificationDTO postDto) {
+    public void createPost(
+            @RequestBody PostNotificationDTO postDto
+    ) {
          postNotificationService.saveOrUpdate(postDto);
     }
     @GetMapping
@@ -27,11 +29,15 @@ public class PostNotificationController {
         return postNotificationService.getList();
     }
     @DeleteMapping("/{postId}")
-    public void deletePost(@PathVariable("postId") Long postId) {
+    public void deletePost(
+            @PathVariable("postId") Long postId
+    ) {
         postNotificationService.deleteById(postId);
     }
     @GetMapping("/{postId}")
-    public PostNotificationDTO getPostById(@PathVariable("postId") Long postId) {
+    public PostNotificationDTO getPostById(
+            @PathVariable("postId") Long postId
+    ) {
         return postNotificationService.findById(postId);
     }
 }

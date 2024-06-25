@@ -14,6 +14,7 @@ import com.example.manageruniversity.repository.RegisterRepository;
 import com.example.manageruniversity.service.IMajorRegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -26,23 +27,12 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     private final PaymentRepository paymentRepository;
 
     @Override
+    @Transactional
     public MajorRegisterDTO saveOrUpdate(MajorRegisterDTO majorRegisterDTO) {
-        MajorRegister majorRegister = majorRegisterRepository
-                .findBySeasonIdAndMajorId(majorRegisterDTO.getSeasonDTO().getId(),
-                majorRegisterDTO.getMajorDTO().getId());
-        if(majorRegister != null) {
-            List<Subject> subjects = majorRegister.getSubjects();
-            for(var s : majorRegisterDTO.getSubjectDTOS()) {
-                Subject subject = new Subject(); subject.setId(s.getId());
-                int index = checkSubjectIdIsExistsInList(subjects, s.getId(), 0, subjects.size() - 1);
-                if(index >= 0) {
-                    subjects.add(subject);
-                }
-            }
-        } else {
-            majorRegister = MajorRegisterMapper.mapper.majorRegisterDTOToEntity(majorRegisterDTO);
-        }
-         majorRegisterRepository.save(majorRegister);
+        MajorRegister majorRegister = MajorRegisterMapper
+                .mapper
+                .majorRegisterDTOToEntity(majorRegisterDTO);
+        majorRegisterRepository.save(majorRegister);
         return null;
     }
 
@@ -95,20 +85,6 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     }
 
     @Override
-    public MajorRegisterDTO findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(Long studentId, boolean openRegister, Long coursesIdOfStudent) {
-//        MajorRegister majorRegister = majorRegisterRepository.findByStudentIdAndSeasonNotDisabledAndOpenRegisterAndCoursesOfStudent(studentId, openRegister,coursesIdOfStudent)
-//                .orElseThrow(() -> new NotFoundIdException("MajorRegister", "StudentId - OpenRegister", studentId + " - " + openRegister));
-//        List<RegisterDTO> list = registerRepository.findAllByStudentIdAndMajorRegisterId(studentId, majorRegister.getId())
-//                .stream().map(e -> RegisterMapper.mapper.registerToDTO(e))
-//                .toList();
-//        MajorRegisterDTO majorRegisterDTO = MajorRegisterMapper.mapper.majorRegisterToDTO(majorRegister);
-//        majorRegisterDTO.setRegisterDTOS(list);
-//        majorRegisterDTO.setOpenRegister(majorRegister.getOpenRegister());
-//        return majorRegisterDTO;
-        return null;
-    }
-
-    @Override
     public MajorRegisterDTO findByStudentIdAndSeasonId(Long studentId, Long seasonId) {
         Optional<MajorRegister> optional = majorRegisterRepository.findByStudentIdAndSeasonId(studentId, seasonId);
         if(optional.isEmpty()) {
@@ -126,6 +102,25 @@ public class MajorRegisterServiceImpl implements IMajorRegisterService {
     public List<MajorRegisterDTO> getListExtraOfStudentByStudentId(Long studentId) {
         var majorRegisters = majorRegisterRepository.findAllExtraByStudentId(studentId);
         return getMajorRegisterDTOS(studentId, majorRegisters);
+    }
+
+    @Override
+    @Transactional
+    public void updateSubject(boolean typeAction,
+                              Long majorRegisterId,
+                              Long subjectId) {
+        MajorRegister majorRegister = majorRegisterRepository.findById(majorRegisterId)
+                .orElseThrow(() -> new NotFoundIdException(
+                        "MajorRegister",
+                        "Id",
+                        majorRegisterId.toString()
+                ));
+        if(typeAction) {
+            majorRegister.getSubjects().add(new Subject(subjectId));
+        } else {
+            majorRegister.getSubjects().remove(new Subject(subjectId));
+        }
+        majorRegisterRepository.save(majorRegister);
     }
 
     private List<MajorRegisterDTO> getMajorRegisterDTOS(Long studentId, List<MajorRegister> majorRegisters) {

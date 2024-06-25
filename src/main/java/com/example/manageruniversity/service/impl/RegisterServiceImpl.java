@@ -6,14 +6,17 @@ import com.example.manageruniversity.dto.TransactionDTO;
 import com.example.manageruniversity.entity.Avatar;
 import com.example.manageruniversity.entity.Register;
 import com.example.manageruniversity.entity.SubjectGroup;
+import com.example.manageruniversity.exception.InvalidDateException;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.RegisterMapper;
 import com.example.manageruniversity.repository.*;
 import com.example.manageruniversity.service.IRegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.InvalidTimeoutException;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.InvalidClassException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,11 +28,15 @@ public class RegisterServiceImpl implements IRegisterService {
     private final RegisterRepository registerRepository;
     private final TransactionRepository transactionRepository;
     private final SubjectGroupRepository subjectGroupRepository;
-    private final StudentRepository studentRepository;
-    private final SeasonRepository seasonRepository;
+    private final MajorRegisterRepository majorRegisterRepository;
     @Override
     @Transactional
     public RegisterDTO saveOrUpdate(RegisterDTO request) {
+        if(!majorRegisterRepository.findById(request.getMajorRegisterDTO().getId())
+                .orElseThrow(() -> new NotFoundIdException("MajorRegister", "Id", request.getMajorRegisterDTO().getId() + ""))
+                .getOpenRegister())  {
+            throw new InvalidDateException("Date for register expired");
+        }
         Register register = RegisterMapper.mapper.registerDTOToEntity(request);
         SubjectGroup subjectGroup = subjectGroupRepository.findById(request.getSubjectGroup().getId())
                 .orElseThrow(() -> new NotFoundIdException("SubjectGroup", "Id", request.getSubjectGroup().getId() +""));
@@ -53,6 +60,9 @@ public class RegisterServiceImpl implements IRegisterService {
     public void delete(Long id) {
         Register register = registerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundIdException("Register", "Id", id.toString()));
+        if(!register.getMajorRegister().getOpenRegister()) {
+            throw new InvalidDateException("Error when you try to delete register, because due to expired");
+        }
         SubjectGroup subjectGroup = register.getSubjectGroup();
         subjectGroup.setNumberOfStudentCurrent(subjectGroup.getNumberOfStudentCurrent() - 1 > 0 ? subjectGroup.getNumberOfStudentCurrent() - 1 : 0);
         subjectGroupRepository.save(subjectGroup);
@@ -99,16 +109,18 @@ public class RegisterServiceImpl implements IRegisterService {
                                 .build();
                         registerDTO.getStudentDTO().getUser().setAvatarResponse(response);
                     }
-                    List<TransactionDTO> transactionList = new ArrayList<>();
-                    for (Register r : register.getListRegisterOfSubject()) {
-                        r.setTransactions(new ArrayList<>());
-                        TransactionDTO transactionDTO = new TransactionDTO(
-                                RegisterMapper
-                                        .mapper
-                                        .registerToDTO(r),
-                                r.getStudent().getId());
-                        transactionList.add(transactionDTO);
-                    }
+                    List<TransactionDTO> transactionList = register.getListRegisterOfSubject()
+                            .stream()
+                            .map(registerRequest -> {
+                                registerRequest.setTransactions(new ArrayList<>());
+                                TransactionDTO transactionDTO = new TransactionDTO(
+                                        RegisterMapper
+                                                .mapper
+                                                .registerToDTO(registerRequest),
+                                        registerRequest.getStudent().getId());
+                                return transactionDTO;
+                            })
+                            .collect(Collectors.toList());
                     registerDTO.setTransactionList(transactionList);
                     return registerDTO;
                 }).collect(Collectors.toList());

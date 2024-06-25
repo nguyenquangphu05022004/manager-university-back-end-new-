@@ -12,4 +12,9 @@ public interface IAspirationOfStudentService extends
             Long studentId,
             Long aspirationRegisterId
     );
+
+    void approvalAspirationRegisterOfStudent(
+            Long subjectId,
+            Long  aspirationRegisterId
+    );
 }

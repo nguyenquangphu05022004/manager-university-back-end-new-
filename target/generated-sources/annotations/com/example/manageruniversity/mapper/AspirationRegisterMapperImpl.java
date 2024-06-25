@@ -14,7 +14,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-23T10:38:19+0700",
+    date = "2024-06-25T09:57:42+0700",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (Oracle Corporation)"
 )
 public class AspirationRegisterMapperImpl implements AspirationRegisterMapper {
@@ -27,6 +27,11 @@ public class AspirationRegisterMapperImpl implements AspirationRegisterMapper {
 
         AspirationRegisterDTO aspirationRegisterDTO = new AspirationRegisterDTO();
 
+        aspirationRegisterDTO.setId( aspirationRegister.getId() );
+        aspirationRegisterDTO.setCreatedDate( aspirationRegister.getCreatedDate() );
+        aspirationRegisterDTO.setCreatedBy( aspirationRegister.getCreatedBy() );
+        aspirationRegisterDTO.setModifiedDate( aspirationRegister.getModifiedDate() );
+        aspirationRegisterDTO.setModifiedBy( aspirationRegister.getModifiedBy() );
         aspirationRegisterDTO.setSeason( seasonToSeasonDTO( aspirationRegister.getSeason() ) );
         aspirationRegisterDTO.setStart( aspirationRegister.getStart() );
         aspirationRegisterDTO.setEnd( aspirationRegister.getEnd() );

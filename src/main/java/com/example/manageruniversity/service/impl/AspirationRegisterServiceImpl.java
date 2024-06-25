@@ -6,6 +6,7 @@ import com.example.manageruniversity.entity.AspirationRegister;
 import com.example.manageruniversity.entity.Season;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.AspirationRegisterMapper;
+import com.example.manageruniversity.mapper.SubjectMapper;
 import com.example.manageruniversity.repository.AspirationRegisterRepository;
 import com.example.manageruniversity.repository.SeasonRepository;
 import com.example.manageruniversity.service.IAspirationRegisterService;
@@ -22,6 +23,7 @@ public class AspirationRegisterServiceImpl implements IAspirationRegisterService
 
     private final AspirationRegisterRepository aspirationRegisterRepository;
     private final SeasonRepository seasonRepository;
+
     @Override
     @Transactional
     public AspirationRegisterDTO saveOrUpdate(AspirationRegisterRequest request) {
@@ -37,20 +39,37 @@ public class AspirationRegisterServiceImpl implements IAspirationRegisterService
                 .end(request.getEnd())
                 .start(request.getStart())
                 .build();
-        return AspirationRegisterMapper
-                .mapper
-                .mapToDto(aspirationRegisterRepository.save(as));
+        return getMapToDto(aspirationRegisterRepository.save(as));
     }
 
     @Override
     public List<AspirationRegisterDTO> records() {
-        List<AspirationRegisterDTO> resultList = aspirationRegisterRepository.findAll()
+        List<AspirationRegisterDTO> resultList = aspirationRegisterRepository.findAllByOrderById()
                 .stream()
-                .map(aspi -> AspirationRegisterMapper
-                        .mapper
-                        .mapToDto(aspi))
+                .map(aspi -> getMapToDto(aspi)
+                )
                 .collect(Collectors.toList());
         return resultList;
+    }
+
+    private static AspirationRegisterDTO getMapToDto(AspirationRegister aspi) {
+
+        AspirationRegisterDTO aspirationRegisterDTO = AspirationRegisterMapper
+                .mapper
+                .mapToDto(aspi);
+        if (aspi.getListSubject() != null) {
+            List<AspirationRegisterDTO.SubjectApproval> subjectApprovals = aspi.getListSubject()
+                    .entrySet()
+                    .stream()
+                    .map(entry -> new AspirationRegisterDTO
+                            .SubjectApproval(
+                            SubjectMapper.mapper.subjectToDTO(entry.getKey()),
+                            entry.getValue()
+                    ))
+                    .toList();
+            aspirationRegisterDTO.setSubjectApprovals(subjectApprovals);
+        }
+        return aspirationRegisterDTO;
     }
 
     @Override

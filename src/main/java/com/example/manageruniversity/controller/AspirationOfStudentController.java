@@ -16,23 +16,40 @@ public class AspirationOfStudentController {
     private final IAspirationOfStudentService aspirationOfStudentService;
 
     @PostMapping("/aspirations")
-    public AspirationResponse createAspiration(@RequestBody AspirationRequest aspirationRequest) {
-        return aspirationOfStudentService.saveOrUpdate(aspirationRequest);
+    public AspirationResponse createAspiration(
+            @RequestBody AspirationRequest aspirationRequest
+    ) {
+        return aspirationOfStudentService
+                .saveOrUpdate(aspirationRequest);
     }
 
     @GetMapping("/aspirations")
     public List<AspirationResponse> getListAspiration() {
         return aspirationOfStudentService.records();
     }
-    @GetMapping("/aspirations/student/{studentId}/season/{seasonId}")
-    public List<AspirationResponse> getListAspirationByStudentIdAndAspirationRegisterId(
+    @GetMapping("/aspirations/student/{studentId}/aspiration-register/{aspirationRegisterId}")
+    public List<AspirationResponse> getListByAspirationRegisterIdAndStudentId(
             @PathVariable("studentId") Long studentId,
             @PathVariable("aspirationRegisterId") Long aspirationRegisterId
     ) {
-        return aspirationOfStudentService.getListAspirationByStudentIdAndAspirationRegisterId(studentId, aspirationRegisterId);
+        return aspirationOfStudentService
+                .getListAspirationByStudentIdAndAspirationRegisterId(
+                        studentId,
+                        aspirationRegisterId
+                );
     }
     @DeleteMapping("/aspirations/{aspirationId}")
     public void deleteAspiration(@PathVariable("aspirationId") Long aspiration) {
          aspirationOfStudentService.delete(aspiration);
+    }
+    @PutMapping("/aspirations/approval")
+    public void approvalAspirationOfStudent(
+            @RequestParam("subjectId") Long subjectId,
+            @RequestParam("aspirationRegisterId") Long aspirationRegisterId
+    ) {
+        aspirationOfStudentService.approvalAspirationRegisterOfStudent(
+                subjectId,
+                aspirationRegisterId
+        );
     }
 }

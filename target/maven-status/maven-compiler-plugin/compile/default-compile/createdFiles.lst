@@ -9,7 +9,6 @@ com\example\manageruniversity\dto\RoomClassDTO.class
 com\example\manageruniversity\mapper\MajorRegisterMapper.class
 com\example\manageruniversity\controller\TuitionController.class
 com\example\manageruniversity\entity\Register.class
-com\example\manageruniversity\dto\TestScheduleDTO.class
 com\example\manageruniversity\entity\Grade.class
 com\example\manageruniversity\repository\TuitionRepository.class
 com\example\manageruniversity\service\IMajorRegisterService.class

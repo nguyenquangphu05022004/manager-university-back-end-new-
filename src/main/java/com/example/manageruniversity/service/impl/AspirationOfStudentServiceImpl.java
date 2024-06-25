@@ -4,14 +4,12 @@ import com.example.manageruniversity.dto.AspirationRequest;
 import com.example.manageruniversity.dto.AspirationResponse;
 import com.example.manageruniversity.entity.AspirationOfStudent;
 import com.example.manageruniversity.entity.AspirationRegister;
-import com.example.manageruniversity.entity.Season;
 import com.example.manageruniversity.entity.Subject;
 import com.example.manageruniversity.entity.auth.User;
 import com.example.manageruniversity.exception.InvalidDateException;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.exception.ObjectExistException;
 import com.example.manageruniversity.mapper.AspirationRegisterMapper;
-import com.example.manageruniversity.mapper.SeasonMapper;
 import com.example.manageruniversity.mapper.StudentMapper;
 import com.example.manageruniversity.mapper.SubjectMapper;
 import com.example.manageruniversity.repository.AspirationOfStudentRepository;
@@ -23,6 +21,7 @@ import com.example.manageruniversity.service.IAspirationOfStudentService;
 import com.example.manageruniversity.utils.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,6 +33,7 @@ public class AspirationOfStudentServiceImpl implements IAspirationOfStudentServi
     private final SubjectRepository subjectRepository;
     private final SeasonRepository seasonRepository;
     private final AspirationRegisterRepository aspirationRegisterRepository;
+
     @Override
     public AspirationResponse saveOrUpdate(AspirationRequest aspirationRequest) {
         User user = userRepository.findByUsername(SystemUtils.getUsername())
@@ -50,14 +50,14 @@ public class AspirationOfStudentServiceImpl implements IAspirationOfStudentServi
                         "ID",
                         aspirationRequest.getAspirationRegisterId()
                 ));
-        if(aspirationOfStudentRepository.findByStudentIdAndAspirationRegisterIdAndSubjectId(
+        if (aspirationOfStudentRepository.findByStudentIdAndAspirationRegisterIdAndSubjectId(
                 user.getStudent().getId(),
                 aspirationRequest.getAspirationRegisterId(),
                 subject.getId()
         ).isPresent()) {
             throw new ObjectExistException("Aspiration was exist");
         }
-        if(!aspirationRegister.getOpenRegister()) {
+        if (!aspirationRegister.getOpenRegister()) {
             throw new InvalidDateException("Aspiration register expired");
         }
         AspirationOfStudent aspirationOfStudent = new AspirationOfStudent(
@@ -81,6 +81,7 @@ public class AspirationOfStudentServiceImpl implements IAspirationOfStudentServi
     public void delete(Long id) {
         aspirationOfStudentRepository.deleteById(id);
     }
+
     private AspirationResponse getToDto(AspirationOfStudent aspirationOfStudent) {
         AspirationResponse response = AspirationResponse.builder()
                 .subject(SubjectMapper.mapper
@@ -110,5 +111,24 @@ public class AspirationOfStudentServiceImpl implements IAspirationOfStudentServi
                 .map(this::getToDto)
                 .toList();
         return listResponseByStudent;
+    }
+
+    @Override
+    @Transactional
+    public void approvalAspirationRegisterOfStudent(
+            Long subjectId,
+            Long aspirationRegisterId) {
+        List<AspirationOfStudent> aspirationOfStudents =
+                aspirationOfStudentRepository
+                        .findAllByAspirationRegisterIdAndSubjectId(
+                                aspirationRegisterId,
+                                subjectId
+                        );
+        aspirationOfStudents.
+                stream()
+                .forEach(e -> {
+                    e.setApproval(true);
+                    aspirationOfStudentRepository.save(e);
+                });
     }
 }

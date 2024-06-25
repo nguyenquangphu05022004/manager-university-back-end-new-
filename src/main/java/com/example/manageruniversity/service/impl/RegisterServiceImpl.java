@@ -60,6 +60,9 @@ public class RegisterServiceImpl implements IRegisterService {
     public void delete(Long id) {
         Register register = registerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundIdException("Register", "Id", id.toString()));
+        if(!register.getMajorRegister().getOpenRegister()) {
+            throw new InvalidDateException("Error when you try to delete register, because due to expired");
+        }
         SubjectGroup subjectGroup = register.getSubjectGroup();
         subjectGroup.setNumberOfStudentCurrent(subjectGroup.getNumberOfStudentCurrent() - 1 > 0 ? subjectGroup.getNumberOfStudentCurrent() - 1 : 0);
         subjectGroupRepository.save(subjectGroup);

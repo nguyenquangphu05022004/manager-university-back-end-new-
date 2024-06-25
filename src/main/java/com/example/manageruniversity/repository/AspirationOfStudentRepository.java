@@ -16,4 +16,8 @@ public interface AspirationOfStudentRepository extends JpaRepository<AspirationO
             Long aspirationId,
             Long subjectId
     );
+    List<AspirationOfStudent> findAllByAspirationRegisterIdAndSubjectId(
+            Long aspirationRegisterId,
+            Long subjectId
+    );
 }

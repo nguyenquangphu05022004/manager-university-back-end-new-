@@ -1,7 +1,7 @@
 package com.example.manageruniversity.mapper;
 
 import com.example.manageruniversity.dto.SemesterDTO;
-import com.example.manageruniversity.entity.Semester;
+import com.example.manageruniversity.core.schoolYear.Semester;
 import javax.annotation.processing.Generated;
 
 @Generated(

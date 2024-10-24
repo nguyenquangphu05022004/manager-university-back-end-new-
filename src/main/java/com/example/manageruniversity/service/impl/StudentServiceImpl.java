@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.StudentDTO;
-import com.example.manageruniversity.entity.Student;
+import com.example.manageruniversity.user.Student;
 import com.example.manageruniversity.mapper.StudentMapper;
 import com.example.manageruniversity.repository.StudentRepository;
 import com.example.manageruniversity.service.IStudentService;

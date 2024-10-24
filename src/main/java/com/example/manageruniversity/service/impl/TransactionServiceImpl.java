@@ -1,8 +1,8 @@
 package com.example.manageruniversity.service.impl;
 
-import com.example.manageruniversity.entity.Register;
-import com.example.manageruniversity.entity.Student;
-import com.example.manageruniversity.entity.Transaction;
+import com.example.manageruniversity.domain.Register;
+import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.domain.Transaction;
 import com.example.manageruniversity.exception.NotCreateTransactionException;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.repository.RegisterRepository;

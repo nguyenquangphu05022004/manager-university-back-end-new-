@@ -2,8 +2,8 @@ package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.EventRegisterRequest;
 import com.example.manageruniversity.dto.EventRegisterResponse;
-import com.example.manageruniversity.entity.EventRegister;
-import com.example.manageruniversity.entity.MajorRegister;
+import com.example.manageruniversity.domain.EventRegister;
+import com.example.manageruniversity.domain.MajorRegister;
 import com.example.manageruniversity.repository.EventRegisterRepository;
 import com.example.manageruniversity.repository.MajorRegisterRepository;
 import com.example.manageruniversity.service.IEventRegisterService;

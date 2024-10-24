@@ -1,6 +1,6 @@
 package com.example.manageruniversity.dto;
 
-import com.example.manageruniversity.entity.Role;
+import com.example.manageruniversity.user.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

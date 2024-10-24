@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.MajorDTO;
-import com.example.manageruniversity.entity.Major;
+import com.example.manageruniversity.core.major.Major;
 import com.example.manageruniversity.mapper.MajorMapper;
 import com.example.manageruniversity.repository.MajorRepository;
 import com.example.manageruniversity.service.IMajorService;

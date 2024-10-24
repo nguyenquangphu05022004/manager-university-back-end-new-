@@ -3,9 +3,9 @@ package com.example.manageruniversity.service.impl;
 import com.example.manageruniversity.dto.AvatarResponse;
 import com.example.manageruniversity.dto.RegisterDTO;
 import com.example.manageruniversity.dto.TransactionDTO;
-import com.example.manageruniversity.entity.Avatar;
-import com.example.manageruniversity.entity.Register;
-import com.example.manageruniversity.entity.SubjectGroup;
+import com.example.manageruniversity.domain.Avatar;
+import com.example.manageruniversity.domain.Register;
+import com.example.manageruniversity.domain.SubjectGroup;
 import com.example.manageruniversity.exception.InvalidDateException;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.RegisterMapper;
@@ -17,6 +17,7 @@ import org.springframework.transaction.InvalidTimeoutException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InvalidClassException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,17 +30,36 @@ public class RegisterServiceImpl implements IRegisterService {
     private final TransactionRepository transactionRepository;
     private final SubjectGroupRepository subjectGroupRepository;
     private final MajorRegisterRepository majorRegisterRepository;
+
     @Override
     @Transactional
     public RegisterDTO saveOrUpdate(RegisterDTO request) {
-        if(!majorRegisterRepository.findById(request.getMajorRegisterDTO().getId())
-                .orElseThrow(() -> new NotFoundIdException("MajorRegister", "Id", request.getMajorRegisterDTO().getId() + ""))
-                .getOpenRegister())  {
+        if (!majorRegisterRepository.findById(request.getMajorRegisterDTO().getId())
+                .orElseThrow(() -> new NotFoundIdException(
+                        "MajorRegister",
+                        "Id",
+                        request.getMajorRegisterDTO().getId() + ""))
+                .getOpenRegister()) {
             throw new InvalidDateException("Date for register expired");
         }
+        SubjectGroup subjectGroup = subjectGroupRepository
+                .findById(request.getSubjectGroup().getId())
+                .orElseThrow(() -> new NotFoundIdException(
+                        "SubjectGroup",
+                        "Id",
+                        request.getSubjectGroup().getId() + ""));
+        List<Register> registers = registerRepository
+                .findAllByStudentIdAndMajorRegisterId(
+                        request.getStudentDTO().getId(),
+                        request.getMajorRegisterDTO().getId()
+                );
+        boolean checkTimeIsInvalid = checkTimeIsOverLap(registers, subjectGroup);
+        if(checkTimeIsInvalid) {
+           throw new InvalidDateException(
+                   "Lich hoc trung, vui long ban dang ky lich khac"
+           );
+        }
         Register register = RegisterMapper.mapper.registerDTOToEntity(request);
-        SubjectGroup subjectGroup = subjectGroupRepository.findById(request.getSubjectGroup().getId())
-                .orElseThrow(() -> new NotFoundIdException("SubjectGroup", "Id", request.getSubjectGroup().getId() +""));
         if (subjectGroup.getNumberOfStudent() >= subjectGroup.getNumberOfStudentCurrent()) {
             subjectGroup.setNumberOfStudentCurrent(subjectGroup.getNumberOfStudentCurrent() + 1);
             register.setSubjectGroup(subjectGroup);
@@ -47,6 +67,37 @@ public class RegisterServiceImpl implements IRegisterService {
             return request;
         }
         throw new RuntimeException("student quantity in class was full");
+    }
+
+    private static boolean checkTimeIsOverLap(List<Register> registers,
+                                              SubjectGroup subjectGroup) {
+        if(registers.size() == 0) return false;
+        return registers.stream()
+                .allMatch(register -> {
+                    return register.getSubjectGroup()
+                            .getTimes()
+                            .stream()
+                            .anyMatch(time -> {
+                                return subjectGroup.getTimes()
+                                        .stream()
+                                        .anyMatch(timeSubjectGroup -> {
+                                            if (time.getDayOfWeek() == timeSubjectGroup.getDayOfWeek()) {
+                                                return time.getStartTime().isBefore(timeSubjectGroup.getEndTime())
+                                                        && time.getStartTime().isAfter(timeSubjectGroup.getStartTime())
+                                                        ||
+                                                        time.getStartTime().isBefore(timeSubjectGroup.getStartTime())
+                                                                && time.getEndTime().isAfter(timeSubjectGroup.getEndTime())
+                                                        ||
+                                                        time.getEndTime().isAfter(timeSubjectGroup.getStartTime())
+                                                                && time.getEndTime().isBefore(timeSubjectGroup.getEndTime())
+                                                        ||
+                                                        time.getStartTime().isAfter(timeSubjectGroup.getStartTime())
+                                                                && time.getEndTime().isBefore(timeSubjectGroup.getEndTime());
+                                            }
+                                            return false;
+                                        });
+                            });
+                });
     }
 
     @Override
@@ -60,7 +111,7 @@ public class RegisterServiceImpl implements IRegisterService {
     public void delete(Long id) {
         Register register = registerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundIdException("Register", "Id", id.toString()));
-        if(!register.getMajorRegister().getOpenRegister()) {
+        if (!register.getMajorRegister().getOpenRegister()) {
             throw new InvalidDateException("Error when you try to delete register, because due to expired");
         }
         SubjectGroup subjectGroup = register.getSubjectGroup();
@@ -102,7 +153,7 @@ public class RegisterServiceImpl implements IRegisterService {
                 .map(register -> {
                     RegisterDTO registerDTO = RegisterMapper.mapper.registerToDTO(register);
                     Avatar avatar = register.getStudent().getUser().getAvatar();
-                    if(avatar != null) {
+                    if (avatar != null) {
                         AvatarResponse response = AvatarResponse.builder()
                                 .fileName(avatar.getAvatarName())
                                 .folderStorage(avatar.getFolderStorage())

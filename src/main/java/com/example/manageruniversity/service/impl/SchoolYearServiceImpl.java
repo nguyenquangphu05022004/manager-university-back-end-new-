@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.SchoolYearDTO;
-import com.example.manageruniversity.entity.SchoolYear;
+import com.example.manageruniversity.core.schoolYear.SchoolYear;
 import com.example.manageruniversity.mapper.SchoolYearMapper;
 import com.example.manageruniversity.repository.SchoolYearRepository;
 import com.example.manageruniversity.service.ISchoolYearService;

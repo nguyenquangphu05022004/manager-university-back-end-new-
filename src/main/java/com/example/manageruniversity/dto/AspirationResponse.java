@@ -1,6 +1,6 @@
 package com.example.manageruniversity.dto;
 
-import com.example.manageruniversity.entity.AspirationRegister;
+import com.example.manageruniversity.domain.AspirationRegister;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.TimeDTO;
-import com.example.manageruniversity.entity.Time;
+import com.example.manageruniversity.domain.Time;
 import com.example.manageruniversity.mapper.TimeMapper;
 import com.example.manageruniversity.repository.TimeRepository;
 import com.example.manageruniversity.service.ITimeService;

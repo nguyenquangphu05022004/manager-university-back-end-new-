@@ -2,7 +2,7 @@ package com.example.manageruniversity.dto.auth;
 
 import com.example.manageruniversity.dto.StudentDTO;
 import com.example.manageruniversity.dto.TeacherDTO;
-import com.example.manageruniversity.entity.Role;
+import com.example.manageruniversity.user.Role;
 import lombok.Getter;
 import lombok.Setter;
 

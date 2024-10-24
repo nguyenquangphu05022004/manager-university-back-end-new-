@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.entity.AspirationOfStudent;
+import com.example.manageruniversity.domain.AspirationOfStudent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

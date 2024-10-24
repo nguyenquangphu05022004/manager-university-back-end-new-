@@ -1,7 +1,7 @@
 package com.example.manageruniversity.controller;
 
 import com.example.manageruniversity.dto.PostNotificationDTO;
-import com.example.manageruniversity.entity.PostNotification;
+import com.example.manageruniversity.domain.PostNotification;
 import com.example.manageruniversity.service.impl.PostNotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,8 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.AvatarResponse;
-import com.example.manageruniversity.entity.Avatar;
-import com.example.manageruniversity.entity.auth.User;
+import com.example.manageruniversity.domain.Avatar;
+import com.example.manageruniversity.domain.account.User;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.repository.AvatarRepository;
 import com.example.manageruniversity.repository.auth.UserRepository;

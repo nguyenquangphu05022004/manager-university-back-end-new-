@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.CoursesDTO;
-import com.example.manageruniversity.entity.Courses;
+import com.example.manageruniversity.core.Courses;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.CoursesMapper;
 import com.example.manageruniversity.repository.CoursesRepository;

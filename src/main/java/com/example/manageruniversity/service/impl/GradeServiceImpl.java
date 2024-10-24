@@ -2,8 +2,8 @@ package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.ComponentGradeDTO;
 import com.example.manageruniversity.dto.GradeDTO;
-import com.example.manageruniversity.entity.Grade;
-import com.example.manageruniversity.entity.Register;
+import com.example.manageruniversity.domain.Grade;
+import com.example.manageruniversity.domain.Register;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.ComponentGradeMapper;
 import com.example.manageruniversity.repository.ComponentGradeRepository;

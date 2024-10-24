@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.entity.Transaction;
+import com.example.manageruniversity.domain.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

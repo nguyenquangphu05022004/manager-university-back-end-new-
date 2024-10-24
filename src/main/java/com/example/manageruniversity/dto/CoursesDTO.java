@@ -1,6 +1,5 @@
 package com.example.manageruniversity.dto;
 
-import com.example.manageruniversity.entity.Base;
 import lombok.Data;
 import lombok.Getter;
 

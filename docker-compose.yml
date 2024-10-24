@@ -12,6 +12,8 @@ services:
       - uploadsImage:/app/uploads
     ports:
       - 8081:8081
+    depends_on:
+      - mysql_db
   mamager-university-fronend-app:
     image: irohas2004/manager-university-frontend:latest
     ports:

@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.PostNotificationDTO;
-import com.example.manageruniversity.entity.PostNotification;
+import com.example.manageruniversity.domain.PostNotification;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.repository.PostNotificationRepository;
 import lombok.RequiredArgsConstructor;

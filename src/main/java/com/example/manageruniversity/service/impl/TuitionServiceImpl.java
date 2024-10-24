@@ -1,8 +1,8 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.TuitionDTO;
-import com.example.manageruniversity.entity.Season;
-import com.example.manageruniversity.entity.Tuition;
+import com.example.manageruniversity.domain.Season;
+import com.example.manageruniversity.domain.Tuition;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.TuitionMapper;
 import com.example.manageruniversity.repository.MajorRegisterRepository;

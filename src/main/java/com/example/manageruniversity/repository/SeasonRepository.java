@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.entity.Season;
+import com.example.manageruniversity.domain.Season;
 import com.example.manageruniversity.utils.SystemUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

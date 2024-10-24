@@ -2,8 +2,8 @@ package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.AspirationRegisterDTO;
 import com.example.manageruniversity.dto.AspirationRegisterRequest;
-import com.example.manageruniversity.entity.AspirationRegister;
-import com.example.manageruniversity.entity.Season;
+import com.example.manageruniversity.domain.AspirationRegister;
+import com.example.manageruniversity.domain.Season;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.AspirationRegisterMapper;
 import com.example.manageruniversity.mapper.SubjectMapper;

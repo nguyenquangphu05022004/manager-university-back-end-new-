@@ -1,9 +1,10 @@
 package com.example.manageruniversity.service.impl;
 
+import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.dto.MajorRegisterDTO;
 import com.example.manageruniversity.dto.PaymentResponse;
 import com.example.manageruniversity.dto.RegisterDTO;
-import com.example.manageruniversity.entity.*;
+import com.example.manageruniversity.domain.*;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.MajorRegisterMapper;
 import com.example.manageruniversity.mapper.RegisterMapper;

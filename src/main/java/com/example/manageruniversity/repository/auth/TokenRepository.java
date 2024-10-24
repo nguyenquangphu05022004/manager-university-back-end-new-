@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository.auth;
 
-import com.example.manageruniversity.entity.auth.Token;
+import com.example.manageruniversity.domain.account.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

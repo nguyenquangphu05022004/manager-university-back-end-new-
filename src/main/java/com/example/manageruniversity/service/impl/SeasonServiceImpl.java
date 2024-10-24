@@ -1,20 +1,15 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.*;
-import com.example.manageruniversity.entity.Major;
-import com.example.manageruniversity.entity.Register;
-import com.example.manageruniversity.entity.Season;
-import com.example.manageruniversity.entity.SubjectGroup;
+import com.example.manageruniversity.domain.Season;
 import com.example.manageruniversity.mapper.MajorMapper;
 import com.example.manageruniversity.mapper.MajorRegisterMapper;
 import com.example.manageruniversity.mapper.SeasonMapper;
 import com.example.manageruniversity.mapper.SubjectMapper;
-import com.example.manageruniversity.repository.RegisterRepository;
 import com.example.manageruniversity.repository.SeasonRepository;
 import com.example.manageruniversity.service.ISeasonService;
 import com.example.manageruniversity.utils.SystemUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

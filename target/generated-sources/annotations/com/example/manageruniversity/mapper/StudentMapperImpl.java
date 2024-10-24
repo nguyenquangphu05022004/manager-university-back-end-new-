@@ -4,10 +4,10 @@ import com.example.manageruniversity.dto.CoursesDTO;
 import com.example.manageruniversity.dto.MajorDTO;
 import com.example.manageruniversity.dto.StudentDTO;
 import com.example.manageruniversity.dto.UserDTO;
-import com.example.manageruniversity.entity.Courses;
-import com.example.manageruniversity.entity.Major;
-import com.example.manageruniversity.entity.Student;
-import com.example.manageruniversity.entity.auth.User;
+import com.example.manageruniversity.core.Courses;
+import com.example.manageruniversity.core.major.Major;
+import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.domain.account.User;
 import javax.annotation.processing.Generated;
 
 @Generated(

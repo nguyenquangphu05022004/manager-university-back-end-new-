@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.entity.EventRegister;
+import com.example.manageruniversity.domain.EventRegister;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

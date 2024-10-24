@@ -2,9 +2,7 @@ package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.SubjectDTO;
 import com.example.manageruniversity.dto.SubjectGroupDTO;
-import com.example.manageruniversity.entity.Subject;
-import com.example.manageruniversity.entity.SubjectGroup;
-import com.example.manageruniversity.entity.Teacher;
+import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.mapper.SubjectGroupMapper;
 import com.example.manageruniversity.mapper.SubjectMapper;
 import com.example.manageruniversity.repository.SubjectRepository;

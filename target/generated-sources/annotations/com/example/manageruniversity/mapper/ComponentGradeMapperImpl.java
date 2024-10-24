@@ -1,7 +1,7 @@
 package com.example.manageruniversity.mapper;
 
 import com.example.manageruniversity.dto.ComponentGradeDTO;
-import com.example.manageruniversity.entity.ComponentGrade;
+import com.example.manageruniversity.domain.ComponentGrade;
 import javax.annotation.processing.Generated;
 
 @Generated(

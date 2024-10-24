@@ -1,6 +1,5 @@
 package com.example.manageruniversity.dto.auth;
 
-import com.example.manageruniversity.entity.Role;
 import lombok.*;
 
 @Builder

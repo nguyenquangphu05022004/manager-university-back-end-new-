@@ -1,7 +1,7 @@
 package com.example.manageruniversity.mapper;
 
 import com.example.manageruniversity.dto.RoomClassDTO;
-import com.example.manageruniversity.entity.RoomClass;
+import com.example.manageruniversity.domain.RoomClass;
 import javax.annotation.processing.Generated;
 
 @Generated(

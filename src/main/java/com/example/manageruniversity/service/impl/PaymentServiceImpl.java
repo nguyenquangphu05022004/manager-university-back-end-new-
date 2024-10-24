@@ -1,10 +1,10 @@
 package com.example.manageruniversity.service.impl;
 
-import com.example.manageruniversity.entity.*;
-import com.example.manageruniversity.repository.MajorRegisterRepository;
+import com.example.manageruniversity.domain.*;
 import com.example.manageruniversity.repository.PaymentRepository;
 import com.example.manageruniversity.repository.RegisterRepository;
 import com.example.manageruniversity.service.IPaymentService;
+import com.example.manageruniversity.user.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,15 +1,14 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.SubjectGroupDTO;
-import com.example.manageruniversity.entity.SubjectGroup;
-import com.example.manageruniversity.entity.Teacher;
+import com.example.manageruniversity.domain.SubjectGroup;
+import com.example.manageruniversity.user.Teacher;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.SubjectGroupMapper;
 import com.example.manageruniversity.repository.SubjectGroupRepository;
 import com.example.manageruniversity.repository.TeacherRepository;
 import com.example.manageruniversity.service.ISubjectGroupService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

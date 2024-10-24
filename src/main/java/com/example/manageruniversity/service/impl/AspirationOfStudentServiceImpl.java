@@ -2,10 +2,10 @@ package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.AspirationRequest;
 import com.example.manageruniversity.dto.AspirationResponse;
-import com.example.manageruniversity.entity.AspirationOfStudent;
-import com.example.manageruniversity.entity.AspirationRegister;
-import com.example.manageruniversity.entity.Subject;
-import com.example.manageruniversity.entity.auth.User;
+import com.example.manageruniversity.domain.AspirationOfStudent;
+import com.example.manageruniversity.domain.AspirationRegister;
+import com.example.manageruniversity.core.subject.Subject;
+import com.example.manageruniversity.domain.account.User;
 import com.example.manageruniversity.exception.InvalidDateException;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.exception.ObjectExistException;

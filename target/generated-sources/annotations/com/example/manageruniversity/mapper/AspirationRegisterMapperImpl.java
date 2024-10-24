@@ -5,11 +5,11 @@ import com.example.manageruniversity.dto.CoursesDTO;
 import com.example.manageruniversity.dto.SchoolYearDTO;
 import com.example.manageruniversity.dto.SeasonDTO;
 import com.example.manageruniversity.dto.SemesterDTO;
-import com.example.manageruniversity.entity.AspirationRegister;
-import com.example.manageruniversity.entity.Courses;
-import com.example.manageruniversity.entity.SchoolYear;
-import com.example.manageruniversity.entity.Season;
-import com.example.manageruniversity.entity.Semester;
+import com.example.manageruniversity.domain.AspirationRegister;
+import com.example.manageruniversity.core.Courses;
+import com.example.manageruniversity.core.schoolYear.SchoolYear;
+import com.example.manageruniversity.domain.Season;
+import com.example.manageruniversity.core.schoolYear.Semester;
 import javax.annotation.processing.Generated;
 
 @Generated(

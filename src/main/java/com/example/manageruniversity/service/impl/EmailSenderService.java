@@ -2,8 +2,8 @@ package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.sendMail.EmailRequest;
 import com.example.manageruniversity.dto.sendMail.EmailSender;
-import com.example.manageruniversity.entity.auth.ForgetCode;
-import com.example.manageruniversity.entity.auth.User;
+import com.example.manageruniversity.domain.account.ForgetCode;
+import com.example.manageruniversity.domain.account.User;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.repository.auth.ForgetCodeRepository;
 import com.example.manageruniversity.repository.auth.UserRepository;

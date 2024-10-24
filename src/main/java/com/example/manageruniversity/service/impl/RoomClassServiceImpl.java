@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.RoomClassDTO;
-import com.example.manageruniversity.entity.RoomClass;
+import com.example.manageruniversity.domain.RoomClass;
 import com.example.manageruniversity.mapper.RoomClassMapper;
 import com.example.manageruniversity.repository.RoomClassRepository;
 import com.example.manageruniversity.service.IRoomClassService;

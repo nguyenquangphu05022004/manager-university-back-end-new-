@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.entity.Exam;
+import com.example.manageruniversity.domain.Exam;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

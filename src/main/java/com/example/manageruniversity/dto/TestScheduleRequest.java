@@ -1,6 +1,6 @@
 package com.example.manageruniversity.dto;
 
-import com.example.manageruniversity.entity.TestType;
+import com.example.manageruniversity.domain.TestType;
 import lombok.*;
 
 import java.time.LocalDate;

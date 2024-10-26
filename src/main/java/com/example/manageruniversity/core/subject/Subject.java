@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 public class Subject extends BaseEntity {
     @Id
-    private String subjectCode;
+    private String subjectId;
     private String subjectName;
     private Integer credit;
 }

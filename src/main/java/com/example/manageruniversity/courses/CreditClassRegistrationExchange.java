@@ -1,5 +1,6 @@
 package com.example.manageruniversity.courses;
 
+import com.example.manageruniversity.courses.registration.CreditClassRegistration;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

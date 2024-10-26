@@ -1,5 +1,6 @@
-package com.example.manageruniversity.courses;
+package com.example.manageruniversity.courses.registration;
 
+import com.example.manageruniversity.courses.creditClass.CreditClass;
 import com.example.manageruniversity.share.SubBaseEntity;
 import com.example.manageruniversity.user.Student;
 import jakarta.persistence.Entity;

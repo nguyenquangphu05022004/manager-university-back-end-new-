@@ -1,4 +1,4 @@
-package com.example.manageruniversity.utils;
+package com.example.manageruniversity.common;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;

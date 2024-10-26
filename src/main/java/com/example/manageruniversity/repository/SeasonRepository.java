@@ -1,11 +1,9 @@
 package com.example.manageruniversity.repository;
 
 import com.example.manageruniversity.domain.Season;
-import com.example.manageruniversity.utils.SystemUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.util.backoff.BackOff;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;

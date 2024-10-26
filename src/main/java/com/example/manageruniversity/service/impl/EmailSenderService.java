@@ -8,7 +8,7 @@ import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.repository.auth.ForgetCodeRepository;
 import com.example.manageruniversity.repository.auth.UserRepository;
 import com.example.manageruniversity.service.IEmailSenderService;
-import com.example.manageruniversity.utils.SystemUtils;
+import com.example.manageruniversity.common.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;

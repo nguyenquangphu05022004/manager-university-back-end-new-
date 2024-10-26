@@ -1,10 +1,10 @@
-package com.example.manageruniversity.courses;
+package com.example.manageruniversity.courses.creditClass;
 
-import com.example.manageruniversity.share.BaseEntity;
+import com.example.manageruniversity.courses.creditClass.CreditClass;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.cglib.core.Local;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -23,4 +23,13 @@ public class TimeTable extends SubBaseEntity {
     @JoinColumn(name = "credit_class_id")
     private CreditClass creditClass;
 
+    @RequiredArgsConstructor
+    public enum TimeType {
+        ON_SITE("Học trực tiếp"),
+        REMOTE("Học trực tuyến"),
+        PRACTICE("Thực hành");
+
+        @Getter
+        private final String value;
+    }
 }

@@ -8,7 +8,7 @@ import com.example.manageruniversity.mapper.SeasonMapper;
 import com.example.manageruniversity.mapper.SubjectMapper;
 import com.example.manageruniversity.repository.SeasonRepository;
 import com.example.manageruniversity.service.ISeasonService;
-import com.example.manageruniversity.utils.SystemUtils;
+import com.example.manageruniversity.common.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -20,7 +20,7 @@ import com.example.manageruniversity.repository.auth.TokenRepository;
 import com.example.manageruniversity.repository.auth.UserRepository;
 import com.example.manageruniversity.service.IStudentService;
 import com.example.manageruniversity.service.ITeacherService;
-import com.example.manageruniversity.utils.SystemUtils;
+import com.example.manageruniversity.common.SystemUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

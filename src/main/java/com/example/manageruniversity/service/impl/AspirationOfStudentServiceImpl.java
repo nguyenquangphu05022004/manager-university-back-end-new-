@@ -18,7 +18,7 @@ import com.example.manageruniversity.repository.SeasonRepository;
 import com.example.manageruniversity.repository.SubjectRepository;
 import com.example.manageruniversity.repository.auth.UserRepository;
 import com.example.manageruniversity.service.IAspirationOfStudentService;
-import com.example.manageruniversity.utils.SystemUtils;
+import com.example.manageruniversity.common.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

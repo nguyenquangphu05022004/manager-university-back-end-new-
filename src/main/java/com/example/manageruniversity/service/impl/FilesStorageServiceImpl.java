@@ -7,7 +7,7 @@ import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.repository.AvatarRepository;
 import com.example.manageruniversity.repository.auth.UserRepository;
 import com.example.manageruniversity.service.IFilesStorageService;
-import com.example.manageruniversity.utils.SystemUtils;
+import com.example.manageruniversity.common.SystemUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;

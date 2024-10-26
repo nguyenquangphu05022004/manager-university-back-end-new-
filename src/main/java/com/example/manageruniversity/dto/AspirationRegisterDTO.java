@@ -1,6 +1,6 @@
 package com.example.manageruniversity.dto;
 
-import com.example.manageruniversity.utils.SystemUtils;
+import com.example.manageruniversity.common.SystemUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

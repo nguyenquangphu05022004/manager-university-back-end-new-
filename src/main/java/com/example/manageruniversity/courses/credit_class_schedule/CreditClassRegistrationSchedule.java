@@ -4,10 +4,7 @@ import com.example.manageruniversity.core.course.Course;
 import com.example.manageruniversity.core.major.Major;
 import com.example.manageruniversity.core.schoolYear.SchoolYear;
 import com.example.manageruniversity.share.SubBaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -28,4 +25,22 @@ public class CreditClassRegistrationSchedule extends SubBaseEntity {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+
+    @Transient
+    public boolean isOngoing() {
+        return false;
+    }
+
+    @Transient
+    public boolean isCompleted() {
+        return false;
+    }
+
+    @Transient
+    public boolean isUpcoming() {
+        return false;
+    }
+
+
 }

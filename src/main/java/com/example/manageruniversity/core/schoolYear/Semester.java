@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Semester {
     SEMESTER_1("Học kỳ 1"),
-    SEMESTER_2("Học kỳ 2");
-
+    SEMESTER_2("Học kỳ 2"),
+    SEMESTER_3("Học kỳ 3");
     @Getter
     private final String value;
 }

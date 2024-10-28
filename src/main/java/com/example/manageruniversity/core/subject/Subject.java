@@ -12,5 +12,5 @@ public class Subject extends BaseEntity {
     @Id
     private String subjectId;
     private String subjectName;
-    private Integer credit;
+    private Short credit;
 }

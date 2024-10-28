@@ -1,6 +1,6 @@
 package com.example.manageruniversity.exam;
 
-import com.example.manageruniversity.core.subject.SubjectSimpleDto;
+import com.example.manageruniversity.core.subject.SubjectDto;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,5 +15,5 @@ public class TestDto {
     private int inMinutes;
     private String format;
     private String room;
-    private SubjectSimpleDto subject;
+    private SubjectDto subject;
 }

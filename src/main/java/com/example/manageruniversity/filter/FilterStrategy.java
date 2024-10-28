@@ -1,4 +1,4 @@
-package com.example.manageruniversity.common.filter;
+package com.example.manageruniversity.filter;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;

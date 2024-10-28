@@ -1,7 +1,7 @@
 package com.example.manageruniversity.courses.credit_class_schedule;
 
-import com.example.manageruniversity.common.filter.Condition;
-import com.example.manageruniversity.common.filter.FilterFactory;
+import com.example.manageruniversity.filter.Condition;
+import com.example.manageruniversity.filter.FilterFactory;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 

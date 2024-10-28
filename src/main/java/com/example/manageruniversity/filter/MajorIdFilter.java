@@ -1,6 +1,5 @@
-package com.example.manageruniversity.courses.credit_class_schedule.filter;
+package com.example.manageruniversity.filter;
 
-import com.example.manageruniversity.common.filter.FilterStrategy;
 import com.example.manageruniversity.courses.credit_class_schedule.CreditClassRegistrationSchedule;
 import jakarta.persistence.criteria.Predicate;
 

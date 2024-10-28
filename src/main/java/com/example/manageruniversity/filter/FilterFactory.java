@@ -1,4 +1,4 @@
-package com.example.manageruniversity.common.filter;
+package com.example.manageruniversity.filter;
 
 public class FilterFactory {
     public static FilterStrategy getInstance(String key) {

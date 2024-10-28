@@ -1,4 +1,4 @@
-package com.example.manageruniversity.score;
+package com.example.manageruniversity.score.domain.entity;
 
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.Entity;
@@ -7,10 +7,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
-@Table(name = "score_scoring")
+@Table(name = "score_scoring_each_component")
 @Entity
 @Getter
-public class Scoring extends SubBaseEntity {
+public class ScoringEachComponent extends SubBaseEntity {
     private Double value;
 
     @ManyToOne

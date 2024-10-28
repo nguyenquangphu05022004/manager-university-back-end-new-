@@ -1,6 +1,6 @@
 package com.example.manageruniversity.courses.credit_class_schedule;
 
-import com.example.manageruniversity.common.filter.Condition;
+import com.example.manageruniversity.filter.Condition;
 
 public interface CreditClassRegistrationScheduleService {
     /**

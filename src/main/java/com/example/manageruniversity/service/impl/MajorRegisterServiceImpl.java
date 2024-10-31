@@ -1,6 +1,6 @@
 package com.example.manageruniversity.service.impl;
 
-import com.example.manageruniversity.core.subject.Subject;
+import com.example.manageruniversity.core.subject.domain.entity.Subject;
 import com.example.manageruniversity.dto.MajorRegisterDTO;
 import com.example.manageruniversity.dto.PaymentResponse;
 import com.example.manageruniversity.dto.RegisterDTO;

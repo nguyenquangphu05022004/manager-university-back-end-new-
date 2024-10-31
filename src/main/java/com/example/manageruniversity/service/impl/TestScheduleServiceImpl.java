@@ -1,6 +1,6 @@
 package com.example.manageruniversity.service.impl;
 
-import com.example.manageruniversity.core.subject.Subject;
+import com.example.manageruniversity.core.subject.domain.entity.Subject;
 import com.example.manageruniversity.dto.ExamResponse;
 import com.example.manageruniversity.dto.TestScheduleRequest;
 import com.example.manageruniversity.dto.TestScheduleResponse;
@@ -9,7 +9,7 @@ import com.example.manageruniversity.repository.ExamRepository;
 import com.example.manageruniversity.repository.StudentRepository;
 import com.example.manageruniversity.repository.TestScheduleRepository;
 import com.example.manageruniversity.service.ITestScheduleService;
-import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.user.domain.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

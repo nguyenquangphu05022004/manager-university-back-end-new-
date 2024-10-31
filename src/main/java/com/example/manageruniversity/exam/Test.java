@@ -1,10 +1,10 @@
 package com.example.manageruniversity.exam;
 
 import com.example.manageruniversity.core.location.Room;
-import com.example.manageruniversity.core.schoolYear.SchoolYear;
-import com.example.manageruniversity.core.subject.Subject;
+import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
+import com.example.manageruniversity.core.subject.domain.entity.Subject;
 import com.example.manageruniversity.share.SubBaseEntity;
-import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.user.domain.entity.Student;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

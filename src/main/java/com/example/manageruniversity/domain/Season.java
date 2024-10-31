@@ -1,8 +1,8 @@
 package com.example.manageruniversity.domain;
 
 import com.example.manageruniversity.core.Courses;
-import com.example.manageruniversity.core.schoolYear.SchoolYear;
-import com.example.manageruniversity.core.schoolYear.Semester;
+import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
+import com.example.manageruniversity.core.schoolYear.domain.enums.Semester;
 import com.example.manageruniversity.share.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;

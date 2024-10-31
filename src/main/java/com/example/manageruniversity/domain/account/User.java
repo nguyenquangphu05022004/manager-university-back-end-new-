@@ -2,9 +2,9 @@ package com.example.manageruniversity.domain.account;
 
 import com.example.manageruniversity.domain.*;
 import com.example.manageruniversity.share.BaseEntity;
-import com.example.manageruniversity.user.Role;
-import com.example.manageruniversity.user.Student;
-import com.example.manageruniversity.user.Teacher;
+import com.example.manageruniversity.user.enums.Role;
+import com.example.manageruniversity.user.domain.entity.Student;
+import com.example.manageruniversity.user.domain.entity.Teacher;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

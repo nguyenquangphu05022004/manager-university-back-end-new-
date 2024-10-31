@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.user.domain.entity.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

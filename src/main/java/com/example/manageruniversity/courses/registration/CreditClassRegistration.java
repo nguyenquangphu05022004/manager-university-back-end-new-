@@ -2,7 +2,7 @@ package com.example.manageruniversity.courses.registration;
 
 import com.example.manageruniversity.courses.creditClass.CreditClass;
 import com.example.manageruniversity.share.SubBaseEntity;
-import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.user.domain.entity.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

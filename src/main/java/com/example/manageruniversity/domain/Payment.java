@@ -1,7 +1,7 @@
 package com.example.manageruniversity.domain;
 
 import com.example.manageruniversity.share.BaseEntity;
-import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.user.domain.entity.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

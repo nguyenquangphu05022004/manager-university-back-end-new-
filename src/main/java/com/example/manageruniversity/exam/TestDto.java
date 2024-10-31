@@ -1,6 +1,6 @@
 package com.example.manageruniversity.exam;
 
-import com.example.manageruniversity.core.subject.SubjectDto;
+import com.example.manageruniversity.core.subject.domain.dto.SubjectDto;
 import lombok.Data;
 
 import java.time.LocalDate;

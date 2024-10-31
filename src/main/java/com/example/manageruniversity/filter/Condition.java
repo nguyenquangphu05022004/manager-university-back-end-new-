@@ -6,5 +6,5 @@ import java.util.Map;
 
 @Data
 public class Condition {
-    private Map<String, String> pair;
+    private Map<FilterType, Object> pair;
 }

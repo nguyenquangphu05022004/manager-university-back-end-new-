@@ -4,7 +4,7 @@ import com.example.manageruniversity.domain.*;
 import com.example.manageruniversity.repository.PaymentRepository;
 import com.example.manageruniversity.repository.RegisterRepository;
 import com.example.manageruniversity.service.IPaymentService;
-import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.user.domain.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -25,7 +25,7 @@ public class CreditClassRegistrationScheduleServiceImpl
                     Predicate predicate = null;
                     for(var s : condition.getPair().entrySet()) {
                         Predicate filter = FilterFactory
-                                .getInstance(s.getKey())
+                                .getInstance(s.getKey(),root, criteriaBuilder, s.getValue())
                                 .filter();
                         predicate = (predicate == null) ? filter : criteriaBuilder.and(predicate);
                     }

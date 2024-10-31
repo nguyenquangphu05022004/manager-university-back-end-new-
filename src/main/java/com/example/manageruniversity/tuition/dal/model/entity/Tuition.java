@@ -1,8 +1,8 @@
 package com.example.manageruniversity.tuition.dal.model.entity;
 
-import com.example.manageruniversity.core.schoolYear.SchoolYear;
+import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
 import com.example.manageruniversity.share.SubBaseEntity;
-import com.example.manageruniversity.user.Student;
+import com.example.manageruniversity.user.domain.entity.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

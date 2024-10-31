@@ -1,7 +1,7 @@
 package com.example.manageruniversity.service.impl;
 
 import com.example.manageruniversity.dto.SemesterDTO;
-import com.example.manageruniversity.core.schoolYear.Semester;
+import com.example.manageruniversity.core.schoolYear.domain.enums.Semester;
 import com.example.manageruniversity.mapper.SemesterMapper;
 import com.example.manageruniversity.repository.SemesterRepository;
 import com.example.manageruniversity.service.ISemesterService;

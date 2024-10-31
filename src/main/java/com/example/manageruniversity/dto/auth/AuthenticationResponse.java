@@ -1,7 +1,7 @@
 package com.example.manageruniversity.dto.auth;
 
 import com.example.manageruniversity.dto.AvatarResponse;
-import com.example.manageruniversity.user.Role;
+import com.example.manageruniversity.user.enums.Role;
 import lombok.*;
 
 import java.util.Date;

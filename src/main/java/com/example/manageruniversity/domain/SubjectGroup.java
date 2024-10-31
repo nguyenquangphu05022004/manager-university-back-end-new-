@@ -1,8 +1,8 @@
 package com.example.manageruniversity.domain;
 
-import com.example.manageruniversity.core.subject.Subject;
+import com.example.manageruniversity.core.subject.domain.entity.Subject;
 import com.example.manageruniversity.share.BaseEntity;
-import com.example.manageruniversity.user.Teacher;
+import com.example.manageruniversity.user.domain.entity.Teacher;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

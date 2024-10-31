@@ -1,6 +1,6 @@
 package com.example.manageruniversity.repository;
 
-import com.example.manageruniversity.core.schoolYear.SchoolYear;
+import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
 
 import java.util.List;
 

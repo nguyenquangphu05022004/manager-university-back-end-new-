@@ -1,8 +1,8 @@
 package com.example.manageruniversity.courses.credit_class_schedule;
 
-import com.example.manageruniversity.core.course.Course;
-import com.example.manageruniversity.core.major.Major;
-import com.example.manageruniversity.core.schoolYear.SchoolYear;
+import com.example.manageruniversity.core.course.domain.entity.Course;
+import com.example.manageruniversity.core.major.domain.entity.Major;
+import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;

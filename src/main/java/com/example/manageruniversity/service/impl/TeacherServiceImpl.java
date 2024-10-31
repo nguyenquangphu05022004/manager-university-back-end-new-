@@ -3,7 +3,7 @@ package com.example.manageruniversity.service.impl;
 import com.example.manageruniversity.dto.RegisterDTO;
 import com.example.manageruniversity.dto.SubjectGroupDTO;
 import com.example.manageruniversity.dto.TeacherDTO;
-import com.example.manageruniversity.user.Teacher;
+import com.example.manageruniversity.user.domain.entity.Teacher;
 import com.example.manageruniversity.exception.NotFoundIdException;
 import com.example.manageruniversity.mapper.RegisterMapper;
 import com.example.manageruniversity.mapper.SubjectGroupMapper;

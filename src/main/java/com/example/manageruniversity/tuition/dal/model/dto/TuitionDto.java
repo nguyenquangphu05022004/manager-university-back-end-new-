@@ -1,6 +1,6 @@
 package com.example.manageruniversity.tuition.dal.model.dto;
 
-import com.example.manageruniversity.core.schoolYear.SchoolYearDto;
+import com.example.manageruniversity.core.schoolYear.domain.dto.SchoolYearDto;
 import com.example.manageruniversity.tuition.dal.model.entity.Tuition;
 import lombok.Getter;
 

@@ -7,7 +7,7 @@ import com.example.manageruniversity.dto.UserDTO;
 import com.example.manageruniversity.dto.auth.AuthenticationRequest;
 import com.example.manageruniversity.dto.auth.AuthenticationResponse;
 import com.example.manageruniversity.dto.auth.RegisterRequest;
-import com.example.manageruniversity.user.Role;
+import com.example.manageruniversity.user.enums.Role;
 import com.example.manageruniversity.domain.account.ForgetCode;
 import com.example.manageruniversity.domain.account.Token;
 import com.example.manageruniversity.domain.account.TokenType;

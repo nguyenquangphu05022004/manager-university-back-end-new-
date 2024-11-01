@@ -1,5 +1,6 @@
 package com.example.manageruniversity.user.domain.request;
 
+import com.example.manageruniversity.user.domain.enums.Role;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,9 +9,6 @@ import java.util.Date;
 public class UserRequest {
     private String username;
     private String password;
-    private String fullName;
-    private String address;
-    private String phoneNumber;
-    private Date dateOfBirth;
-    private Boolean sex;
+    private Role role;
+    private String email;
 }

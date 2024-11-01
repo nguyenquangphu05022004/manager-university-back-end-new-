@@ -2,7 +2,7 @@ package com.example.manageruniversity.user.domain.dto;
 
 import com.example.manageruniversity.common.object.ObjectUtils;
 import com.example.manageruniversity.user.domain.entity.User;
-import com.example.manageruniversity.user.enums.Role;
+import com.example.manageruniversity.user.domain.enums.Role;
 import lombok.Getter;
 
 @Getter
@@ -15,6 +15,6 @@ public class UserDto {
         if(ObjectUtils.isNull(user)) return;
         this.username =user.getUsername();
         this.role = user.getRole();
-        this.entityId = user.getEntityId();
+        this.entityId = user.getPersonId();
     }
 }

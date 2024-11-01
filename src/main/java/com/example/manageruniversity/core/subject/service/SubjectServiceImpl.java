@@ -6,10 +6,11 @@ import com.example.manageruniversity.core.subject.domain.entity.Subject;
 import com.example.manageruniversity.core.subject.domain.request.SubjectFilterCondition;
 import com.example.manageruniversity.filter.Condition;
 import com.example.manageruniversity.filter.SubQueryCondition;
-import jakarta.persistence.criteria.Expression;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SubjectServiceImpl implements SubjectService{
     @Override
     public Subject create(SubjectDto subjectDto) {
@@ -43,5 +44,6 @@ public class SubjectServiceImpl implements SubjectService{
                 throw new RuntimeException(e);
             }
         }
+        return null;
     }
 }

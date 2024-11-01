@@ -1,7 +1,5 @@
 package com.example.manageruniversity.common.collection;
 
-import com.example.manageruniversity.handler.exception.ObjectNotFoundException;
-
 import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.function.Predicate;

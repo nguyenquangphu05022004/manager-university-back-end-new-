@@ -1,9 +1,10 @@
 package com.example.manageruniversity.user.domain.entity;
 
 import com.example.manageruniversity.share.BaseEntity;
-import com.example.manageruniversity.user.enums.Role;
+import com.example.manageruniversity.user.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +19,18 @@ public  class User extends BaseEntity implements UserDetails {
 
     @Id
     private String username;
+    @Setter
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Setter
     private Role role;
 
-    private String entityId;
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
+    @Column(unique = true)
+    private String email;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

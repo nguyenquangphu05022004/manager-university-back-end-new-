@@ -18,7 +18,7 @@ public class PersonDto {
 
     public PersonDto(Person person) {
         if(ObjectUtils.isNull(person)) return;
-        this.entityId = person.getEntityId();
+        this.entityId = person.getPersonId();
         this.fullName = person.getFullName();
         this.address = person.getAddress();
         this.phoneNumber = person.getPhoneNumber();

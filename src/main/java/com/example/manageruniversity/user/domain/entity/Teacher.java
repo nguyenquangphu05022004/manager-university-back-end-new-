@@ -6,6 +6,7 @@ import lombok.Getter;
 @Entity
 @Table(name = "teachers")
 @Getter
+@DiscriminatorValue("TEACHER")
 public class Teacher extends Person {
 
 }

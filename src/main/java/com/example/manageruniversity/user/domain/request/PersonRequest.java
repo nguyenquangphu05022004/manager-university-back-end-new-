@@ -1,0 +1,12 @@
+package com.example.manageruniversity.user.domain.request;
+
+import java.util.Date;
+
+public class PersonRequest {
+    private String personId;
+    private String fullName;
+    private String address;
+    private String phoneNumber;
+    private Date dateOfBirth;
+    private Boolean sex;
+}

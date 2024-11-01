@@ -2,7 +2,8 @@ package com.example.manageruniversity.domain.account;
 
 import com.example.manageruniversity.domain.*;
 import com.example.manageruniversity.share.BaseEntity;
-import com.example.manageruniversity.user.enums.Role;
+import com.example.manageruniversity.user.domain.entity.Token;
+import com.example.manageruniversity.user.domain.enums.Role;
 import com.example.manageruniversity.user.domain.entity.Student;
 import com.example.manageruniversity.user.domain.entity.Teacher;
 import jakarta.persistence.*;

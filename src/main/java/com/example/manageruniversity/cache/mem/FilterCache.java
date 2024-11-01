@@ -6,5 +6,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FilterCache {
-    public final static Map<String, FilterStrategy> MEM = new HashMap<>();
+    public final static Map<String, FilterStrategy> MEM_FILTER_INSTANCE = new HashMap<>();
 }

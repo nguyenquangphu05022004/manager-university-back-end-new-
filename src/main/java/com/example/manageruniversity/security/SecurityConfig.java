@@ -1,7 +1,7 @@
 package com.example.manageruniversity.security;
 
 
-import com.example.manageruniversity.user.enums.Role;
+import com.example.manageruniversity.user.domain.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.example.manageruniversity.security;
+package com.example.manageruniversity.web.security;
 
 import com.example.manageruniversity.repository.auth.UserRepository;
 import lombok.RequiredArgsConstructor;

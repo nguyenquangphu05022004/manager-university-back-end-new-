@@ -1,4 +1,4 @@
-package com.example.manageruniversity.security;
+package com.example.manageruniversity.web.security;
 
 
 import com.example.manageruniversity.user.domain.enums.Role;

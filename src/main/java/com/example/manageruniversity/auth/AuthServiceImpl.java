@@ -4,7 +4,7 @@ import com.example.manageruniversity.common.collection.CollectionUtils;
 import com.example.manageruniversity.common.exception.PasswordNotMatchException;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.security.SecurityUtils;
-import com.example.manageruniversity.service.auth.JwtService;
+import com.example.manageruniversity.web.security.JwtService;
 import com.example.manageruniversity.user.domain.entity.Token;
 import com.example.manageruniversity.user.domain.entity.User;
 import com.example.manageruniversity.user.domain.enums.Role;

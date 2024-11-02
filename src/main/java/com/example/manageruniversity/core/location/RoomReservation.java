@@ -7,12 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Entity
-@Table(name = "location_room")
+@Table(name = "room_reservation")
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
-public class Room extends SubBaseEntity {
-    private String name;
-    private House house;
+public class RoomReservation extends SubBaseEntity {
+    private Room room;
+    private LocalDate start;
+    private LocalDate end;
+    private LocalTime time;
+    private int numberOfWeek;
 }

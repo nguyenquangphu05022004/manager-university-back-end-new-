@@ -1,7 +1,6 @@
-package com.example.manageruniversity.security;
+package com.example.manageruniversity.web.security;
 
 import com.example.manageruniversity.user.repo.TokenRepository;
-import com.example.manageruniversity.service.auth.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

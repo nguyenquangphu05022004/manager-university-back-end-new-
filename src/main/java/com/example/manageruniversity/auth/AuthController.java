@@ -1,8 +1,11 @@
 package com.example.manageruniversity.auth;
 
+import com.example.manageruniversity.common.pojo.CommonResult;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import static com.example.manageruniversity.common.pojo.CommonResult.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -11,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthService authService;
     @PostMapping("/login")
-    public AuthResponse authenticate(@RequestBody AuthRequest authRequest) {
-        return authService.authenticate(authRequest);
+    public CommonResult<AuthResponse> authenticate(@RequestBody AuthRequest authRequest) {
+        return success(authService.authenticate(authRequest));
     }
     @GetMapping("/logout")
     public void logout() {

@@ -1,4 +1,4 @@
-package com.example.manageruniversity.service.auth;
+package com.example.manageruniversity.web.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

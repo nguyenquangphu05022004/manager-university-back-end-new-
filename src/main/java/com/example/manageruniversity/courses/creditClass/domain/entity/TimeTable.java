@@ -1,6 +1,6 @@
-package com.example.manageruniversity.courses.creditClass;
+package com.example.manageruniversity.courses.creditClass.domain.entity;
 
-import com.example.manageruniversity.courses.creditClass.CreditClass;
+import com.example.manageruniversity.core.location.Room;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,6 +22,10 @@ public class TimeTable extends SubBaseEntity {
     @ManyToOne
     @JoinColumn(name = "credit_class_id")
     private CreditClass creditClass;
+
+    @ManyToOne
+    @JoinColumn(name  = "room_id")
+    private Room room;
 
     @RequiredArgsConstructor
     public enum TimeType {

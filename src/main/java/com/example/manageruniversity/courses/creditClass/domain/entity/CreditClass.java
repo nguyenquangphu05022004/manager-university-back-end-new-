@@ -1,14 +1,15 @@
-package com.example.manageruniversity.courses.creditClass;
+package com.example.manageruniversity.courses.creditClass.domain.entity;
 
+import com.example.manageruniversity.core.location.Room;
 import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
 import com.example.manageruniversity.core.subject.domain.entity.Subject;
+import com.example.manageruniversity.courses.creditClass.domain.entity.TimeTable;
 import com.example.manageruniversity.share.SubBaseEntity;
 import com.example.manageruniversity.user.domain.entity.Teacher;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "courses_credit_class")
@@ -27,4 +28,7 @@ public class CreditClass extends SubBaseEntity {
     private SchoolYear schoolYear;
 
     private Integer group;
+
+    @OneToMany(mappedBy = "creditClass")
+    private Set<TimeTable> timeTables;
 }

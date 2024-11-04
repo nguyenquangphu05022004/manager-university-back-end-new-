@@ -8,7 +8,7 @@ import com.example.manageruniversity.dto.TimeDTO;
 import com.example.manageruniversity.domain.RoomClass;
 import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.domain.SubjectGroup;
-import com.example.manageruniversity.user.domain.entity.Teacher;
+import com.example.manageruniversity.core.user.domain.entity.Teacher;
 import com.example.manageruniversity.domain.Time;
 import java.util.ArrayList;
 import java.util.List;

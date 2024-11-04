@@ -1,6 +1,5 @@
 package com.example.manageruniversity.third.payment;
 
-import com.example.manageruniversity.service.IPaymentService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
     private final VNPayService vnPayService;
-    private final IPaymentService paymentService;
     @Value("${vnPay.urlReturn}")
     private String urlFrontEndPage;
 
@@ -36,7 +34,7 @@ public class PaymentController {
             String description = request.getParameter("vnp_OrderInfo");
             String transactionId = request.getParameter("vnp_TransactionNo");
             String totalPrice = request.getParameter("vnp_Amount");
-            paymentService.save(description, transactionId, Integer.parseInt(totalPrice)/100);
+//            paymentService.save(description, transactionId, Integer.parseInt(totalPrice)/100);
             urlRedirect += "Success";
         } else {
             urlRedirect += "Fail";

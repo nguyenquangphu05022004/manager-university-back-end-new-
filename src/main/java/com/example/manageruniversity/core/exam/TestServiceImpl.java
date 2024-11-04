@@ -36,8 +36,11 @@ public class TestServiceImpl implements TestService{
 
     @Override
     public Page<Test> getAllBySchoolYearIdAndStudentId(Long schoolYearId, String studentId, int page) {
-        return this.testRepository.findAllBySchoolYearIdAndContainsStudentId(schoolYearId, studentId, PageRequest.of(page - 1, PageConstant.LIMIT));
+//        return this.testRepository.findAllBySchoolYearIdAndContainsStudentId(schoolYearId, studentId, PageRequest.of(page - 1, PageConstant.LIMIT));
+        return null;
     }
+
+
 
     @Override
     public void addStudentIntoTest(EditRequestStudent request) {

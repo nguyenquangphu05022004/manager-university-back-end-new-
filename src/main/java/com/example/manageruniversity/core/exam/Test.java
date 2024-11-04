@@ -4,7 +4,7 @@ import com.example.manageruniversity.core.location.Room;
 import com.example.manageruniversity.core.school_year.SchoolYear;
 import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.share.SubBaseEntity;
-import com.example.manageruniversity.user.domain.entity.Student;
+import com.example.manageruniversity.core.user.domain.entity.Student;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

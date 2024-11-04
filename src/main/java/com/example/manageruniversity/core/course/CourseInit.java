@@ -23,7 +23,6 @@ public class CourseInit {
                     new Course("D24", "2024")
             );
              courses.forEach(s -> this.courseRepository.save(s));
-             courses.clear();
         }
     }
 }

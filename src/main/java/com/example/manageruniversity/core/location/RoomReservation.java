@@ -2,6 +2,8 @@ package com.example.manageruniversity.core.location;
 
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +13,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "room_reservation")
+@Table(name = "location_room_reservation")
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
 public class RoomReservation extends SubBaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "room_id")
     private Room room;
     private LocalDate start;
     private LocalDate end;

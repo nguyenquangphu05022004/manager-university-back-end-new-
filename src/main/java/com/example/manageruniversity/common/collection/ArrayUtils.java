@@ -5,6 +5,10 @@ import java.util.List;
 
 public class ArrayUtils {
 
+    public static<T> boolean isEmpty(T[] values) {
+        if(values.length == 0) return true;
+        return false;
+    }
     public static <T> T[] convertToArray(List<T> collection, Class<?> clazz) {
         T[] arrays = (T[]) Array.newInstance(clazz, collection.size());
         int i = 0;

@@ -1,6 +1,6 @@
 package com.example.manageruniversity.web.security.filter;
 
-import com.example.manageruniversity.user.repo.TokenRepository;
+import com.example.manageruniversity.core.user.repo.TokenRepository;
 import com.example.manageruniversity.web.security.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var userDetails = userDetailsService.loadUserByUsername(username);
             boolean isValidToken = tokenRepository.findByToken(jwt)
-                    .map(token -> !token.isExpired() && !token.isRevoked())
+                    .map(token -> !token.isRevoked())
                     .orElseThrow();
             if(jwtService.isValidToken(jwt, userDetails) && isValidToken) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

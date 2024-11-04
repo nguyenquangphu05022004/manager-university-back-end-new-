@@ -29,7 +29,7 @@ import com.example.manageruniversity.domain.Season;
 import com.example.manageruniversity.core.school_year.Semester;
 import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.domain.SubjectGroup;
-import com.example.manageruniversity.user.domain.entity.Teacher;
+import com.example.manageruniversity.core.user.domain.entity.Teacher;
 import com.example.manageruniversity.domain.Time;
 import com.example.manageruniversity.domain.Tuition;
 import java.util.ArrayList;

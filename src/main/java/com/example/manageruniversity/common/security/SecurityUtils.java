@@ -1,8 +1,8 @@
 package com.example.manageruniversity.common.security;
 
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.user.domain.enums.Role;
-import com.example.manageruniversity.user.domain.entity.User;
+import com.example.manageruniversity.core.user.domain.enums.Role;
+import com.example.manageruniversity.core.user.domain.entity.User;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

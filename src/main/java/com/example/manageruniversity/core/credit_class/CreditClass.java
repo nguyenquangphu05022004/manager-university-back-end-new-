@@ -4,7 +4,7 @@ import com.example.manageruniversity.core.credit_class.time_table.TimeTable;
 import com.example.manageruniversity.core.school_year.SchoolYear;
 import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.share.SubBaseEntity;
-import com.example.manageruniversity.user.domain.entity.Teacher;
+import com.example.manageruniversity.core.user.domain.entity.Teacher;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "courses_credit_class")
 @Getter
 public class CreditClass extends SubBaseEntity {
-    private Short maxStudent;
+    private Integer maxStudent;
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
@@ -26,7 +26,7 @@ public class CreditClass extends SubBaseEntity {
     @JoinColumn(name = "school_year_id")
     private SchoolYear schoolYear;
 
-    private Integer group;
+    private Integer studyGroup;
 
     @OneToMany(mappedBy = "creditClass")
     private Set<TimeTable> timeTables;

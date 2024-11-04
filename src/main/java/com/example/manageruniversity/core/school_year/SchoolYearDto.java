@@ -13,7 +13,7 @@ public class SchoolYearDto {
     public SchoolYearDto(SchoolYear schoolYear) {
         if(schoolYear != null) {
             id = schoolYear.getId();
-            name = schoolYear.getFrom() + " - " + schoolYear.getTo();
+            name = schoolYear.getFromYear() + " - " + schoolYear.getToYear();
             semester = schoolYear.getSemester().getValue();
         }
     }

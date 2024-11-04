@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/credit-class/time-table")
 @RequiredArgsConstructor
 public class TimeTableController {
-    private final TimeTableService timeTableService;
+//    private final TimeTableService timeTableService;
 }

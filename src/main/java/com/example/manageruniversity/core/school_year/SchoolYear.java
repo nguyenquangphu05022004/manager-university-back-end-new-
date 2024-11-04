@@ -8,22 +8,18 @@ import lombok.*;
 @Table(name = "school_years")
 @Getter
 @NoArgsConstructor
+@Setter
 public class SchoolYear extends SubBaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Setter
-    private Integer from;
-    @Setter
-    private Integer to;
+    private Integer fromYear;
+    private Integer toYear;
     @Enumerated(EnumType.STRING)
-    @Setter
     private Semester semester;
 
-    public SchoolYear(Integer from, Integer to, Semester semester) {
-        this.from = from;
-        this.to = to;
+
+    public SchoolYear(Integer fromYear, Integer toYear, Semester semester) {
+        this.fromYear = fromYear;
+        this.toYear = toYear;
         this.semester = semester;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.manageruniversity.web.security.config;
 
-import com.example.manageruniversity.repository.auth.UserRepository;
+import com.example.manageruniversity.core.user.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class SecurityAutoConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return  (username) -> userRepository
-                .findByUsername(username)
+                .findUserByEmailIgnoreCase(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         username + " not found"
                 ));

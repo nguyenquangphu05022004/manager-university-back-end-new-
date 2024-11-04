@@ -24,8 +24,8 @@ public class SchoolYearServiceImpl implements SchoolYearService {
         if(ObjectUtils.isNull(schoolYear)) {
             schoolYear = new SchoolYear(request.getFrom(), request.getTo(), Semester.findByIndex(request.getSemester()));
         } else {
-            schoolYear.setTo(request.getTo());
-            schoolYear.setFrom(request.getFrom());
+            schoolYear.setToYear(request.getTo());
+            schoolYear.setFromYear(request.getFrom());
             schoolYear.setSemester(Semester.findByIndex(request.getSemester()));
         }
         this.schoolYearRepository.save(schoolYear);

@@ -4,11 +4,12 @@ import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.common.pojo.PageResult;
 import com.example.manageruniversity.common.string.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/courses")
+@RequestMapping("/api/courses")
 public class CourseController {
     private final CourseService courseService;
 
@@ -22,7 +23,8 @@ public class CourseController {
     }
 
     @GetMapping
-    public PageResult<CourseDto> getAll(int page) {
+    @PreAuthorize("@ss.hasAnyRole('test')")
+    public PageResult<CourseDto> getAll(@RequestParam(value = "page", defaultValue = "1") int page) {
         return PageResult.success(
                 this.courseService.getAll(page),
                 (course) -> new CourseDto(course));

@@ -1,7 +1,6 @@
 package com.example.manageruniversity.filter;
 
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.core.instruction.domain.entity.MajorSubjectSelection;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 

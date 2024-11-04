@@ -1,8 +1,7 @@
 package com.example.manageruniversity.user.domain.entity;
 
-import com.example.manageruniversity.core.course.domain.entity.Course;
-import com.example.manageruniversity.core.major.domain.entity.Major;
-import com.example.manageruniversity.user.domain.request.StudentRequest;
+import com.example.manageruniversity.core.course.Course;
+import com.example.manageruniversity.core.major.Major;
 import jakarta.persistence.*;
 import lombok.Getter;
 

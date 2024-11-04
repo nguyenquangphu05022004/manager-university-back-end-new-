@@ -1,6 +1,6 @@
 package com.example.manageruniversity.tuition.dal.model.entity;
 
-import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
+import com.example.manageruniversity.core.school_year.SchoolYear;
 import com.example.manageruniversity.share.SubBaseEntity;
 import com.example.manageruniversity.user.domain.entity.Student;
 import jakarta.persistence.Entity;

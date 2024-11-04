@@ -4,6 +4,7 @@ import com.example.manageruniversity.common.collection.CollectionUtils;
 import com.example.manageruniversity.common.exception.PasswordNotMatchException;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.security.SecurityUtils;
+import com.example.manageruniversity.mq.producer.EmailProducer;
 import com.example.manageruniversity.web.security.JwtService;
 import com.example.manageruniversity.user.domain.entity.Token;
 import com.example.manageruniversity.user.domain.entity.User;
@@ -28,6 +29,7 @@ public class AuthServiceImpl implements AuthService{
     private final JwtService jwtService;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailProducer emailProducer;
     @Override
     public AuthResponse authenticate(AuthRequest authRequest) {
         this.authenticationManager.authenticate(
@@ -74,7 +76,12 @@ public class AuthServiceImpl implements AuthService{
     public void forgotPassword(String email) {
         User user = this.userRepository.findUserByEmailIgnoreCase(email)
                 .orElseThrow(() -> new ResourcesNotFoundException("Email not found"));
-        //send mail
+        this.emailProducer.publish(
+                "Forget password",
+                "Your code: " + "random",
+                user.getUsername(),
+                user.getEmail()
+        );
     }
 
     @Override
@@ -83,37 +90,9 @@ public class AuthServiceImpl implements AuthService{
         if(this.passwordEncoder.matches(oldPass, user.getPassword())) {
             user.setPassword(this.passwordEncoder.encode(newPass));
             this.userRepository.save(user);
-            //response api
+            return;
         }
         throw new PasswordNotMatchException("Your old password not match");
     }
 
-    @Override
-    public void changeRoleUser(String username, Role role) {
-        User user = this.userRepository.findUserByUsernameIgnoreCase(username)
-                .orElseThrow(() -> new ResourcesNotFoundException("Username not found"));
-        user.setRole(role);
-        this.userRepository.save(user);
-        //response
-
-    }
-
-    @Override
-    public void lockIfLoginFailedExceededPermission() {
-
-    }
-
-    @Override
-    public void logout() {
-        User userLogin = SecurityUtils.getLoginUser();
-        Optional<Token> optionalToken = this.tokenRepository.findByUserUsernameAndRevoked(
-                userLogin.getUsername(),
-                false
-        );
-        if(optionalToken.isPresent()) {
-            optionalToken.get().setRevoked(true);
-            this.tokenRepository.save(optionalToken.get());
-        }
-        //ok
-    }
 }

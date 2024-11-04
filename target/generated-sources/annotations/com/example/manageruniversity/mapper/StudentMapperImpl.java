@@ -5,7 +5,7 @@ import com.example.manageruniversity.dto.MajorDTO;
 import com.example.manageruniversity.dto.StudentDTO;
 import com.example.manageruniversity.dto.UserDTO;
 import com.example.manageruniversity.core.Courses;
-import com.example.manageruniversity.core.major.domain.entity.Major;
+import com.example.manageruniversity.core.major.Major;
 import com.example.manageruniversity.user.domain.entity.Student;
 import com.example.manageruniversity.domain.account.User;
 import javax.annotation.processing.Generated;

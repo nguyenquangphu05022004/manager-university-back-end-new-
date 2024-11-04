@@ -1,7 +1,7 @@
 package com.example.manageruniversity.score.domain.entity;
 
-import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
-import com.example.manageruniversity.core.subject.domain.entity.Subject;
+import com.example.manageruniversity.core.school_year.SchoolYear;
+import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.share.SubBaseEntity;
 import com.example.manageruniversity.user.domain.entity.Student;
 import jakarta.persistence.*;

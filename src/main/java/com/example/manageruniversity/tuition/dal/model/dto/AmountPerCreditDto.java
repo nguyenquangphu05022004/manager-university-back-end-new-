@@ -1,8 +1,8 @@
 package com.example.manageruniversity.tuition.dal.model.dto;
 
 import com.example.manageruniversity.core.course.domain.dto.Course;
-import com.example.manageruniversity.core.major.domain.dto.MajorDto;
-import com.example.manageruniversity.core.schoolYear.domain.dto.SchoolYearDto;
+import com.example.manageruniversity.core.major.MajorDto;
+import com.example.manageruniversity.core.school_year.SchoolYearDto;
 import com.example.manageruniversity.tuition.dal.model.entity.AmountPerCredit;
 import lombok.Getter;
 

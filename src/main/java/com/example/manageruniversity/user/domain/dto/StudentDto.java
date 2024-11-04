@@ -1,8 +1,8 @@
 package com.example.manageruniversity.user.domain.dto;
 
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.core.course.domain.dto.Course;
-import com.example.manageruniversity.core.major.domain.dto.MajorDto;
+import com.example.manageruniversity.core.course.Course;
+import com.example.manageruniversity.core.major.MajorDto;
 import com.example.manageruniversity.user.domain.entity.Student;
 import lombok.Getter;
 

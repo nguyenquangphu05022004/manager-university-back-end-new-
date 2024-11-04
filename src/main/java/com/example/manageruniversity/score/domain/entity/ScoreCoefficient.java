@@ -1,6 +1,6 @@
 package com.example.manageruniversity.score.domain.entity;
 
-import com.example.manageruniversity.core.subject.domain.entity.Subject;
+import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.score.domain.enums.ScoreType;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;

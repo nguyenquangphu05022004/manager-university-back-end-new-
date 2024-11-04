@@ -2,8 +2,8 @@ package com.example.manageruniversity.score.domain.dto;
 
 import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.core.schoolYear.domain.dto.SchoolYearDto;
-import com.example.manageruniversity.core.subject.domain.dto.SubjectDto;
+import com.example.manageruniversity.core.school_year.SchoolYearDto;
+import com.example.manageruniversity.core.subject.SubjectDto;
 import com.example.manageruniversity.score.domain.entity.Score;
 import lombok.Getter;
 

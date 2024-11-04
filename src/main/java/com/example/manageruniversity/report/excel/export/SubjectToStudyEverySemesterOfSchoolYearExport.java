@@ -1,6 +1,6 @@
 package com.example.manageruniversity.report.excel.export;
 
-import com.example.manageruniversity.core.instruction.domain.entity.MajorSubjectSelection;
+import com.example.manageruniversity.core.instruction.MajorSubjectSelection;
 import lombok.Getter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 

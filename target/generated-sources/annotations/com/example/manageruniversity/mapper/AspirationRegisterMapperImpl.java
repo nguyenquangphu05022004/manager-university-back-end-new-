@@ -7,9 +7,9 @@ import com.example.manageruniversity.dto.SeasonDTO;
 import com.example.manageruniversity.dto.SemesterDTO;
 import com.example.manageruniversity.domain.AspirationRegister;
 import com.example.manageruniversity.core.Courses;
-import com.example.manageruniversity.core.schoolYear.domain.entity.SchoolYear;
+import com.example.manageruniversity.core.school_year.SchoolYear;
 import com.example.manageruniversity.domain.Season;
-import com.example.manageruniversity.core.schoolYear.domain.enums.Semester;
+import com.example.manageruniversity.core.school_year.Semester;
 import javax.annotation.processing.Generated;
 
 @Generated(

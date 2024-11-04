@@ -3,7 +3,7 @@ package com.example.manageruniversity.score.domain.dto;
 import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.common.collection.MapUtils;
 import com.example.manageruniversity.common.pojo.KeyPair;
-import com.example.manageruniversity.core.subject.domain.dto.SubjectDto;
+import com.example.manageruniversity.core.subject.SubjectDto;
 import com.example.manageruniversity.score.domain.entity.ScoreCoefficient;
 import com.example.manageruniversity.score.domain.enums.ScoreType;
 import lombok.Getter;

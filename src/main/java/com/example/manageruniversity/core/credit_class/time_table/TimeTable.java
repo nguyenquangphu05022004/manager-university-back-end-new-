@@ -5,6 +5,7 @@ import com.example.manageruniversity.core.location.Room;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -12,11 +13,11 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "courses_time_table")
+@NoArgsConstructor
 public class TimeTable extends SubBaseEntity {
     private LocalDateTime start;
     private LocalDateTime end;
-    private Short dayOfWeek;
-    private String room_name;
+    private Integer dayOfWeek;
     @Enumerated(EnumType.STRING)
     private TimeType timeType;
 
@@ -27,6 +28,21 @@ public class TimeTable extends SubBaseEntity {
     @ManyToOne
     @JoinColumn(name  = "room_id")
     private Room room;
+
+    public TimeTable(Long id,
+                     LocalDateTime start, LocalDateTime end,
+                     Integer dayOfWeek,
+                     TimeType timeType,
+                     CreditClass creditClass,
+                     Room room) {
+        setId(id);
+        this.start = start;
+        this.end = end;
+        this.dayOfWeek = dayOfWeek;
+        this.timeType = timeType;
+        this.creditClass = creditClass;
+        this.room = room;
+    }
 
     @RequiredArgsConstructor
     public enum TimeType {

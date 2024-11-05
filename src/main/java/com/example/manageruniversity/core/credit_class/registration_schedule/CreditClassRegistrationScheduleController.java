@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/credit-class/registration/schedule")
+@RequestMapping("/credit-class/registration-schedule")
 @RequiredArgsConstructor
 public class CreditClassRegistrationScheduleController {
     private final CreditClassRegistrationScheduleService creditClassRegistrationScheduleService;

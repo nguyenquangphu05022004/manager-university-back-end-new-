@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.example.manageruniversity.common.pojo.CommonResult.*;
 
 @RestController
-@RequestMapping("/majors")
+@RequestMapping("/api/majors")
 @RequiredArgsConstructor
 public class MajorController {
     private final MajorService majorService;

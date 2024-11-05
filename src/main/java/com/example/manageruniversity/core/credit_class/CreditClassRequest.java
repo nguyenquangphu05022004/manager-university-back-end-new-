@@ -1,12 +1,15 @@
 package com.example.manageruniversity.core.credit_class;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class CreditClassRequest {
-    private int maxStudent;
+    private Long id;
+    private Integer maxStudent;
     private String teacherId;
     private String subjectId;
     private Long schoolYearId;
-    private int group;
+    private Integer group;
 }

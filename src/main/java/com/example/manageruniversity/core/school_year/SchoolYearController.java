@@ -21,7 +21,7 @@ public class SchoolYearController {
                                                       @RequestParam(value = "page", defaultValue = "1") int page) {
         return PageResult.success(
                 schoolYearService.getAllByCourseId(courseId, page),
-                sc -> new SchoolYearDto(sc)
+                s -> new SchoolYearDto(s)
         );
     }
 

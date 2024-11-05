@@ -1,5 +1,6 @@
 package com.example.manageruniversity.core.school_year;
 
+import com.example.manageruniversity.common.pojo.PageResult;
 import org.springframework.data.domain.Page;
 
 public interface SchoolYearService {

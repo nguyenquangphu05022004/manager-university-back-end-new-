@@ -2,8 +2,10 @@ package com.example.manageruniversity.core.subject;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.common.pojo.PageResult;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 

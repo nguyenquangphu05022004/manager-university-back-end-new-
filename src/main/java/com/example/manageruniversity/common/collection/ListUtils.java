@@ -3,6 +3,7 @@ package com.example.manageruniversity.common.collection;
 import com.example.manageruniversity.common.object.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ListUtils {
@@ -21,7 +22,7 @@ public class ListUtils {
         return list;
     }
 
-    public static <T, M> List<T> convert(Class<T> classWantConvert, List<M> list) {
+    public static <T, M> List<T> convert(Class<T> classWantConvert, Collection<M> list) {
         if(CollectionUtils.isEmpty(list)) {
             return null;
         }

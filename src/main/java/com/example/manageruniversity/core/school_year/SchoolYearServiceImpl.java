@@ -2,9 +2,12 @@ package com.example.manageruniversity.core.school_year;
 
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
+import com.example.manageruniversity.common.pojo.PageConstant;
+import com.example.manageruniversity.common.pojo.PageResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,7 +37,10 @@ public class SchoolYearServiceImpl implements SchoolYearService {
 
     @Override
     public Page<SchoolYear> getAllByCourseId(String courseId, int page) {
-        return null;
+        return  this.schoolYearRepository.findAllByCourseId(
+                courseId,
+                PageRequest.of(page - 1, PageConstant.LIMIT)
+        );
     }
 
     @Override

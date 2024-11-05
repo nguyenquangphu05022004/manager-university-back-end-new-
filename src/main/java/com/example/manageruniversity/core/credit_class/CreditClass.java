@@ -6,13 +6,16 @@ import com.example.manageruniversity.core.subject.Subject;
 import com.example.manageruniversity.share.SubBaseEntity;
 import com.example.manageruniversity.core.user.domain.entity.Teacher;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "courses_credit_class")
 @Getter
+@NoArgsConstructor
 public class CreditClass extends SubBaseEntity {
     private Integer maxStudent;
     @ManyToOne
@@ -27,6 +30,16 @@ public class CreditClass extends SubBaseEntity {
     private SchoolYear schoolYear;
 
     private Integer studyGroup;
+
+    public CreditClass(Integer maxStudent, Teacher teacher,
+                       Subject subject, SchoolYear schoolYear,
+                       Integer studyGroup) {
+        this.maxStudent = maxStudent;
+        this.teacher = teacher;
+        this.subject = subject;
+        this.schoolYear = schoolYear;
+        this.studyGroup = studyGroup;
+    }
 
     @OneToMany(mappedBy = "creditClass")
     private Set<TimeTable> timeTables;

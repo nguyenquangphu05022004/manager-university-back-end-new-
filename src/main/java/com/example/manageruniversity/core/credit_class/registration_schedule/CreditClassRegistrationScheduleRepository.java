@@ -4,7 +4,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface CreditClassRegistrationScheduleRepository extends JpaRepository<CreditClassRegistrationSchedule, Long> {
-    Page<CreditClassRegistrationSchedule> findAllBySchoolYearId(Long schoolYearId, Pageable pageable);
-    Page<CreditClassRegistrationSchedule> findAllByMajorMajorId(String majorId, Pageable pageable);
+    List<CreditClassRegistrationSchedule> findAllBySchoolYearId(Long schoolYearId);
+    List<CreditClassRegistrationSchedule> findAllByMajorMajorId(String majorId);
 }

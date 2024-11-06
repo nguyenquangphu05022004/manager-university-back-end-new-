@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -35,8 +37,8 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Page<Post> getAll(int page) {
-        return this.postRepository.findAll(PageRequest.of(page - 1, PageConstant.LIMIT));
+    public List<Post> getAll() {
+        return this.postRepository.findAll();
     }
 
     @Override

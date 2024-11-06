@@ -3,6 +3,11 @@ package com.example.manageruniversity.common.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Data
 public class CommonResult<T> {
@@ -22,7 +27,9 @@ public class CommonResult<T> {
         return success(200, null, data);
     }
 
-
+    public static <S, U> CommonResult<List<U>> success(Collection<S> list, Function<S, U> func) {
+        return success(list.stream().map(func).toList());
+    }
     public static <T> CommonResult<T> success(Integer code, T data) {
         return success(code, null, data);
     }

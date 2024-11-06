@@ -1,23 +1,24 @@
 package com.example.manageruniversity.core.subject;
 
-import com.example.manageruniversity.core.instruction.MajorSubjectSelection;
-import com.example.manageruniversity.filter.Condition;
-import com.example.manageruniversity.filter.SubQueryCondition;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class SubjectServiceImpl implements SubjectService{
+    private final SubjectRepository subjectRepository;
+
     @Override
     public Subject create(SubjectDto subjectDto) {
         return null;
     }
 
     @Override
-    public Page<Subject> getAll(int page) {
-        return null;
+    public List<Subject> getAll() {
+        return this.subjectRepository.findAll();
     }
 
     @Override
@@ -27,9 +28,9 @@ public class SubjectServiceImpl implements SubjectService{
 
 
     @Override
-    public Page<Subject> getAllByMajorIdAndSchoolYearIdAndCourseId(
+    public List<Subject> getAllByMajorIdAndSchoolYearIdAndCourseId(
             String majorId, Long schoolYearId,
-            String courseId,int page) {
+            String courseId) {
         return null;
     }
 

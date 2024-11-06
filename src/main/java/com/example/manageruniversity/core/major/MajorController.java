@@ -6,6 +6,8 @@ import com.example.manageruniversity.web.security.annotation.Permission;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.example.manageruniversity.common.pojo.CommonResult.*;
 
 @RestController
@@ -26,11 +28,8 @@ public class MajorController {
     }
 
     @GetMapping
-    public PageResult<MajorDto> getAll(@RequestParam(value = "page", defaultValue = "1")int page) {
-        return PageResult.success(
-                majorService.getAll(page),
-                (major) -> new MajorDto(major)
-        );
+    public CommonResult<List<MajorDto>> getAll() {
+        return CommonResult.success(majorService.getAll(),MajorDto::new);
     }
 
 }

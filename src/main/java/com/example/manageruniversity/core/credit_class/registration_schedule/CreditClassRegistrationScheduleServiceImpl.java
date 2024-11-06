@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CreditClassRegistrationScheduleServiceImpl
@@ -34,18 +36,12 @@ public class CreditClassRegistrationScheduleServiceImpl
 
 
     @Override
-    public Page<CreditClassRegistrationSchedule> getAllBySchoolYearId(Long schoolYearId, int page) {
-        return this.creditClassRegistrationScheduleRepository.findAllBySchoolYearId(
-                schoolYearId,
-                PageRequest.of(page - 1, PageConstant.LIMIT)
-        );
+    public List<CreditClassRegistrationSchedule> getAllBySchoolYearId(Long schoolYearId) {
+        return this.creditClassRegistrationScheduleRepository.findAllBySchoolYearId(schoolYearId);
     }
 
     @Override
-    public Page<CreditClassRegistrationSchedule> getAllByMajorId(String majorId, int page) {
-        return this.creditClassRegistrationScheduleRepository.findAllByMajorMajorId(
-                majorId,
-                PageRequest.of(page - 1, PageConstant.LIMIT)
-        );
+    public List<CreditClassRegistrationSchedule> getAllByMajorId(String majorId) {
+        return this.creditClassRegistrationScheduleRepository.findAllByMajorMajorId(majorId);
     }
 }

@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MajorSubjectSelectionServiceImpl implements MajorSubjectSelectionService {
@@ -46,10 +48,7 @@ public class MajorSubjectSelectionServiceImpl implements MajorSubjectSelectionSe
     }
 
     @Override
-    public Page<MajorSubjectSelection> findAllByCondition(Condition condition, int page) {
-        return majorSubjectSelectionRepository.findAll(
-                Filter.filterAllCondition(condition),
-                PageRequest.of(page - 1, PageConstant.LIMIT)
-        );
+    public List<MajorSubjectSelection> findAllByCondition(Condition condition) {
+        return majorSubjectSelectionRepository.findAll(Filter.filterAllCondition(condition));
     }
 }

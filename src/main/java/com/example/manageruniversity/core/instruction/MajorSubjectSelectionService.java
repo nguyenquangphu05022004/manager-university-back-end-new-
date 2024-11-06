@@ -14,5 +14,5 @@ public interface MajorSubjectSelectionService {
      * @param condition: combine all the keys major, schoolYear and course for filter
      * @return: result that we need
      */
-    Page<MajorSubjectSelection> findAllByCondition(Condition condition, int page);
+    List<MajorSubjectSelection> findAllByCondition(Condition condition);
 }

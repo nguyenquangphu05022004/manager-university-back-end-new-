@@ -5,6 +5,10 @@ import com.example.manageruniversity.common.pojo.PageResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+import static com.example.manageruniversity.common.pojo.CommonResult.*;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/school-year")
@@ -13,16 +17,12 @@ public class SchoolYearController {
 
 
     public CommonResult<SchoolYearDto> update(@RequestBody SchoolYearRequest request) {
-        return CommonResult.success(new SchoolYearDto(schoolYearService.update(request)));
+        return success(new SchoolYearDto(schoolYearService.update(request)));
     }
 
     @GetMapping("/get-all-by-couse-id-{courseId}")
-    public PageResult<SchoolYearDto> getAllByCourseId(@PathVariable("courseId") String courseId,
-                                                      @RequestParam(value = "page", defaultValue = "1") int page) {
-        return PageResult.success(
-                schoolYearService.getAllByCourseId(courseId, page),
-                s -> new SchoolYearDto(s)
-        );
+    public CommonResult<List<SchoolYearDto>> getAllByCourseId(@PathVariable("courseId") String courseId) {
+        return success(schoolYearService.getAllByCourseId(courseId), SchoolYearDto::new);
     }
 
 }

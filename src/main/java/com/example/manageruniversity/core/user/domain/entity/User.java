@@ -2,6 +2,7 @@ package com.example.manageruniversity.core.user.domain.entity;
 
 import com.example.manageruniversity.core.user.domain.enums.Role;
 import com.example.manageruniversity.share.BaseEntity;
+import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,11 +14,11 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "user_user")
+@Table(name = "sys_user")
 @Getter
-public  class User extends BaseEntity implements UserDetails {
+public  class User extends SubBaseEntity implements UserDetails {
 
-    @Id
+    @Column(unique = true)
     private String username;
     @Setter
     private String password;

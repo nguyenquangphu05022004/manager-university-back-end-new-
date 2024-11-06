@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SubjectService {
     Subject create(SubjectDto subjectDto);
-    Page<Subject> getAll(int page);
+    List<Subject> getAll();
     Subject getById(String subjectId);
 
     /**
@@ -20,10 +20,9 @@ public interface SubjectService {
      * )
      * @param schoolYearId
      */
-    Page<Subject> getAllByMajorIdAndSchoolYearIdAndCourseId(String majorId,
+    List<Subject> getAllByMajorIdAndSchoolYearIdAndCourseId(String majorId,
                                                  Long schoolYearId,
-                                                 String courseId,
-                                                 int page); //(**)
+                                                 String courseId); //(**)
 
     /**
      * This method is combined from two method above

@@ -1,11 +1,13 @@
 package com.example.manageruniversity.core.course;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.common.pojo.PageResult;
 import com.example.manageruniversity.common.string.StringUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.example.manageruniversity.common.pojo.CommonResult.success;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,19 +21,16 @@ public class CourseController {
         if(!StringUtils.isEmpty(courseId)) {
             courseRequest.setCourseId(courseId);
         }
-        return CommonResult.success(new CourseDto(this.courseService.update(courseRequest)));
+        return success(new CourseDto(this.courseService.update(courseRequest)));
     }
 
     @GetMapping
-    @PreAuthorize("@ss.hasAnyRole('test')")
-    public PageResult<CourseDto> getAll(@RequestParam(value = "page", defaultValue = "1") int page) {
-        return PageResult.success(
-                this.courseService.getAll(page),
-                (course) -> new CourseDto(course));
+    public CommonResult<List<CourseDto>> getAll() {
+        return success(courseService.getAll(), CourseDto::new);
     }
 
     @GetMapping("/{courseId}")
     public CommonResult<CourseDto> getById(@PathVariable("courseId") String courseId) {
-        return CommonResult.success(new CourseDto(this.courseService.getById(courseId)));
+        return success(new CourseDto(this.courseService.getById(courseId)));
     }
 }

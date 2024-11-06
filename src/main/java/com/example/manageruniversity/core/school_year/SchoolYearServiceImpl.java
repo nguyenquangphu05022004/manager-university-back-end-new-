@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -36,11 +38,8 @@ public class SchoolYearServiceImpl implements SchoolYearService {
     }
 
     @Override
-    public Page<SchoolYear> getAllByCourseId(String courseId, int page) {
-        return  this.schoolYearRepository.findAllByCourseId(
-                courseId,
-                PageRequest.of(page - 1, PageConstant.LIMIT)
-        );
+    public List<SchoolYear> getAllByCourseId(String courseId) {
+        return  this.schoolYearRepository.findAllByCourseId(courseId);
     }
 
     @Override

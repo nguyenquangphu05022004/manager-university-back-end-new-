@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -37,10 +39,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Page<Course> getAll(int page) {
-        return this.courseRepository.findAll(PageRequest.of(page - 1, PageConstant.LIMIT));
+    public List<Course> getAll() {
+        return courseRepository.findAll();
     }
-
     @Override
     public Course getById(String courseId) {
         return this.courseRepository.findById(courseId)

@@ -3,6 +3,7 @@ package com.example.manageruniversity.core.major;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
 import com.example.manageruniversity.common.pojo.PageConstant;
+import com.example.manageruniversity.common.pojo.PageResult;
 import com.example.manageruniversity.common.string.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +42,8 @@ public class MajorServiceImpl implements MajorService{
     }
 
     @Override
-    public Page<Major> getAll(int page) {
-        return this.majorRepository.findAll(PageRequest.of(page - 1, PageConstant.LIMIT));
+    public List<Major> getAll() {
+        return this.majorRepository.findAll();
     }
 
     @Override

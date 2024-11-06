@@ -3,6 +3,7 @@ package com.example.manageruniversity.core.credit_class;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
 import com.example.manageruniversity.common.pojo.PageConstant;
+import com.example.manageruniversity.core.credit_class.time_table.TimeTableRepository;
 import com.example.manageruniversity.core.credit_class.time_table.TimeTableService;
 import com.example.manageruniversity.core.school_year.SchoolYearService;
 import com.example.manageruniversity.core.subject.SubjectService;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class CreditClassServiceImpl implements CreditClassService{
     private final CreditClassRepository creditClassRepository;
     private final SubjectService subjectService;
     private final SchoolYearService schoolYearService;
-    private final TimeTableService timeTableService;
+    private final TimeTableRepository timeTableRepository;
     @Override
     public CreditClass createOrUpdate(CreditClassRequest request) {
         ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(request, "id");
@@ -32,8 +34,9 @@ public class CreditClassServiceImpl implements CreditClassService{
     }
 
     @Override
+    @Transactional
     public void delete(Long creditClassId) {
-        this.timeTableService.deleteByCreditClass(creditClassId);
+        this.timeTableRepository.deleteAllByCreditClassId(creditClassId);
         this.creditClassRepository.deleteById(creditClassId);
     }
 

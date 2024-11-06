@@ -1,13 +1,12 @@
 package com.example.manageruniversity.core.subject;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.common.pojo.PageResult;
-import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.example.manageruniversity.common.pojo.CommonResult.success;
 
 @RestController
 @RequestMapping("/subjects")
@@ -17,27 +16,23 @@ public class SubjectController {
 
     @PostMapping
     public CommonResult<SubjectDto> update(@RequestBody SubjectDto subjectDto) {
-        return CommonResult.success(new SubjectDto(subjectService.create(subjectDto)));
+        return success(new SubjectDto(subjectService.create(subjectDto)));
     }
 
     @GetMapping
-    public PageResult<SubjectDto> getAll(@RequestParam(value = "page", defaultValue = "1") int page) {
-        return PageResult.success(
-                subjectService.getAll(page),
-                s -> new SubjectDto(s)
-        );
+    public CommonResult<List<SubjectDto>> getAll() {
+        return success(subjectService.getAll(), SubjectDto::new);
     }
 
     @GetMapping("/get-by-major-school-year-course-id-{majorId}-{schoolYearId}-{courseId}")
-    public PageResult<SubjectDto> getAllByMajorIdAndSchoolYearIdAndCourseId(
+    public CommonResult<List<SubjectDto>> getAllByMajorIdAndSchoolYearIdAndCourseId(
             @PathVariable("majorId") String majorId,
             @PathVariable("schoolYearId") Long schoolYearId,
-            @PathVariable("courseId") String courseId,
-            @RequestParam(value = "page", defaultValue = "1") int page
+            @PathVariable("courseId") String courseId
     ) {
-        return PageResult.success(
-                subjectService.getAllByMajorIdAndSchoolYearIdAndCourseId(majorId, schoolYearId, courseId, page),
-                s -> new SubjectDto(s)
+        return success(
+                subjectService.getAllByMajorIdAndSchoolYearIdAndCourseId(majorId, schoolYearId, courseId),
+                SubjectDto::new
         );
     }
 }

@@ -2,6 +2,8 @@ package com.example.manageruniversity.core.credit_class.registration_schedule;
 
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface CreditClassRegistrationScheduleService {
     /**
      *Tao thoi gian dang ky lop hoc tin chi cho sinh vien
@@ -22,6 +24,6 @@ public interface CreditClassRegistrationScheduleService {
 //     */
 //    void getAllByCondition(Condition condition);
 
-    Page<CreditClassRegistrationSchedule> getAllBySchoolYearId(Long schoolYearId, int page);
-    Page<CreditClassRegistrationSchedule> getAllByMajorId(String majorId, int page);
+    List<CreditClassRegistrationSchedule> getAllBySchoolYearId(Long schoolYearId);
+    List<CreditClassRegistrationSchedule> getAllByMajorId(String majorId);
 }

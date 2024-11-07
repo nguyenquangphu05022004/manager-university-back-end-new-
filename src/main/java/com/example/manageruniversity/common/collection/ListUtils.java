@@ -5,6 +5,7 @@ import com.example.manageruniversity.common.object.ObjectUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 
 public class ListUtils {
 
@@ -29,5 +30,9 @@ public class ListUtils {
         final List<T> newList = new ArrayList<>();
         list.stream().forEach(s -> newList.add(ObjectUtils.init(classWantConvert, s)));
         return newList;
+    }
+
+    public static <T, M> List<T> convert(Collection<M> list, Function<M, T> func) {
+        return list.stream().map(func).toList();
     }
 }

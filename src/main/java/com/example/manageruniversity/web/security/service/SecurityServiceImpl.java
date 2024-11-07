@@ -13,21 +13,21 @@ public class SecurityServiceImpl implements SecurityService{
     private final RoleService roleService;
     @Override
     public boolean hasRole(String role) {
-        return this.roleService.hasRole(role);
+        return false;
     }
 
     @Override
     public boolean hasAnyRole(String... roles) {
-        return this.roleService.hasAnyRole(roles);
+        return false;
     }
 
     @Override
     public boolean hasPermission(String permission) {
-        return this.permissionService.hasPermission(permission);
+        return false;
     }
 
     @Override
     public boolean hasAnyPermission(String... permissions) {
-        return this.permissionService.hasAnyPermission(permissions);
+        return false;
     }
 }

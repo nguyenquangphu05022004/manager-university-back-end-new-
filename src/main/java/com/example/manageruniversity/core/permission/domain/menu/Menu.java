@@ -17,7 +17,11 @@ public class Menu extends SubBaseEntity {
     @Enumerated(EnumType.STRING)
     private Action action;
 
-    static enum Action {
+
+    public Menu(Long id) {
+        setId(id);
+    }
+    public static enum Action {
         CREATE, UPDATE, DELETE
     }
 }

@@ -13,8 +13,9 @@ public interface PermissionService {
     List<Permission> getAll();
     List<Permission> getAllByRole(Long roleId);
     List<Permission> getAllByRole(String roleName);
-    boolean hasPermission(String permission);
-    boolean hasAnyPermission(String... permission);
+    boolean roleHasPermission(String role, String permission);
+    boolean roleHsAnyPermission(String role, String... permissions);
     void assignPermissionForRole(PermissionRoleRequest request);
     void revokePermissionFromRole(PermissionRoleRequest request);
+    void revokePermissionFromRole(Long permissionRoleId);
 }

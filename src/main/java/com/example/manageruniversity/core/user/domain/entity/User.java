@@ -5,6 +5,7 @@ import com.example.manageruniversity.share.BaseEntity;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "sys_user")
 @Getter
+@NoArgsConstructor
 public  class User extends SubBaseEntity implements UserDetails {
 
     @Column(unique = true)
@@ -33,10 +35,15 @@ public  class User extends SubBaseEntity implements UserDetails {
     @Column(unique = true)
     private String email;
 
+    public User(Long id) {
+        setId(id);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

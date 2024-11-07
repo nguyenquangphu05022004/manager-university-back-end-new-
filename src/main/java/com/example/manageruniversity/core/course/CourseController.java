@@ -12,15 +12,12 @@ import static com.example.manageruniversity.common.pojo.CommonResult.success;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/courses")
+@CrossOrigin("*")
 public class CourseController {
     private final CourseService courseService;
 
     @PostMapping
-    public CommonResult<CourseDto> create(@RequestBody CourseRequest courseRequest,
-                               @RequestParam(value = "courseId", required = false) String courseId) {
-        if(!StringUtils.isEmpty(courseId)) {
-            courseRequest.setCourseId(courseId);
-        }
+    public CommonResult<CourseDto> create(@RequestBody CourseRequest courseRequest) {
         return success(new CourseDto(this.courseService.update(courseRequest)));
     }
 

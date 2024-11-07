@@ -16,5 +16,11 @@ import java.util.Set;
 @Entity
 @Table(name = "sys_permission")
 public class Permission extends SubBaseEntity {
+    @Setter
+    @Column(unique = true)
     private String name;
+
+    public Permission(Long id) {
+        setId(id);
+    }
 }

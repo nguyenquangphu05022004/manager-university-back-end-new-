@@ -6,11 +6,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "sys_user_roles")
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RoleUser extends SubBaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -19,4 +23,5 @@ public class RoleUser extends SubBaseEntity {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
 }

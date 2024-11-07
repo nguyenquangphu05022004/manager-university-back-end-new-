@@ -10,12 +10,10 @@ public interface RoleService {
     Role createRole(RoleRequest request);
     Role updateRole(Long roleId, RoleRequest request);
     void deleteById(Long roleId);
-    void deleteByName(String roleName);
     List<Role> getAllRole();
     List<Role> getAllRoleByUser(Long userId);
-    List<Role> getAllRoleByUser(String username);
     void assignRoleForUser(RoleUserRequest request);
     void revokeRoleFromUser(RoleUserRequest request);
-    boolean hasRole(String role);
-    boolean hasAnyRole(String... roles);
+    boolean userHasRole(Long userId, String role);
+    boolean userHasAnyRole(Long userId, String... roles);
 }

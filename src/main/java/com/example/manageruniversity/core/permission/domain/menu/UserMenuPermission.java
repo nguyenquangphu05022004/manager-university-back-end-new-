@@ -1,6 +1,7 @@
 package com.example.manageruniversity.core.permission.domain.menu;
 
-import com.example.manageruniversity.core.permission.domain.permission.Permission;
+import com.example.manageruniversity.core.user.domain.entity.User;
+import com.example.manageruniversity.share.BaseEntity;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -11,19 +12,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "sys_permission_menu")
+@Table(name = "sys_user_menu_permission")
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-public class MenuPermission extends SubBaseEntity {
+@AllArgsConstructor
+public class UserMenuPermission extends SubBaseEntity {
     @ManyToOne
-    @JoinColumn(name = "permission_id")
-    private Permission permission;
+    @JoinColumn(name = "user_id")
+    private User user;
     @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
+    @JoinColumn(name = "menu_permission_id")
+    private MenuPermission menuPermission;
 
-    public MenuPermission(Long id) {
+    public UserMenuPermission(Long id) {
         setId(id);
     }
 }

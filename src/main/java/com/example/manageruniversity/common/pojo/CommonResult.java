@@ -26,6 +26,9 @@ public class CommonResult<T> {
     public static <T> CommonResult<T> success(T data) {
         return success(200, null, data);
     }
+    public static <T> CommonResult<T> success(String message) {
+        return success(200, message, null);
+    }
 
     public static <S, U> CommonResult<List<U>> success(Collection<S> list, Function<S, U> func) {
         return success(list.stream().map(func).toList());

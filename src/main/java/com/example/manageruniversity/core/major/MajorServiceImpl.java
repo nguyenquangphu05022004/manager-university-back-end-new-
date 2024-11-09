@@ -33,7 +33,7 @@ public class MajorServiceImpl implements MajorService{
         } else {
             major.setName(request.getName());
         }
-        if(StringUtils.isEmpty(request.getMajorParentId())) {
+        if(!StringUtils.isEmpty(request.getMajorParentId())) {
             Major majorParent = this.getById(request.getMajorId());
             major.setParentMajorId(majorParent);
         }
@@ -49,6 +49,6 @@ public class MajorServiceImpl implements MajorService{
     @Override
     public Major getById(String majorId) {
         return this.majorRepository.findById(majorId)
-                .orElseThrow(() -> new ResourceAccessException("Major not found"));
+                .orElseThrow(() -> new ResourcesNotFoundException("Major not found"));
     }
 }

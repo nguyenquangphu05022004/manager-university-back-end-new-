@@ -1,12 +1,12 @@
 package com.example.manageruniversity.core.credit_class;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
 
 public interface CreditClassService {
     CreditClass createOrUpdate(CreditClassRequest request);
     void delete(Long creditClassId);
-    Page<CreditClass> getAllBySchoolYearId(Long schoolYearId, int page);
-    Page<CreditClass> getAllBySchoolYearIdAndTeacherId(Long schoolYearId, String teacherId, int page);
-    Page<CreditClass> getAllBySchoolYearIdThatWereSelectedByStudentId(Long schoolYearId, String studentId, int page);
+    List<CreditClass> getAllBySchoolYearId(Long schoolYearId);
+    List<CreditClass> getAllBySchoolYearIdAndTeacherId(Long schoolYearId, String teacherId);
+    List<CreditClass> getAllBySchoolYearIdThatWereSelectedByStudentId(Long schoolYearId, String studentId);
     CreditClass getById(Long id);
 }

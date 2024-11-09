@@ -17,7 +17,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    @PreAuthorize("@ss.hasAnyPermission('notification:post:create-update')")
+    @PreAuthorize("@ss.hasAnyPermission('post:create-update')")
     public CommonResult<PostDto> createOrUpdate(@RequestBody PostRequest request) {
         return success(new PostDto(postService.createOrUpdate(request)));
     }
@@ -35,9 +35,9 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("@ss.hasPermission('notification:post:delete')")
+    @PreAuthorize("@ss.hasPermission('post:delete')")
     public CommonResult<?> delete(@PathVariable("id") Long postId) {
         this.postService.delete(postId);
-        return success(200, "ok", null);
+        return success("deleted successfully");
     }
 }

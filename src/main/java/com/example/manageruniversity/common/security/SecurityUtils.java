@@ -17,13 +17,6 @@ public class SecurityUtils {
         return (User) authentication.getPrincipal();
     }
 
-    public static String getUserId() {
-        User user = getLoginUser();
-        if(ObjectUtils.isNull(user)) {
-            return null;
-        }
-        return user.getUsername();
-    }
     
 
     public static Role getRole() {

@@ -6,21 +6,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface CreditClassRepository extends JpaRepository<CreditClass, Long> {
-    Page<CreditClass> findAllBySchoolYearId(Long schoolYearId, Pageable pageable);
-    Page<CreditClass> findAllBySchoolYearIdAndTeacherPersonId(
+    List<CreditClass> findAllBySchoolYearId(Long schoolYearId);
+    List<CreditClass> findAllBySchoolYearIdAndTeacherPersonId(
             Long schoolYearId,
-            String teacherId,
-            Pageable pageable
-    );
+            String teacherId);
 
     @Query("select c from CreditClass c where c.schoolYear.id = :schoolYearId and \n" +
             "c.id in (select cm.creditClass.id from CreditClassRegistration cm \n" +
             "where cm.student.personId = :studentId)")
-    Page<CreditClass> findAllBySchoolYearAndThatWereSelectedByStudentId(
+    List<CreditClass> findAllBySchoolYearAndThatWereSelectedByStudentId(
             @Param("schoolYearId") Long schoolYearId,
-            @Param("studentId") String studentId,
-            Pageable pageable
-    );
+            @Param("studentId") String studentId);
 
 }

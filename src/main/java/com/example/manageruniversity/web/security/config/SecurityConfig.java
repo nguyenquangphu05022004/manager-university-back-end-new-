@@ -49,7 +49,8 @@ public class SecurityConfig {
                     exception.authenticationEntryPoint(this.jwtAuthEntryPoint);
                 })
                 .authorizeHttpRequests(request -> {
-                   request.anyRequest().permitAll();
+                    request.anyRequest().permitAll();
+//                   request.requestMatchers("/**").hasAnyRole("SUPER_ADMIN");
                 });
         //Map<HttpMethod, Set<String>> urls = getAllUrls();
         return http.build();

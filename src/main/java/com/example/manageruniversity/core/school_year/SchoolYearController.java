@@ -11,7 +11,8 @@ import static com.example.manageruniversity.common.pojo.CommonResult.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/school-year")
+@RequestMapping("/api/school-year")
+@CrossOrigin("*")
 public class SchoolYearController {
     private final SchoolYearService schoolYearService;
 
@@ -20,7 +21,13 @@ public class SchoolYearController {
         return success(new SchoolYearDto(schoolYearService.update(request)));
     }
 
-    @GetMapping("/get-all-by-couse-id-{courseId}")
+
+    @GetMapping
+    public CommonResult<List<SchoolYearDto>> getAll() {
+        return success(this.schoolYearService.getAll(), SchoolYearDto::new);
+    }
+
+    @GetMapping("/get-all-by-course-id-{courseId}")
     public CommonResult<List<SchoolYearDto>> getAllByCourseId(@PathVariable("courseId") String courseId) {
         return success(schoolYearService.getAllByCourseId(courseId), SchoolYearDto::new);
     }

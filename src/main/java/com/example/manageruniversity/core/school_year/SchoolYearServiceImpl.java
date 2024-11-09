@@ -47,4 +47,9 @@ public class SchoolYearServiceImpl implements SchoolYearService {
         return this.schoolYearRepository.findById(schoolYearId)
                 .orElseThrow(() -> new ResourcesNotFoundException("SchoolYear not found"));
     }
+
+    @Override
+    public List<SchoolYear> getAll() {
+        return this.schoolYearRepository.findAll();
+    }
 }

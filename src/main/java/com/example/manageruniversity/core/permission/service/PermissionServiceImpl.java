@@ -3,26 +3,30 @@ package com.example.manageruniversity.core.permission.service;
 import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
+import com.example.manageruniversity.core.permission.domain.menu.Menu;
+import com.example.manageruniversity.core.permission.domain.menu.MenuPermission;
 import com.example.manageruniversity.core.permission.domain.permission.Permission;
 import com.example.manageruniversity.core.permission.domain.permission.PermissionRequest;
-import com.example.manageruniversity.core.permission.domain.permission.PermissionRole;
-import com.example.manageruniversity.core.permission.domain.permission.PermissionRoleRequest;
-import com.example.manageruniversity.core.permission.domain.role.Role;
 import com.example.manageruniversity.core.permission.repo.MenuPermissionRepository;
 import com.example.manageruniversity.core.permission.repo.PermissionRepository;
-import com.example.manageruniversity.core.permission.repo.PermissionRoleRepository;
+import com.example.manageruniversity.core.permission.repo.UserMenuPermissionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.util.List;
+
+import static com.example.manageruniversity.core.permission.domain.redis.RedisPermissionConstant.USER_PERMISSION;
 
 @Service
 @RequiredArgsConstructor
 public class PermissionServiceImpl implements PermissionService{
     private final PermissionRepository permissionRepository;
-    private final PermissionRoleRepository permissionRoleRepository;
     private final MenuPermissionRepository menuPermissionRepository;
+    private final UserMenuPermissionRepository userMenuPermissionRepository;
+    private final RedisTemplate<String, String> redisTemplate;
     @Override
     public Permission createPermission(PermissionRequest request) {
         ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(request);
@@ -45,7 +49,6 @@ public class PermissionServiceImpl implements PermissionService{
     @Transactional
     public void deletePermission(Long id) {
         this.menuPermissionRepository.deleteAllByPermissionId(id);
-        this.permissionRoleRepository.deleteAllByPermissionId(id);
         this.permissionRepository.deleteById(id);
     }
 
@@ -55,55 +58,31 @@ public class PermissionServiceImpl implements PermissionService{
     }
 
     @Override
-    public List<Permission> getAllByRole(Long roleId) {
-        return ListUtils.convert(
-                this.permissionRoleRepository.findAllByRoleId(roleId),
-                s -> s.getPermission());
-    }
-
-    @Override
-    public List<Permission> getAllByRole(String roleName) {
-        return ListUtils.convert(
-                this.permissionRoleRepository.findAllByRoleName(roleName),
-                s -> s.getPermission());
-    }
-
-    @Override
-    public boolean roleHasPermission(String role, String permission) {
-        return this.permissionRoleRepository
-                .findByRoleNameAndPermissionName(role, permission)
-                .isPresent();
-    }
-
-    @Override
-    public boolean roleHsAnyPermission(String role, String... permissions) {
-        for(String permission : permissions) {
-            return roleHasPermission(role, permission);
+    public boolean permissionHasMenuAction(String permission, Menu.Action action) {
+        MenuPermission menuPermission = this.menuPermissionRepository
+                .findByPermissionNameAndMenuAction(permission, action)
+                .orElse(null);
+        if(menuPermission == null) {
+            return false;
         }
-        return false;
-    }
-
-
-    @Override
-    public void assignPermissionForRole(PermissionRoleRequest request) {
-        ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(request);
-        PermissionRole permissionRole = new PermissionRole(
-                new Permission(request.getPermissionId()),
-                new Role(request.getRoleId())
-        );
-        this.permissionRoleRepository.save(permissionRole);
+        return true;
     }
 
     @Override
-    public void revokePermissionFromRole(PermissionRoleRequest request) {
-        this.permissionRoleRepository.deleteByPermissionIdAndRoleId(
-                request.getPermissionId(),
-                request.getRoleId()
-        );
+    public boolean userHasPermissionAndMenuAction(Long userId, String permission, Menu.Action action) {
+//        String key = String.format(USER_PERMISSION, userId, permission, action);
+//        if(redisTemplate.hasKey(key)) {
+//            return Boolean.getBoolean(redisTemplate.opsForValue().get(key));
+//        }
+//        boolean res = this.permissionHasMenuAction(permission, action);
+//        if(res) {
+//            res =  this.userMenuPermissionRepository
+//                    .findByUserIdAndMenuPermissionId(userId, )
+//        }
+//        redisTemplate.opsForValue().set(key, String.valueOf(res), Duration.ofHours(1));
+//        return res;
+        return true;
     }
 
-    @Override
-    public void revokePermissionFromRole(Long permissionRoleId) {
-        this.permissionRoleRepository.deleteById(permissionRoleId);
-    }
+
 }

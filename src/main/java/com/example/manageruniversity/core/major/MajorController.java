@@ -4,6 +4,7 @@ import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.common.pojo.PageResult;
 import com.example.manageruniversity.web.security.annotation.Permission;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,11 +14,12 @@ import static com.example.manageruniversity.common.pojo.CommonResult.*;
 @RestController
 @RequestMapping("/api/majors")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class MajorController {
     private final MajorService majorService;
 
-
     @PostMapping
+    @PreAuthorize("@ss.hasPermission('major:create')")
     public CommonResult<MajorDto> create(@RequestBody MajorRequest majorRequest) {
         return success(new MajorDto(majorService.update(majorRequest)));
     }

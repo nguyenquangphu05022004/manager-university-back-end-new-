@@ -1,5 +1,6 @@
 package com.example.manageruniversity.core.subject;
 
+import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,8 @@ public class SubjectServiceImpl implements SubjectService{
 
     @Override
     public Subject getById(String subjectId) {
-        return null;
+        return this.subjectRepository.findById(subjectId)
+                .orElseThrow(() -> new ResourcesNotFoundException("subject not found"));
     }
 
 

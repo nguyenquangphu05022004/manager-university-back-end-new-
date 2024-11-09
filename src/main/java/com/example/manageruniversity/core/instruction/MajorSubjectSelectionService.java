@@ -3,11 +3,12 @@ package com.example.manageruniversity.core.instruction;
 import com.example.manageruniversity.filter.Condition;
 import org.springframework.data.domain.Page;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface MajorSubjectSelectionService {
     MajorSubjectSelection create(MajorSubjectSelectionRequest request);
-    void delete(Long majorSSlId);
+    void delete(Long id);
 
     /**
      * findAllBy: major and course, schoolYearId and course, schoolYearId and CourseId and MajorId
@@ -15,4 +16,10 @@ public interface MajorSubjectSelectionService {
      * @return: result that we need
      */
     List<MajorSubjectSelection> findAllByCondition(Condition condition);
+
+    void removeSubject(Long majorSelectionId, String subjectId);
+    void addSubject(AddSubjectRequest request);
+
+
+    List<MajorSubjectSelection> getAll();
 }

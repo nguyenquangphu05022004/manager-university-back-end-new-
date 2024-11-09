@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CreditClassRequest {
-    private Long id;
     private Integer maxStudent;
     private String teacherId;
     private String subjectId;

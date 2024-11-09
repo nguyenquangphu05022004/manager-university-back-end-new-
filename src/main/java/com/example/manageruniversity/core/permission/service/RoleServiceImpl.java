@@ -2,6 +2,7 @@ package com.example.manageruniversity.core.permission.service;
 
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
+import com.example.manageruniversity.core.permission.domain.redis.RedisPermissionConstant;
 import com.example.manageruniversity.core.permission.domain.role.Role;
 import com.example.manageruniversity.core.permission.domain.role.RoleRequest;
 import com.example.manageruniversity.core.permission.domain.role.RoleUser;
@@ -10,8 +11,10 @@ import com.example.manageruniversity.core.permission.repo.RoleRepository;
 import com.example.manageruniversity.core.permission.repo.RoleUserRepository;
 import com.example.manageruniversity.core.user.domain.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.List;
 
 @Service
@@ -19,6 +22,7 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService{
     private final RoleRepository roleRepository;
     private final RoleUserRepository roleUserRepository;
+    private final RedisTemplate<String, String> redisTemplate;
     @Override
     public Role createRole(RoleRequest request) {
         ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(request);
@@ -73,9 +77,19 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public boolean userHasRole(Long userId, String role) {
-        return this.roleUserRepository
+        String key = String.format(RedisPermissionConstant.USER_ROLE, userId, role);
+        if(this.redisTemplate.hasKey(key)) {
+            return true;
+        }
+        boolean userRole = this.roleUserRepository
                 .findByUserIdAndRoleName(userId, role)
                 .isPresent();
+
+        if(userRole) {
+            this.redisTemplate.opsForValue().set(key, "ok", Duration.ofHours(1));
+            return true;
+        }
+        return false;
     }
 
     @Override

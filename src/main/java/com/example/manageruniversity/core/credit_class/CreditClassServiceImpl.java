@@ -2,16 +2,14 @@ package com.example.manageruniversity.core.credit_class;
 
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.common.pojo.PageConstant;
 import com.example.manageruniversity.core.credit_class.time_table.TimeTableRepository;
-import com.example.manageruniversity.core.credit_class.time_table.TimeTableService;
 import com.example.manageruniversity.core.school_year.SchoolYearService;
 import com.example.manageruniversity.core.subject.SubjectService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,31 +39,26 @@ public class CreditClassServiceImpl implements CreditClassService{
     }
 
     @Override
-    public Page<CreditClass> getAllBySchoolYearId(Long schoolYearId, int page) {
-        return this.creditClassRepository
-                .findAllBySchoolYearId(
-                        schoolYearId,
-                        PageRequest.of(page - 1, PageConstant.LIMIT)
-                );
+    public List<CreditClass> getAllBySchoolYearId(Long schoolYearId) {
+        return this.creditClassRepository.findAllBySchoolYearId(schoolYearId);
     }
 
     @Override
-    public Page<CreditClass> getAllBySchoolYearIdAndTeacherId(Long schoolYearId, String teacherId, int page) {
+    public List<CreditClass> getAllBySchoolYearIdAndTeacherId(Long schoolYearId, String teacherId) {
         return this.creditClassRepository
                 .findAllBySchoolYearIdAndTeacherPersonId(
                         schoolYearId,
-                        teacherId,
-                        PageRequest.of(page - 1, PageConstant.LIMIT)
+                        teacherId
                 );
     }
 
 
     @Override
-    public Page<CreditClass> getAllBySchoolYearIdThatWereSelectedByStudentId(Long schoolYearId, String studentId, int page) {
+    public List<CreditClass> getAllBySchoolYearIdThatWereSelectedByStudentId(
+            Long schoolYearId, String studentId) {
         return this.creditClassRepository.findAllBySchoolYearAndThatWereSelectedByStudentId(
                 schoolYearId,
-                studentId,
-                PageRequest.of(page - 1, PageConstant.LIMIT)
+                studentId
         );
     }
 

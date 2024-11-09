@@ -3,6 +3,7 @@ package com.example.manageruniversity.core.course;
 import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.common.string.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class CourseController {
     private final CourseService courseService;
 
     @PostMapping
+    @PreAuthorize("@ss.hasPermission('course:create')")
     public CommonResult<CourseDto> create(@RequestBody CourseRequest courseRequest) {
         return success(new CourseDto(this.courseService.update(courseRequest)));
     }

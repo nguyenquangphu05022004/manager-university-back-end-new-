@@ -10,7 +10,7 @@ import java.util.Map;
 public class MapUtils {
 
     public static <K, V> Map<K, V> convertToMap(Collection<KeyPair<K, V>> keyPairs) {
-        if(CollectionUtils.isEmpty(keyPairs)) {
+        if(CollUtils.isEmpty(keyPairs)) {
             return null;
         }
         Map<K, V> map = new HashMap<>();
@@ -21,7 +21,7 @@ public class MapUtils {
         return map;
     }
     public static <K, V> Map<K, List<V>> convertToMap(List<KeyPair<K, V>> keyPairs) {
-        if(CollectionUtils.isEmpty(keyPairs)) {
+        if(CollUtils.isEmpty(keyPairs)) {
             return null;
         }
         Map<K, List<V>> map = new HashMap<>();

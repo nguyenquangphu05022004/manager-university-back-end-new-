@@ -1,10 +1,7 @@
 package com.example.manageruniversity.web.security.service;
 
-import com.example.manageruniversity.common.security.SecurityUtils;
-import com.example.manageruniversity.core.permission.service.PermissionService;
-import com.example.manageruniversity.core.permission.service.RoleService;
-import com.example.manageruniversity.core.user.domain.entity.User;
-import com.example.manageruniversity.core.user.domain.enums.Role;
+import com.example.manageruniversity.permission.service.PermissionService;
+import com.example.manageruniversity.permission.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

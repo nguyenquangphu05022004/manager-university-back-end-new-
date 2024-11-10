@@ -1,6 +1,6 @@
 package com.example.manageruniversity.core.course;
 
-import com.example.manageruniversity.common.collection.CollectionUtils;
+import com.example.manageruniversity.common.collection.CollUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class CourseInit {
     @PostConstruct
     public void init() {
         List<Course> courseInDatabase = courseRepository.findAll();
-        if(CollectionUtils.isEmpty(courseInDatabase)) {
+        if(CollUtils.isEmpty(courseInDatabase)) {
              final List<Course> courses = List.of(
                     new Course("D22", "2022"),
                     new Course("D21", "2021"),

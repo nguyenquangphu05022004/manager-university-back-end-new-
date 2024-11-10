@@ -1,6 +1,6 @@
 package com.example.manageruniversity.core.school_year;
 
-import com.example.manageruniversity.common.collection.CollectionUtils;
+import com.example.manageruniversity.common.collection.CollUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ public class SchoolYearInit {
     private final SchoolYearRepository schoolYearRepository;
     @PostConstruct
     void init() {
-        if(CollectionUtils.isEmpty(schoolYearRepository.findAll())) {
+        if(CollUtils.isEmpty(schoolYearRepository.findAll())) {
             List<SchoolYear> schoolYears = List.of(
                     new SchoolYear(2022, 2023, Semester.SEMESTER_1),
                     new SchoolYear(2022, 2023, Semester.SEMESTER_2),

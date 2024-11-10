@@ -24,7 +24,7 @@ public class ListUtils {
     }
 
     public static <T, M> List<T> convert(Class<T> classWantConvert, Collection<M> list) {
-        if(CollectionUtils.isEmpty(list)) {
+        if(CollUtils.isEmpty(list)) {
             return null;
         }
         final List<T> newList = new ArrayList<>();

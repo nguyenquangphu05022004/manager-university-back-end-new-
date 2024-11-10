@@ -1,6 +1,6 @@
 package com.example.manageruniversity.core.auth;
 
-import com.example.manageruniversity.common.collection.CollectionUtils;
+import com.example.manageruniversity.common.collection.CollUtils;
 import com.example.manageruniversity.common.exception.PasswordNotMatchException;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.security.SecurityUtils;
@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService{
          * Revoked all token previous
          */
         List<Token> tokens = this.tokenRepository.findAllByUserUsername(user.getUsername());
-        if(CollectionUtils.isEmpty(tokens)) {
+        if(CollUtils.isEmpty(tokens)) {
             tokens.forEach(s -> {
                 s.setRevoked(true);
                 this.tokenRepository.save(s);

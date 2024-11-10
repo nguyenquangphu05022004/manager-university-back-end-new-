@@ -1,6 +1,6 @@
 package com.example.manageruniversity.core.location;
 
-import com.example.manageruniversity.common.collection.CollectionUtils;
+import com.example.manageruniversity.common.collection.CollUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ public class RoomInit {
 
     @PostConstruct
     public void init() {
-        if(CollectionUtils.isEmpty(roomRepository.findAll())) {
+        if(CollUtils.isEmpty(roomRepository.findAll())) {
             List<Room> rooms = List.of(
                     new Room("202", House.A1),
                     new Room("203", House.A1),

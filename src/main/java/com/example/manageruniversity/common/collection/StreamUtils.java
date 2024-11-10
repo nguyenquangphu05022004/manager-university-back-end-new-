@@ -10,7 +10,7 @@ public class StreamUtils {
     public static <T> void filterAndThen(Collection<T> collection,
                                      Predicate<T> predicate,
                                      Consumer<T> consumer) {
-        if(CollectionUtils.isEmpty(collection)) {
+        if(CollUtils.isEmpty(collection)) {
             return;
         }
         collection.stream()
@@ -21,7 +21,7 @@ public class StreamUtils {
 
     public static <T> T findFirst(Collection<T> collection,
                              Predicate<T> predicate) {
-        if(CollectionUtils.isEmpty(collection)) {
+        if(CollUtils.isEmpty(collection)) {
             return null;
         }
 
@@ -33,7 +33,7 @@ public class StreamUtils {
 
     public static <T> boolean findAnyMatch(Collection<T> collection,
                                            Predicate<T> predicate) {
-        if(CollectionUtils.isEmpty(collection)) {
+        if(CollUtils.isEmpty(collection)) {
             return false;
         }
         return collection

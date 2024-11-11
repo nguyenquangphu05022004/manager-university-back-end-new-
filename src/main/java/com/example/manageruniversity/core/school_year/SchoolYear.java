@@ -17,6 +17,9 @@ public class SchoolYear extends SubBaseEntity {
     private Semester semester;
 
 
+    public SchoolYear(Long id) {
+        setId(id);
+    }
     public SchoolYear(Integer fromYear, Integer toYear, Semester semester) {
         this.fromYear = fromYear;
         this.toYear = toYear;

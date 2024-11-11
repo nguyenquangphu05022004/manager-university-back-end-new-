@@ -2,7 +2,7 @@ package com.example.manageruniversity.core.credit_class.time_table;
 
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.core.credit_class.CreditClassService;
+import com.example.manageruniversity.core.credit_class.self.CreditClassService;
 import com.example.manageruniversity.core.location.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,8 @@ public class TimeTableServiceImpl implements TimeTableService{
 
         timeTable = new TimeTable(
                 ObjectUtils.isNull(timeTable) ? null : timeTable.getId(),
-                request.getStart(), request.getEnd(),
+                request.getStartDate(), request.getEndDate(),
+                request.getStartTime(), request.getEndTime(),
                 request.getDayOfWeek(), request.getTimeType(),
                 creditClassService.getById(request.getCreditClassId()),
                 roomService.getById(request.getRoomId())

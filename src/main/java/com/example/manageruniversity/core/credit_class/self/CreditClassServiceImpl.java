@@ -44,9 +44,9 @@ public class CreditClassServiceImpl implements CreditClassService{
     }
 
     @Override
-    public List<CreditClass> getAllBySchoolYearIdAndTeacherId(Long schoolYearId, String teacherId) {
+    public List<CreditClass> getAllBySchoolYearIdAndTeacherId(Long schoolYearId, Long teacherId) {
         return this.creditClassRepository
-                .findAllBySchoolYearIdAndTeacherPersonId(
+                .findAllBySchoolYearIdAndTeacherId(
                         schoolYearId,
                         teacherId
                 );
@@ -55,7 +55,7 @@ public class CreditClassServiceImpl implements CreditClassService{
 
     @Override
     public List<CreditClass> getAllBySchoolYearIdThatWereSelectedByStudentId(
-            Long schoolYearId, String studentId) {
+            Long schoolYearId, Long studentId) {
         return this.creditClassRepository.findAllBySchoolYearAndThatWereSelectedByStudentId(
                 schoolYearId,
                 studentId

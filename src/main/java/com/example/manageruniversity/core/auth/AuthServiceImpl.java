@@ -2,19 +2,16 @@ package com.example.manageruniversity.core.auth;
 
 import com.example.manageruniversity.common.collection.CollUtils;
 import com.example.manageruniversity.common.exception.PasswordNotMatchException;
-import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
-import com.example.manageruniversity.common.security.SecurityUtils;
-import com.example.manageruniversity.mq.producer.EmailProducer;
+import com.example.manageruniversity.core.auth.token.Token;
+import com.example.manageruniversity.core.auth.token.TokenRepository;
+import com.example.manageruniversity.core.auth.token.TokenType;
+import com.example.manageruniversity.core.member.dal.entities.User;
+import com.example.manageruniversity.core.member.dal.repo.UserRepository;
+import com.example.manageruniversity.core.member.service.UserService;
 import com.example.manageruniversity.web.security.JwtService;
-import com.example.manageruniversity.core.user.domain.entity.Token;
-import com.example.manageruniversity.core.user.domain.entity.User;
-import com.example.manageruniversity.core.user.domain.enums.TokenType;
-import com.example.manageruniversity.core.user.repo.TokenRepository;
-import com.example.manageruniversity.core.user.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,21 +19,16 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService{
-    private final UserRepository userRepository;
-    private final AuthenticationManager authenticationManager;
+    private final UserService userService;
     private final JwtService jwtService;
     private final TokenRepository tokenRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final EmailProducer emailProducer;
+
     @Override
     public AuthResponse authenticate(AuthRequest authRequest) {
-        this.authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authRequest.getUsername(),
-                        authRequest.getPassword()
-                )
-        );
-        User user = userRepository.findUserByUsernameIgnoreCase(authRequest.getUsername()).get();
+        User user = userService.getByUsername(authRequest.getUsername());
+        if(!userService.passwordMatch(authRequest.getPassword(), user.getPassword())) {
+            throw new PasswordNotMatchException("password not match");
+        }
         String jwtToken = this.jwtService.generateToken(user);
         String jwtRefreshToken = this.jwtService.generateRefreshToken(user);
         Token token = new Token(
@@ -64,33 +56,21 @@ public class AuthServiceImpl implements AuthService{
         AuthResponse authResponse = new AuthResponse(
                 jwtToken,
                 jwtRefreshToken,
-                null,
-                null
+                jwtService.extractExpiration(jwtToken).getTime(),
+                user.getFullName()
         );
         return authResponse;
     }
 
     @Override
-    public void forgotPassword(String email) {
-        User user = this.userRepository.findUserByEmailIgnoreCase(email)
-                .orElseThrow(() -> new ResourcesNotFoundException("Email not found"));
-        this.emailProducer.publish(
-                "Forget password",
-                "Your code: " + "random",
-                user.getUsername(),
-                user.getEmail()
-        );
+    public void logout() {
+
     }
 
     @Override
-    public void changePassword(String oldPass, String newPass) {
-        User user = SecurityUtils.getLoginUser();
-        if(this.passwordEncoder.matches(oldPass, user.getPassword())) {
-            user.setPassword(this.passwordEncoder.encode(newPass));
-            this.userRepository.save(user);
-            return;
-        }
-        throw new PasswordNotMatchException("Your old password not match");
+    public void refreshToken() {
+
     }
+
 
 }

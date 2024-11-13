@@ -1,6 +1,7 @@
 package com.example.manageruniversity.core.credit_class.self;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
+import com.example.manageruniversity.common.security.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -34,19 +35,18 @@ public class CreditClassController {
     }
 
     @GetMapping("/get-all-by-school-year-{schoolYear}-that-were-selectd-by-student-id-{studentId}")
-    public CommonResult<List<CreditClassDto>> getAllBySchoolYearIdThatWereSelectedByStudentId(
-            @PathVariable("schoolYearId") Long schoolYearId,
-            @PathVariable("studentId") String studentId
+    public CommonResult<List<CreditClassDto>> getAllBySchoolYearIdThatWereSelectedByCurrentUser(
+            @PathVariable("schoolYearId") Long schoolYearId
     ) {
         return success(
-                this.creditClassService.getAllBySchoolYearIdThatWereSelectedByStudentId(schoolYearId, studentId),
+                this.creditClassService.getAllBySchoolYearIdThatWereSelectedByStudentId(schoolYearId, SecurityUtils.userIdLogin()),
                 s -> new CreditClassDto(s));
     }
 
     @GetMapping("/get-all-by-school-year-{schoolYearId}-and-teacher-id-{teacherId}")
     public CommonResult<List<CreditClassDto>> getAllBySchoolYearIdAndTeacherId(
             @PathVariable("schoolYearId") Long schoolYearId,
-            @PathVariable("teacherId") String teacherId
+            @PathVariable("teacherId") Long teacherId
     ) {
         return success(
                 this.creditClassService.getAllBySchoolYearIdAndTeacherId(schoolYearId, teacherId),

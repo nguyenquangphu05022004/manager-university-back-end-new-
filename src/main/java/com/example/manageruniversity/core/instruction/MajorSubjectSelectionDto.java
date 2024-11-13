@@ -9,7 +9,6 @@ import com.example.manageruniversity.core.subject.SubjectDto;
 import lombok.Getter;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 public class MajorSubjectSelectionDto {
@@ -24,7 +23,7 @@ public class MajorSubjectSelectionDto {
         this.id = majorSubjectSelection.getId();
         this.major = new MajorDto(majorSubjectSelection.getMajor());
         this.schoolYear = new SchoolYearDto(majorSubjectSelection.getSchoolYear());
-        this.subject = ListUtils.convert(majorSubjectSelection.getSubjects(),SubjectDto::new);
+        this.subject = ListUtils.convertToList(majorSubjectSelection.getSubjects(),SubjectDto::new);
         this.course = new CourseDto(majorSubjectSelection.getCourse());
     }
 }

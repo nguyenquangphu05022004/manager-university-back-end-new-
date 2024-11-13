@@ -4,7 +4,7 @@ import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.core.credit_class.time_table.TimeTableDto;
 import com.example.manageruniversity.core.school_year.SchoolYearDto;
 import com.example.manageruniversity.core.subject.SubjectDto;
-import com.example.manageruniversity.core.user.domain.dto.TeacherDto;
+import com.example.manageruniversity.core.member.domain.dto.response.TeacherDto;
 import lombok.Data;
 
 import java.util.List;
@@ -26,6 +26,6 @@ public class CreditClassDto {
         this.teacher = new TeacherDto(creditClass.getTeacher());
         this.schoolYear = new SchoolYearDto(creditClass.getSchoolYear());
         this.studyGroup = creditClass.getStudyGroup();
-        this.timeTables = ListUtils.convert(TimeTableDto.class, creditClass.getTimeTables());
+        this.timeTables = ListUtils.convertToList(TimeTableDto.class, creditClass.getTimeTables());
     }
 }

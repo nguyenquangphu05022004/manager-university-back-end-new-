@@ -2,13 +2,12 @@ package com.example.manageruniversity.core.credit_class.self;
 
 import com.example.manageruniversity.common.exception.ExceededException;
 import com.example.manageruniversity.core.credit_class.time_table.TimeTable;
+import com.example.manageruniversity.core.member.dal.entities.Student;
+import com.example.manageruniversity.core.member.dal.entities.Teacher;
 import com.example.manageruniversity.core.school_year.SchoolYear;
 import com.example.manageruniversity.core.subject.Subject;
-import com.example.manageruniversity.core.user.domain.entity.Student;
 import com.example.manageruniversity.share.SubBaseEntity;
-import com.example.manageruniversity.core.user.domain.entity.Teacher;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

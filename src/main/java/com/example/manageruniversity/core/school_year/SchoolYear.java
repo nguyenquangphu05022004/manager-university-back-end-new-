@@ -4,11 +4,14 @@ import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "school_years")
 @Getter
 @NoArgsConstructor
 @Setter
+@EqualsAndHashCode(callSuper = true)
 public class SchoolYear extends SubBaseEntity {
 
     private Integer fromYear;
@@ -25,4 +28,7 @@ public class SchoolYear extends SubBaseEntity {
         this.toYear = toYear;
         this.semester = semester;
     }
+
+
+
 }

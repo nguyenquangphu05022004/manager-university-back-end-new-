@@ -64,7 +64,7 @@ public class PermissionServiceImpl implements PermissionService{
         Set<Long> roleIdsWereAssignedMenu = convertToSet(this.getAllMenuRoleByMenuId(menu.getId()), r -> r.getRole().getId());
 
         /**
-         * Role was assigned permission
+         * MemberType was assigned permission
          */
         if (isEmpty(roleIdsWereAssignedMenu)) {
             return false;

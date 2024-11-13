@@ -2,7 +2,7 @@ package com.example.manageruniversity.core.credit_class.registration.domain.dto.
 
 import com.example.manageruniversity.core.credit_class.registration.domain.entities.CreditClassExchange;
 import com.example.manageruniversity.core.credit_class.self.CreditClassDto;
-import com.example.manageruniversity.core.user.domain.dto.StudentDto;
+import com.example.manageruniversity.core.member.domain.dto.response.StudentDto;
 
 public class CreditClassExchangeDto {
     private StudentDto fromStudent;

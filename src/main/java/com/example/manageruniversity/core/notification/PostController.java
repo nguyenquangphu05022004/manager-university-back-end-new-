@@ -13,6 +13,7 @@ import static com.example.manageruniversity.common.pojo.CommonResult.success;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/notification/posts")
+@CrossOrigin("*")
 public class PostController {
     private final PostService postService;
 

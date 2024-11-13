@@ -3,7 +3,7 @@ package com.example.manageruniversity.core.credit_class.registration.service;
 
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassExchangeRequest;
+import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassExchangeReqVO;
 import com.example.manageruniversity.core.credit_class.registration.domain.entities.CreditClassExchange;
 import com.example.manageruniversity.core.credit_class.registration.domain.entities.CreditClassRegistration;
 import com.example.manageruniversity.core.credit_class.registration.repo.CreditClassExchangeRepository;
@@ -23,7 +23,7 @@ public class CreditClassExchangeServiceImpl implements CreditClassExchangeServic
     private final CreditClassRegistrationRepository creditClassRegistrationRepository;
     @Override
     @Transactional(rollbackFor = ServiceException.class)
-    public CreditClassExchange sendRequest(CreditClassExchangeRequest request) {
+    public CreditClassExchange sendRequest(CreditClassExchangeReqVO request) {
         ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(request);
         CreditClassExchange object = new CreditClassExchange(
                 request.getFromStudentId(),
@@ -43,12 +43,12 @@ public class CreditClassExchangeServiceImpl implements CreditClassExchangeServic
                 .orElseThrow(() -> new ResourcesNotFoundException("not found"));
 
         CreditClassRegistration request = creditClassRegistrationRepository.findByStudentIdAndCreditClassId(
-                creditClassExchange.getFromStudent().getPersonId(),
+                creditClassExchange.getFromStudent().getId(),
                 creditClassExchange.getRequest().getId()
         ).orElseThrow(() -> new ResourcesNotFoundException("not found"));
 
         CreditClassRegistration target = creditClassRegistrationRepository.findByStudentIdAndCreditClassId(
-                creditClassExchange.getToStudent().getPersonId(),
+                creditClassExchange.getToStudent().getId(),
                 creditClassExchange.getTarget().getId()
         ).orElseThrow(() -> new ResourcesNotFoundException("not found"));
 
@@ -68,10 +68,10 @@ public class CreditClassExchangeServiceImpl implements CreditClassExchangeServic
     }
 
     @Override
-    public List<CreditClassExchange> getListByStudentIdAndCreditClassId(String studentId, Long creditClassId) {
-        return this.creditClassExchangeRepository.findAllByTargetCreditClassAndToStudent(
-                creditClassId,
-                studentId
+    public List<CreditClassExchange> getListByStudentIdAndCreditClassId(Long studentId, Long creditClassId) {
+        return this.creditClassExchangeRepository.findAllByToStudentIdAndTargetId(
+                studentId,
+                creditClassId
         );
     }
 }

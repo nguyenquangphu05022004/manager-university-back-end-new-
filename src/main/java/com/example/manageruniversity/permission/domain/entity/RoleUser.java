@@ -1,6 +1,6 @@
 package com.example.manageruniversity.permission.domain.entity;
 
-import com.example.manageruniversity.core.user.domain.entity.User;
+import com.example.manageruniversity.core.member.dal.entities.User;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

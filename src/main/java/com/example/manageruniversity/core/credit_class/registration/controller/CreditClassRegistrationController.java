@@ -1,7 +1,8 @@
 package com.example.manageruniversity.core.credit_class.registration.controller;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassRegistrationRequest;
+import com.example.manageruniversity.common.security.SecurityUtils;
+import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassRegistrationReqVO;
 import com.example.manageruniversity.core.credit_class.registration.domain.dto.response.CreditClassRegistrationDto;
 import com.example.manageruniversity.core.credit_class.registration.service.CreditClassRegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.example.manageruniversity.common.pojo.CommonResult.success;
+import static com.example.manageruniversity.common.security.SecurityUtils.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class CreditClassRegistrationController {
 
     @PostMapping
     @PreAuthorize("@ss.hasPermission('credit-class-registration:create')")
-    public CommonResult<CreditClassRegistrationDto> create(@RequestBody CreditClassRegistrationRequest request) {
+    public CommonResult<CreditClassRegistrationDto> create(@RequestBody CreditClassRegistrationReqVO request) {
         return success(new CreditClassRegistrationDto(creditClassRegistrationService.create(request)));
     }
 
@@ -36,12 +38,11 @@ public class CreditClassRegistrationController {
 
 
     @GetMapping
-    @PreAuthorize("@ss.hasPermission('credit-class-registration:get-list')")
-    public CommonResult<List<CreditClassRegistrationDto>> getListByStudentIdAndSchoolYearId(
-            @RequestParam("studentId") String studenId,
+    @PreAuthorize("@ss.hasPermission('credit-class-registration:get-list-of-student-by-school-year-id')")
+    public CommonResult<List<CreditClassRegistrationDto>> getListClassOfStudentBySchoolYearId(
             @RequestParam("schoolYearId") Long schoolYearId
     ) {
-        return success(this.creditClassRegistrationService.getListByStudentIdAndSchoolYearId(studenId, schoolYearId), CreditClassRegistrationDto::new);
+        return success(this.creditClassRegistrationService.getListByStudentIdAndSchoolYearId(userIdLogin(), schoolYearId), CreditClassRegistrationDto::new);
     }
 
 }

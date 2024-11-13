@@ -24,7 +24,7 @@ public class SecurityServiceImpl implements SecurityService{
     @Override
     public boolean hasPermission(String permission) {
 //        User loginUser = SecurityUtils.getLoginUser();
-//        if(loginUser.getRole() == Role.SUPER_ADMIN) return true;
+//        if(loginUser.getMemberType() == MemberType.SUPER_ADMIN) return true;
 //        String words[] = permission.split(":");
         return true;
     }

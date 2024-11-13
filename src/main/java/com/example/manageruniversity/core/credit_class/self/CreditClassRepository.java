@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface CreditClassRepository extends JpaRepository<CreditClass, Long> {
     List<CreditClass> findAllBySchoolYearId(Long schoolYearId);
-    List<CreditClass> findAllBySchoolYearIdAndTeacherPersonId(
+    List<CreditClass> findAllBySchoolYearIdAndTeacherId(
             Long schoolYearId,
-            String teacherId);
+            Long teacherId);
 
     @Query("select c from CreditClass c where c.schoolYear.id = :schoolYearId and \n" +
             "c.id in (select cm.creditClass.id from CreditClassRegistration cm \n" +
-            "where cm.student.personId = :studentId)")
+            "where cm.student.id = :studentId)")
     List<CreditClass> findAllBySchoolYearAndThatWereSelectedByStudentId(
             @Param("schoolYearId") Long schoolYearId,
-            @Param("studentId") String studentId);
+            @Param("studentId") Long studentId);
 
 }

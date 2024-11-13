@@ -1,7 +1,8 @@
 package com.example.manageruniversity.core.credit_class.registration.controller;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassExchangeRequest;
+import com.example.manageruniversity.common.security.SecurityUtils;
+import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassExchangeReqVO;
 import com.example.manageruniversity.core.credit_class.registration.domain.dto.response.CreditClassExchangeDto;
 import com.example.manageruniversity.core.credit_class.registration.service.CreditClassExchangeService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class CreditClassExchangeController {
 
     @PostMapping
     @PreAuthorize("@ss.hasPermission('credit-class-exchange:sendRequest')")
-    public CommonResult<CreditClassExchangeDto> sendRequest(@RequestBody CreditClassExchangeRequest request) {
+    public CommonResult<CreditClassExchangeDto> sendRequest(@RequestBody CreditClassExchangeReqVO request) {
         return success(new CreditClassExchangeDto(creditClassExchangeService.sendRequest(request)));
     }
 
@@ -42,15 +43,21 @@ public class CreditClassExchangeController {
     }
 
 
+    /**
+     * lay toan bo cac request duoc gui toi user hien tai
+     * cho viec trao doi lop hoc voi nhau
+     * @param creditClassId
+     * @return
+     */
     @GetMapping
     @PreAuthorize("@ss.hasPermission('credit-class-exchange:getListExchangeByStudentAndCreditClass')")
-    public CommonResult<List<CreditClassExchangeDto>> getListExchangeByStudentAndCreditClass(
-            @RequestParam("studentId") String studentId,
+    public CommonResult<List<CreditClassExchangeDto>> getListRequestExchangeOfCreditClassToCurrentUser(
             @RequestParam("creditClassId") Long creditClassId
     ) {
-        return success(this.creditClassExchangeService.getListByStudentIdAndCreditClassId(
-                studentId, creditClassId
-        ), CreditClassExchangeDto::new);
+        return success(
+                this.creditClassExchangeService.getListByStudentIdAndCreditClassId(
+                SecurityUtils.userIdLogin(), creditClassId),
+                CreditClassExchangeDto::new);
     }
 
 

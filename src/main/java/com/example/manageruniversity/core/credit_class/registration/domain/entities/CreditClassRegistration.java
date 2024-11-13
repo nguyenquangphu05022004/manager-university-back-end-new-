@@ -1,9 +1,9 @@
 package com.example.manageruniversity.core.credit_class.registration.domain.entities;
 
 import com.example.manageruniversity.core.credit_class.self.CreditClass;
+import com.example.manageruniversity.core.member.dal.entities.Student;
 import com.example.manageruniversity.core.school_year.SchoolYear;
 import com.example.manageruniversity.share.SubBaseEntity;
-import com.example.manageruniversity.core.user.domain.entity.Student;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +41,7 @@ public class CreditClassRegistration extends SubBaseEntity {
         this.student = student;
         this.creditClass = creditClass;
         this.status = Status.PENDING;
+        this.schoolYear = schoolYear;
     }
 
 }

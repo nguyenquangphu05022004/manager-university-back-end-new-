@@ -10,7 +10,7 @@ import static com.example.manageruniversity.common.pojo.CommonResult.success;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @CrossOrigin("*")
 public class AuthController {
     private final AuthService authService;
@@ -20,17 +20,14 @@ public class AuthController {
         return success(authService.authenticate(authRequest));
     }
 
-    @PostMapping("/change-password")
-    public CommonResult<?> changePassword(@RequestParam("oldPass") String oldPass,
-                               @RequestParam("newPass") String newPass) {
-        authService.changePassword(oldPass, newPass);
-        return success(HttpStatus.OK.value(), "updated password success", null);
+    @PostMapping("/logout")
+    public CommonResult<?> logout() {
+        return null;
     }
 
-    @PostMapping("/forgot-password")
-    @PermitAll
-    public CommonResult<?> forgotPassword(@RequestParam("email") String email) {
-        authService.forgotPassword(email);
-        return success(HttpStatus.OK.value(), "We hava sent code to your email, please check it", null);
+    @PostMapping("/refresh-token")
+    public CommonResult<AuthResponse> refreshToken() {
+        return null;
     }
+
 }

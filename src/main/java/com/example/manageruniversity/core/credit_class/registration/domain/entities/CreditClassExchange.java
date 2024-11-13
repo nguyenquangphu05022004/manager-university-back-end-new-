@@ -1,7 +1,7 @@
 package com.example.manageruniversity.core.credit_class.registration.domain.entities;
 
 import com.example.manageruniversity.core.credit_class.self.CreditClass;
-import com.example.manageruniversity.core.user.domain.entity.Student;
+import com.example.manageruniversity.core.member.dal.entities.Student;
 import com.example.manageruniversity.share.SubBaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -34,10 +34,10 @@ public class CreditClassExchange extends SubBaseEntity {
     private Student toStudent;
 
     public CreditClassExchange(
-            String fromStudentId,
+            Long fromStudentId,
             Long requestId,
             Long targetId,
-            String targetStudentId
+            Long targetStudentId
     ) {
         this.fromStudent = new Student(fromStudentId);
         this.request = new CreditClass(requestId);

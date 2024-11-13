@@ -9,9 +9,14 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
+@Setter
 public class Subject extends BaseEntity {
     @Id
     private String subjectId;
     private String subjectName;
     private Integer credit;
+
+    public Subject(String subjectId) {
+        this.subjectId = subjectId;
+    }
 }

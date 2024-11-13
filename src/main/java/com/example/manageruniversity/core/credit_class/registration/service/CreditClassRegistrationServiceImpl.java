@@ -4,14 +4,14 @@ import com.example.manageruniversity.common.exception.ResourcesNotFoundException
 import com.example.manageruniversity.common.exception.ServiceException;
 import com.example.manageruniversity.common.exception.TimeOverlapException;
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassRegistrationRequest;
+import com.example.manageruniversity.core.credit_class.registration.domain.dto.request.CreditClassRegistrationReqVO;
 import com.example.manageruniversity.core.credit_class.registration.domain.entities.CreditClassRegistration;
 import com.example.manageruniversity.core.credit_class.registration.repo.CreditClassRegistrationRepository;
 import com.example.manageruniversity.core.credit_class.self.CreditClass;
 import com.example.manageruniversity.core.credit_class.self.CreditClassRepository;
+import com.example.manageruniversity.core.member.dal.entities.Student;
+import com.example.manageruniversity.core.member.dal.repo.StudentRepository;
 import com.example.manageruniversity.core.school_year.SchoolYear;
-import com.example.manageruniversity.core.user.domain.entity.Student;
-import com.example.manageruniversity.core.user.repo.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ public class CreditClassRegistrationServiceImpl implements CreditClassRegistrati
 
     @Override
     @Transactional(rollbackFor = ServiceException.class)
-    public CreditClassRegistration create(CreditClassRegistrationRequest request) {
+    public CreditClassRegistration create(CreditClassRegistrationReqVO request) {
         ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(request);
 
         Student student = studentRepository.findById(request.getStudentId())
@@ -89,7 +89,7 @@ public class CreditClassRegistrationServiceImpl implements CreditClassRegistrati
     }
 
     @Override
-    public List<CreditClassRegistration> getListByStudentIdAndSchoolYearId(String studentId, Long schoolYearId) {
+    public List<CreditClassRegistration> getListByStudentIdAndSchoolYearId(Long studentId, Long schoolYearId) {
         return this.creditClassRegistrationRepository.findAllByStudentIdAndSchoolYearId(studentId, schoolYearId);
     }
 }

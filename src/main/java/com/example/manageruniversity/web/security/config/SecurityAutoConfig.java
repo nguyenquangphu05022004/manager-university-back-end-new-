@@ -1,6 +1,6 @@
 package com.example.manageruniversity.web.security.config;
 
-import com.example.manageruniversity.core.user.repo.UserRepository;
+import com.example.manageruniversity.core.member.dal.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,9 @@ public class SecurityAutoConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
+        System.out.println("dcm");
         return  (username) -> userRepository
-                .findUserByEmailIgnoreCase(username)
+                .findUserByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         username + " not found"
                 ));

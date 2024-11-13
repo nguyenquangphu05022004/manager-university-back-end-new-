@@ -9,17 +9,14 @@ import java.util.Optional;
 
 public interface CreditClassRegistrationRepository extends JpaRepository<CreditClassRegistration, Long> {
 
-    @Query("select c from CreditClassRegistration c where c.student.personId = :studentId " +
-            "and c.creditClass.id = :creditClassId")
     Optional<CreditClassRegistration> findByStudentIdAndCreditClassId(
-            String studentId,
+            Long studentId,
             Long creditClassId
     );
 
 
-    @Query("select c from CreditClassRegistration c \n" +
-            "where c.student.personId = :studentId and c.schoolYear.id = :schoolYearId")
-    List<CreditClassRegistration> findAllByStudentIdAndSchoolYearId(String studentId,
-                                                                    Long schoolYearId);
+    List<CreditClassRegistration> findAllBySchoolYearId(Long schoolYearId);
+
+    List<CreditClassRegistration> findAllByStudentIdAndSchoolYearId(Long studentId, Long schoolYearId);
 
 }

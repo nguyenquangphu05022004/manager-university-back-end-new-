@@ -23,7 +23,7 @@ public class ListUtils {
         return list;
     }
 
-    public static <T, M> List<T> convert(Class<T> classWantConvert, Collection<M> list) {
+    public static <T, M> List<T> convertToList(Class<T> classWantConvert, Collection<M> list) {
         if(CollUtils.isEmpty(list)) {
             return null;
         }
@@ -32,7 +32,7 @@ public class ListUtils {
         return newList;
     }
 
-    public static <T, M> List<T> convert(Collection<M> list, Function<M, T> func) {
+    public static <T, M> List<T> convertToList(Collection<M> list, Function<M, T> func) {
         return list.stream().map(func).toList();
     }
 }

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 public class EmailProducer {
     private final ApplicationContext context;
 
-    public void publish(String title, String content, String userId, String recepient) {
-        EmailMessage message = new EmailMessage(title, content, userId, recepient);
+    public void publish(String title, String content, String username, String recepient) {
+        EmailMessage message = new EmailMessage(title, content, username, recepient);
         this.context.publishEvent(message);
     }
 }

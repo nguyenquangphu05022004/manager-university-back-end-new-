@@ -1,7 +1,7 @@
 package com.example.manageruniversity.report.excel.export;
 
 
-import com.example.manageruniversity.core.user.domain.entity.Student;
+import com.example.manageruniversity.core.member.dal.entities.Student;
 import lombok.Getter;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -32,7 +32,7 @@ public class StudentEachCreditClassExport extends Export {
         for (var student : students) {
             Row row = getSheet().createRow(rowCount++);
             int columnCount = 0;
-            createCell(row, columnCount++, student.getPersonId(), style);
+            createCell(row, columnCount++, student.getUsername(), style);
             createCell(row, columnCount++,student.getFullName(), style);
             createCell(row, columnCount++,student.getDateOfBirth(), style);
             createCell(row, columnCount++, student.getMajor().getName(), style);

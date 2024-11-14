@@ -35,4 +35,8 @@ public class Score extends SubBaseEntity {
         this.subject = subject;
         this.schoolYear = schoolYear;
     }
+
+    public Score(Long id) {
+        setId(id);
+    }
 }

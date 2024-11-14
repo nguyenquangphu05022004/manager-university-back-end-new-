@@ -41,17 +41,16 @@ public class Test extends SubBaseEntity {
     private Set<Student> students;
 
 
-    public Test(Subject subject, Room room, LocalDate startDate,
+    public Test(String subject, LocalDate startDate,
                 LocalTime startTime, int inMinutes,
-                String format, SchoolYear schoolYear,
+                String format, Long schoolYear,
                 Set<Student> students) {
-        this.subject = subject;
-        this.room = room;
+        this.subject = new Subject(subject);
         this.startDate = startDate;
         this.startTime = startTime;
         this.inMinutes = inMinutes;
         this.format = format;
-        this.schoolYear = schoolYear;
+        this.schoolYear = new SchoolYear(schoolYear);
         this.students = students;
     }
 }

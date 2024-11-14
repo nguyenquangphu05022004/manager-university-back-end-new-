@@ -1,4 +1,4 @@
-package com.example.manageruniversity.core.tuition.dal.model.entity;
+package com.example.manageruniversity.core.tuition.dal.entity;
 
 import com.example.manageruniversity.core.course.Course;
 import com.example.manageruniversity.core.major.Major;

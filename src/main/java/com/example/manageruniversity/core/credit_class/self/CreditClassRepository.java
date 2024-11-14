@@ -19,4 +19,5 @@ public interface CreditClassRepository extends JpaRepository<CreditClass, Long> 
             @Param("schoolYearId") Long schoolYearId,
             @Param("studentId") Long studentId);
 
+    List<CreditClass> findAllSchoolYearIdAndSubjectSubjectId(Long schoolYearId, String subjectId);
 }

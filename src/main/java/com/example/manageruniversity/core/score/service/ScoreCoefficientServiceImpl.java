@@ -42,4 +42,9 @@ public class ScoreCoefficientServiceImpl implements ScoreCoefficientService{
     public List<ScoreCoefficient> getList() {
         return scoreCoefficientRepository.findAll();
     }
+
+    @Override
+    public List<ScoreCoefficient> getListBySchoolYearIdAndSubjectId(Long schoolYearId, String subjectId) {
+        return this.scoreCoefficientRepository.findAllBySchoolYearIdAndSubjectSubjectId(schoolYearId, subjectId);
+    }
 }

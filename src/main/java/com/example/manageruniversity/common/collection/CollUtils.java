@@ -13,12 +13,6 @@ public class CollUtils {
         return false;
     }
 
-    public static <T, U> List<U> convertToList(Collection<T> from, Function<T, U> func) {
-        if (CollUtils.isEmpty(from)) {
-            return new ArrayList<>();
-        }
-        return from.stream().map(func).filter(Objects::nonNull).collect(Collectors.toList());
-    }
     public static <T, U> Set<U> convertToSet(Collection<T> from, Function<T, U> func) {
         if (CollUtils.isEmpty(from)) {
             return new HashSet<>();

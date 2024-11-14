@@ -2,6 +2,7 @@ package com.example.manageruniversity.web.security.config;
 
 
 import com.example.manageruniversity.common.collection.CollUtils;
+import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.web.security.JwtAuthenticationEntryPoint;
 import com.example.manageruniversity.web.security.filter.JwtAuthenticationFilter;
 import jakarta.annotation.security.PermitAll;
@@ -82,7 +83,7 @@ public class SecurityConfig {
             }
             //get all pattern of request
             if (entry.getKey().getPathPatternsCondition() != null) {
-                urls.addAll(CollUtils.convertToList(entry.getKey().getPathPatternsCondition().getPatterns(), PathPattern::getPatternString));
+                urls.addAll(ListUtils.convertToList(entry.getKey().getPathPatternsCondition().getPatterns(), PathPattern::getPatternString));
             }
             if (urls.isEmpty()) {
                 continue;

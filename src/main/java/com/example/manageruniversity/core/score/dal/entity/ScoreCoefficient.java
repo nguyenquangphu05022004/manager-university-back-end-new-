@@ -38,4 +38,7 @@ public class ScoreCoefficient extends SubBaseEntity {
         this.subject = new Subject(subjectId);
         this.schoolYear = new SchoolYear(schoolYearId);
     }
+    public ScoreCoefficient(Long id) {
+        setId(id);
+    }
 }

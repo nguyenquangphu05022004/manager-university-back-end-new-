@@ -1,56 +1,93 @@
 package com.example.manageruniversity.core.exam;
 
+import com.example.manageruniversity.common.collection.CollUtils;
+import com.example.manageruniversity.common.collection.ListUtils;
+import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.object.ObjectUtils;
-import com.example.manageruniversity.common.pojo.PageConstant;
+import com.example.manageruniversity.core.credit_class.self.CreditClass;
+import com.example.manageruniversity.core.credit_class.self.CreditClassRepository;
+import com.example.manageruniversity.core.exam.vo.TestUpdateReqVO;
+import com.example.manageruniversity.core.exam.vo.TestReqVO;
+import com.example.manageruniversity.core.member.dal.entities.Student;
 import com.example.manageruniversity.core.school_year.SchoolYearService;
 import com.example.manageruniversity.core.subject.SubjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+
+import static com.example.manageruniversity.common.collection.ListUtils.*;
 
 @Service
 @RequiredArgsConstructor
 public class TestServiceImpl implements TestService{
     private final TestRepository testRepository;
-    private final SubjectService subjectService;
-    private final SchoolYearService schoolYearService;
+    private final CreditClassRepository creditClassRepository;
+
     @Override
-    public Test update(TestRequest testRequest) {
-        ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(testRequest, "testId");
-        Test test = new Test(
-                subjectService.getById(testRequest.getSubjectId()),
-                null,
-                testRequest.getStartDate(),
-                testRequest.getStartTime(),
-                testRequest.getInMinutes(),
-                testRequest.getFormat(),
-                schoolYearService.getById(testRequest.getSchoolYearId()),
-                null
+    public void create(TestReqVO testReqVO) {
+        /**
+         * Lay toan bo lop hoc ung voi mon hoc
+         * va hoc ky do
+         */
+        List<CreditClass> creditClasses = this.creditClassRepository.findAllSchoolYearIdAndSubjectSubjectId(
+                testReqVO.getSchoolYearId(),
+                testReqVO.getSubjectId()
         );
-        this.testRepository.save(test);
-        return test;
+
+        /**
+         * Lay toan bo sinh vien da hoc trong
+         * cac lop tin chi
+         */
+        List<Student> students = convertToList2(creditClasses, creditClass -> creditClass.getStudents());
+
+        /**
+         * So luong sinh vien moi phong thi
+         */
+        int maxSize =  testReqVO.getNumberOfStudent();
+        /**
+         * Gioi han sinh vien trong moi phong kiem tra
+         */
+        List<List<Student>> partition = partition(students, maxSize);
+
+        partition.stream().forEach(st -> {
+            Test test = new Test(
+                    testReqVO.getSubjectId(),
+                    testReqVO.getStartDate(),
+                    testReqVO.getStartTime(),
+                    testReqVO.getInMinutes(),
+                    testReqVO.getFormat(),
+                    testReqVO.getSchoolYearId(),
+                    new HashSet<>(st)
+            );
+            this.testRepository.save(test);
+        });
     }
 
     @Override
-    public Page<Test> getAllBySchoolYearIdAndStudentId(Long schoolYearId, String studentId, int page) {
-//        return this.testRepository.findAllBySchoolYearIdAndContainsStudentId(schoolYearId, studentId, PageRequest.of(page - 1, PageConstant.LIMIT));
+    public void updateRoom(Long testId, Long roomId) {
+        Test test = this.testRepository.findById(testId)
+                .orElseThrow(() -> new ResourcesNotFoundException("not found"));
+
+
+
+    }
+
+    @Override
+    public List<Test> getAllBySchoolYearIdAndStudentId(Long schoolYearId, String studentId) {
         return null;
     }
 
-
-
     @Override
-    public void addStudentIntoTest(EditRequestStudent request) {
+    public void addStudentIntoTest(TestUpdateReqVO request) {
 
     }
 
     @Override
-    public void removeStudentFromTest(EditRequestStudent request) {
+    public void removeStudentFromTest(TestUpdateReqVO request) {
 
     }
-
 
 }

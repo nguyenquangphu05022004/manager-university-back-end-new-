@@ -1,6 +1,7 @@
 package com.example.manageruniversity.core.score.service;
 
 import com.example.manageruniversity.core.score.controller.vo.ScoreCoefficientReqVO;
+import com.example.manageruniversity.core.score.dal.entity.Score;
 import com.example.manageruniversity.core.score.dal.entity.ScoreCoefficient;
 
 import java.util.List;
@@ -25,4 +26,18 @@ public interface ScoreCoefficientService {
      * @return
      */
     List<ScoreCoefficient> getList();
+
+
+    /**
+     * Lay toan bo trong so diem thanh phan
+     * cua mon hoc theo tung hoc ky
+     * @param schoolYearId: ma hoc ky/nam hoc
+     * @param subjectId: ma mon hoc
+     * @return: Danh sach trong so diem thanh phan
+     */
+    List<ScoreCoefficient> getListBySchoolYearIdAndSubjectId(
+            Long schoolYearId,
+            String subjectId
+    );
+
 }

@@ -5,13 +5,11 @@ import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.common.pojo.KeyPair;
 import com.example.manageruniversity.common.security.SecurityUtils;
 import com.example.manageruniversity.core.school_year.SchoolYearDto;
-import com.example.manageruniversity.core.score.controller.vo.ScoreCoefficientReqVO;
 import com.example.manageruniversity.core.score.controller.vo.ScoreResVO;
 import com.example.manageruniversity.core.score.dal.entity.Score;
 import com.example.manageruniversity.core.score.service.ScoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +47,8 @@ public class ScoreController {
         Map<SchoolYearDto, List<ScoreResVO>> response = convertToMap(convertToList(scores, (score) -> new KeyPair<>(new SchoolYearDto(score.getSchoolYear()), new ScoreResVO(score))));
         return success(response);
     }
+
+
 
 
 }

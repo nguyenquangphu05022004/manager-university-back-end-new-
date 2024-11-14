@@ -1,9 +1,9 @@
-package com.example.manageruniversity.core.tuition.dal.model.request;
+package com.example.manageruniversity.core.tuition.controller.vo;
 
 import lombok.Data;
 
 @Data
-public class AmountPerCreditRequest {
+public class AmountPerCreditReqVO {
     private Integer amount;
     private Long schoolYearId;
     private String majorId;

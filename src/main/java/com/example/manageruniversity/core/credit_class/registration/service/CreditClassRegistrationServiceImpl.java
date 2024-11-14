@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.example.manageruniversity.common.collection.CollUtils.convertToList;
+import static com.example.manageruniversity.common.collection.ListUtils.convertToList;
 import static com.example.manageruniversity.common.date.DateTimeUtils.isBetween;
 import static com.example.manageruniversity.core.credit_class.registration.domain.entities.CreditClassRegistration.Status.ACCEPT;
 

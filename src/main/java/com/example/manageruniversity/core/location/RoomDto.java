@@ -9,7 +9,7 @@ public class RoomDto {
     private House house;
     public RoomDto(Room room) {
         this.id = room.getId();
-        this.name = room.getName();
+        this.name = room.getCode();
         this.house = room.getHouse();
     }
 }

@@ -9,6 +9,9 @@ import lombok.Data;
 @Schema(name = "Score Coefficient - Trong so diem cua mon hoc")
 public class ScoreCoefficientResVO {
 
+    @Schema(description = "id trong so diem thanh phan", example = "1")
+    private Long id;
+
     @Schema(description = "Trong so thanh phan cua mon hoc", example = "0.7")
     private Double coefficient;
 
@@ -17,6 +20,7 @@ public class ScoreCoefficientResVO {
 
 
     public ScoreCoefficientResVO(ScoreCoefficient scoreCoefficient) {
+        this.id =  scoreCoefficient.getId();
         this.coefficient = scoreCoefficient.getCoefficient();
         this.scoreType = scoreCoefficient.getScoreType().getValue();
     }

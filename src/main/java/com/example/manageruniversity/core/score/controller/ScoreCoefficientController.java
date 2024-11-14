@@ -1,7 +1,5 @@
 package com.example.manageruniversity.core.score.controller;
 
-import com.example.manageruniversity.common.collection.ListUtils;
-import com.example.manageruniversity.common.collection.MapUtils;
 import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.common.pojo.KeyPair;
 import com.example.manageruniversity.core.school_year.SchoolYearDto;
@@ -19,7 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import static com.example.manageruniversity.common.collection.CollUtils.convertToSet;
+import static com.example.manageruniversity.common.collection.ListUtils.convertToList;
+import static com.example.manageruniversity.common.collection.MapUtils.convertToMap;
 import static com.example.manageruniversity.common.pojo.CommonResult.success;
 
 @Tag(name = "Score Coefficient - Trong so diem cua mon hoc")
@@ -41,22 +43,41 @@ public class ScoreCoefficientController {
     }
 
 
-
     @GetMapping
     @Operation(summary = "Lay toan bo danh sach trong so diem thanh phan mon hoc")
     @PreAuthorize("@ss.hasPermission('score-coefficient:get')")
-    public CommonResult<Map<SchoolYearDto, List<Map<SubjectDto, List<ScoreCoefficientResVO>>>>> getList() {
-//        List<ScoreCoefficient> scoreCoefficients = scoreCoefficientService.getList();
-//        List<KeyPair<SchoolYearDto, Map<SubjectDto, List<ScoreCoefficientResVO>>>> c = ListUtils.convertToList(
-//                scoreCoefficients,
-//                (score) -> new KeyPair<>(
-//                        new SchoolYearDto(score.getSchoolYear()),
-//                        MapUtils.convertToMap(ListUtils.convertToList(scoreCoefficients, sc -> new KeyPair<>(new SubjectDto(sc.getSubject()),)))
-//                )
-//        )
-//        Map<SchoolYearDto, List<Map<SubjectDto, List<ScoreCoefficientResVO>>>> res = MapUtils.convertToMap(
-//
-//        )
+    public CommonResult<Map<SchoolYearDto, Map<SubjectDto, List<ScoreCoefficientResVO>>>> getList() {
+        List<ScoreCoefficient> scoreCoefficients = scoreCoefficientService.getList();
+
+        Set<KeyPair<SchoolYearDto, Map<SubjectDto, List<ScoreCoefficientResVO>>>> keyPairs = convertToSet(scoreCoefficients, s -> {
+            return new KeyPair<>(
+                    new SchoolYearDto(s.getSchoolYear()),
+                    convertToMap(convertToList(
+                            scoreCoefficients,
+                            fSub -> {
+                                if (fSub.getSchoolYear().equals(s.getSchoolYear())) {
+                                    return new KeyPair<>(new SubjectDto(fSub.getSubject()), new ScoreCoefficientResVO(fSub));
+                                }
+                                return null;
+                            }
+                    ))
+            );
+        });
+        return success(convertToMap(keyPairs));
     }
 
+
+    @GetMapping("/school-year/{schoolYearId}/subject/{subjectId}")
+    @Operation(summary = "Lay toan bo he so cua mon hoc, de tinh diem mon hoc do cho sinh vien")
+    public CommonResult<List<ScoreCoefficientResVO>> getListBySchoolAndSubject(
+            @PathVariable("schoolYearId") Long schoolYearId,
+            @PathVariable("subjectId") String subjectId
+    ) {
+        return success(
+                this.scoreCoefficientService.getListBySchoolYearIdAndSubjectId(schoolYearId, subjectId),
+                ScoreCoefficientResVO::new
+        );
+    }
 }
+
+

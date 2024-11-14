@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.example.manageruniversity.common.collection.CollUtils.*;
+import static com.example.manageruniversity.common.collection.ListUtils.*;
 import static com.example.manageruniversity.common.collection.MapUtils.convertToMap;
 
 @Service

@@ -1,6 +1,7 @@
 package com.example.manageruniversity.permission.controller;
 
 import com.example.manageruniversity.common.collection.CollUtils;
+import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.permission.controller.dto.RoleDto;
 import com.example.manageruniversity.permission.service.RoleService;
@@ -34,7 +35,7 @@ public class RoleController {
 
     @GetMapping
     public CommonResult<List<RoleDto>> getAll() {
-        return success(CollUtils.convertToList(this.roleService.getList(), RoleDto::new));
+        return success(ListUtils.convertToList(this.roleService.getList(), RoleDto::new));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.manageruniversity.permission.service;
 
 import com.example.manageruniversity.common.collection.CollUtils;
+import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.json.JsonUtils;
 import com.example.manageruniversity.common.object.ObjectUtils;
@@ -83,7 +84,7 @@ public class RoleServiceImpl implements RoleService{
     public List<Role> getList() {
         if(this.redisTemplate.hasKey(RedisPermissionConstant.ROLE_LIST)) {
             Map<Object, Object> entries = this.redisTemplate.opsForHash().entries(RedisPermissionConstant.ROLE_LIST);
-            return CollUtils.convertToList(entries.entrySet(), entry -> JsonUtils.read((String) entry.getValue(), Role.class));
+            return ListUtils.convertToList(entries.entrySet(), entry -> JsonUtils.read((String) entry.getValue(), Role.class));
         } else {
             List<Role> roles = this.roleRepository.findAll();
             roles.forEach(role -> {

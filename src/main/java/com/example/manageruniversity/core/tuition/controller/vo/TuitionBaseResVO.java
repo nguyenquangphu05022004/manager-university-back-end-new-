@@ -1,11 +1,14 @@
-package com.example.manageruniversity.core.tuition.dal.model.dto;
+package com.example.manageruniversity.core.tuition.controller.vo;
 
 import com.example.manageruniversity.core.school_year.SchoolYearDto;
-import com.example.manageruniversity.core.tuition.dal.model.entity.Tuition;
+import com.example.manageruniversity.core.tuition.dal.entity.Tuition;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
-public class TuitionDto {
+@Data
+@NoArgsConstructor
+public class TuitionBaseResVO {
     private SchoolYearDto schoolYear;
     private Long unAdjustedAmount;
     private Long discountedAmount;
@@ -13,7 +16,7 @@ public class TuitionDto {
     private Long amountReceived;
     private Long outstandingBalance;
 
-    public TuitionDto(Tuition tuition) {
+    public TuitionBaseResVO(Tuition tuition) {
         if(tuition != null) {
             this.schoolYear = new SchoolYearDto(tuition.getSchoolYear());
             this.unAdjustedAmount = tuition.getUnAdjustedAmount();

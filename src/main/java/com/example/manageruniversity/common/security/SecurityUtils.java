@@ -12,7 +12,7 @@ public class SecurityUtils {
     public static User getLoginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(ObjectUtils.isNull(authentication) || authentication instanceof AnonymousAuthenticationToken ) {
-            return null;
+            throw new RuntimeException("not found user");
         }
         return (User) authentication.getPrincipal();
     }

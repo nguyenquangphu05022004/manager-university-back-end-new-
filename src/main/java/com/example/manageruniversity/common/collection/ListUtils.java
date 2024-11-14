@@ -33,6 +33,21 @@ public class ListUtils {
     }
 
     public static <T, M> List<T> convertToList(Collection<M> list, Function<M, T> func) {
-        return list.stream().map(func).toList();
+        return list.stream().map(func)
+                .filter(s -> s != null)
+                .toList();
+    }
+
+    public static <T,  M> List<T> convertToList2(Collection<M> list, Function<M, Collection<T>> func) {
+        List<T> res = new ArrayList<>();
+        for(M m : list) {
+            Collection<T> apply = func.apply(m);
+            res.addAll(apply);
+        }
+        return res;
+    }
+
+    public static <T> List<List<T>> partition(Collection<T> list, int maxSize) {
+        return null;
     }
 }

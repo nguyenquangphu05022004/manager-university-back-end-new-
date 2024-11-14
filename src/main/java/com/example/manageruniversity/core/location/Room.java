@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 public class Room extends SubBaseEntity {
-    private String name;
+    private String code;
     @Enumerated(EnumType.STRING)
     private House house;
 }

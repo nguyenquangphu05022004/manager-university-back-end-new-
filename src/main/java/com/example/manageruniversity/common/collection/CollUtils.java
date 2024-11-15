@@ -20,6 +20,7 @@ public class CollUtils {
         return from.stream().map(func).filter(Objects::nonNull).collect(Collectors.toSet());
     }
 
+
     public static<T> boolean hasAnyContains(Collection<T> col1, Collection<T> col2) {
         for(T x : col1) {
             if(col2.contains(x)) return true;

@@ -15,7 +15,7 @@ import static com.example.manageruniversity.common.pojo.CommonResult.success;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/courses")
-@Tag(name = "Khoa hoc cua sinh vien trong truong dai hoc")
+@Tag(name = "Course - khoa hoc")
 @CrossOrigin("*")
 public class CourseController {
     private final CourseService courseService;

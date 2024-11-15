@@ -12,4 +12,5 @@ public interface SchoolYearService {
     SchoolYear getById(Long schoolYearId);
 
     List<SchoolYear> getAll();
+
 }

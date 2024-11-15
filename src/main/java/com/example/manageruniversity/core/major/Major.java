@@ -25,6 +25,10 @@ public class Major extends BaseEntity {
     @OneToMany(mappedBy = "parentMajorId")
     private List<Major> subMajors;
 
+    public Major(String majorId) {
+        this.majorId = majorId;
+    }
+
     public Major(String majorId, String name) {
         this.majorId = majorId;
         this.name = name;

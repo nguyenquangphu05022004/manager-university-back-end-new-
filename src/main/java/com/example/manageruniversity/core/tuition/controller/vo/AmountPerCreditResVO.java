@@ -3,9 +3,8 @@ package com.example.manageruniversity.core.tuition.controller.vo;
 import com.example.manageruniversity.core.course.CourseDto;
 import com.example.manageruniversity.core.major.MajorDto;
 import com.example.manageruniversity.core.school_year.SchoolYearDto;
-import com.example.manageruniversity.core.tuition.dal.entity.AmountPerCredit;
+import com.example.manageruniversity.core.tuition.dal.dataobject.AmountPerCredit;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 public class AmountPerCreditResVO {

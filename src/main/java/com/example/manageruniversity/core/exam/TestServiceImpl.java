@@ -1,18 +1,12 @@
 package com.example.manageruniversity.core.exam;
 
-import com.example.manageruniversity.common.collection.CollUtils;
-import com.example.manageruniversity.common.collection.ListUtils;
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
-import com.example.manageruniversity.common.object.ObjectUtils;
 import com.example.manageruniversity.core.credit_class.self.CreditClass;
 import com.example.manageruniversity.core.credit_class.self.CreditClassRepository;
 import com.example.manageruniversity.core.exam.vo.TestUpdateReqVO;
 import com.example.manageruniversity.core.exam.vo.TestReqVO;
 import com.example.manageruniversity.core.member.dal.entities.Student;
-import com.example.manageruniversity.core.school_year.SchoolYearService;
-import com.example.manageruniversity.core.subject.SubjectService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -32,7 +26,7 @@ public class TestServiceImpl implements TestService{
          * Lay toan bo lop hoc ung voi mon hoc
          * va hoc ky do
          */
-        List<CreditClass> creditClasses = this.creditClassRepository.findAllSchoolYearIdAndSubjectSubjectId(
+        List<CreditClass> creditClasses = this.creditClassRepository.findAllBySchoolYearIdAndSubjectSubjectId(
                 testReqVO.getSchoolYearId(),
                 testReqVO.getSubjectId()
         );

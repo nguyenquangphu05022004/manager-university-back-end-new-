@@ -16,6 +16,10 @@ public class Course extends BaseEntity {
     private String courseId;
     private String name;
 
+    public Course(String courseId) {
+        this.courseId = courseId;
+    }
+
 
     public void setName(String name) {
         this.name = name;

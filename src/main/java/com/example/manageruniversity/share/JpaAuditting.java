@@ -1,5 +1,6 @@
 package com.example.manageruniversity.share;
 
+import com.example.manageruniversity.web.security.utils.SecurityUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -16,16 +17,6 @@ public class JpaAuditting {
 
     @Bean
     public AuditorAware<String> auditorProvider() {
-        return new AuditorAware<>() {
-
-            @Override
-            public Optional<String> getCurrentAuditor() {
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                if((authentication instanceof AnonymousAuthenticationToken)) {
-                    return null;
-                }
-                return Optional.of("ADMIN");
-            }
-        };
+        return () -> Optional.of(SecurityUtils.getLoginUserUsername());
     }
 }

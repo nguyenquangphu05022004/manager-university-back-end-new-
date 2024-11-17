@@ -1,6 +1,6 @@
 package com.example.manageruniversity.web.security.config;
 
-import com.example.manageruniversity.core.member.dal.repo.UserRepository;
+import com.example.manageruniversity.university.member.dal.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

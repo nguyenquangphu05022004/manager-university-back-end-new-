@@ -1,0 +1,34 @@
+package com.example.manageruniversity.university.school_year;
+
+import com.example.manageruniversity.common.pojo.CommonResult;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.example.manageruniversity.common.pojo.CommonResult.*;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/school-year")
+@CrossOrigin("*")
+public class SchoolYearController {
+    private final SchoolYearService schoolYearService;
+
+
+    public CommonResult<SchoolYearDto> update(@RequestBody SchoolYearRequest request) {
+        return success(new SchoolYearDto(schoolYearService.update(request)));
+    }
+
+
+    @GetMapping
+    public CommonResult<List<SchoolYearDto>> getAll() {
+        return success(this.schoolYearService.getAll(), SchoolYearDto::new);
+    }
+
+    @GetMapping("/get-all-by-course-id-{courseId}")
+    public CommonResult<List<SchoolYearDto>> getAllByCourseId(@PathVariable("courseId") String courseId) {
+        return success(schoolYearService.getAllByCourseId(courseId), SchoolYearDto::new);
+    }
+
+}

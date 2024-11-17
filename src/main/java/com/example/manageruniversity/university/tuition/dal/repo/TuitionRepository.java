@@ -1,0 +1,10 @@
+package com.example.manageruniversity.university.tuition.dal.repo;
+
+import com.example.manageruniversity.university.tuition.dal.dataobject.Tuition;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface TuitionRepository extends JpaRepository<Tuition, Long> {
+    List<Tuition> findByStudentId(Long studentId);
+}

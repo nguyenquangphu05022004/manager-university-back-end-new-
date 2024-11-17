@@ -1,7 +1,7 @@
 package com.example.manageruniversity.report.excel.export;
 
 
-import com.example.manageruniversity.core.member.dal.entities.Student;
+import com.example.manageruniversity.university.member.dal.entities.Student;
 import lombok.Getter;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;

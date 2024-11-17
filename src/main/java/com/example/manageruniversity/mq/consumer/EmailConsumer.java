@@ -2,7 +2,7 @@ package com.example.manageruniversity.mq.consumer;
 
 
 import com.example.manageruniversity.mq.message.EmailMessage;
-import com.example.manageruniversity.third.mail.MailService;
+import com.example.manageruniversity.system.mail.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;

@@ -3,7 +3,7 @@ package com.example.manageruniversity.university.score.dal.entity;
 import com.example.manageruniversity.university.member.dal.entities.Student;
 import com.example.manageruniversity.university.school_year.SchoolYear;
 import com.example.manageruniversity.university.subject.Subject;
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

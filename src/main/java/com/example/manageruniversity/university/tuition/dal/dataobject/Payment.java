@@ -1,7 +1,7 @@
 package com.example.manageruniversity.university.tuition.dal.dataobject;
 
 import com.example.manageruniversity.university.member.dal.entities.Student;
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

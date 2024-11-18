@@ -1,6 +1,6 @@
 package com.example.manageruniversity.university.course;
 
-import com.example.manageruniversity.share.BaseEntity;
+import com.example.manageruniversity.common.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;

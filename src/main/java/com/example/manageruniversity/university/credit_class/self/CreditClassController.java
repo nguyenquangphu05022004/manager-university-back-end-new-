@@ -1,7 +1,7 @@
 package com.example.manageruniversity.university.credit_class.self;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.web.security.utils.SecurityUtils;
+import com.example.manageruniversity.security.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

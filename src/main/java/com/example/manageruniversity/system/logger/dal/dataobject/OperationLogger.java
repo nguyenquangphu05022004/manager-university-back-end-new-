@@ -1,7 +1,7 @@
 package com.example.manageruniversity.system.logger.dal.dataobject;
 
 
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 

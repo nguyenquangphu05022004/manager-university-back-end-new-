@@ -8,7 +8,7 @@ import com.example.manageruniversity.system.auth.dal.dataobject.AuthRefreshToken
 import com.example.manageruniversity.system.auth.dal.redis.config.RedisAccessTokenDao;
 import com.example.manageruniversity.system.auth.dal.repo.AuthAccessTokenRepository;
 import com.example.manageruniversity.system.auth.dal.repo.AuthRefreshTokenRepository;
-import com.example.manageruniversity.web.security.JwtService;
+import com.example.manageruniversity.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

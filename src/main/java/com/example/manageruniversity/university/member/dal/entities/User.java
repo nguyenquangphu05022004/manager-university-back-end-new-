@@ -1,7 +1,7 @@
 package com.example.manageruniversity.university.member.dal.entities;
 
 import com.example.manageruniversity.university.member.domain.enums.MemberType;
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

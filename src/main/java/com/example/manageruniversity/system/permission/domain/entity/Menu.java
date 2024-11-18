@@ -1,6 +1,6 @@
 package com.example.manageruniversity.system.permission.domain.entity;
 
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

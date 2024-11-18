@@ -2,7 +2,7 @@ package com.example.manageruniversity.university.credit_class.time_table;
 
 import com.example.manageruniversity.university.credit_class.self.CreditClass;
 import com.example.manageruniversity.university.location.Room;
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

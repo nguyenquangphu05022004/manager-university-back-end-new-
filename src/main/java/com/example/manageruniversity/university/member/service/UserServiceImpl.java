@@ -2,8 +2,8 @@ package com.example.manageruniversity.university.member.service;
 
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
 import com.example.manageruniversity.common.exception.ServiceException;
-import com.example.manageruniversity.university.media.Media;
-import com.example.manageruniversity.university.media.MediaService;
+import com.example.manageruniversity.infra.media.Media;
+import com.example.manageruniversity.infra.media.MediaService;
 import com.example.manageruniversity.university.member.controller.vo.MemberCreateReqVO;
 import com.example.manageruniversity.university.member.controller.vo.MemberResetPasswordVO;
 import com.example.manageruniversity.university.member.controller.vo.MemberUpdateReqVO;

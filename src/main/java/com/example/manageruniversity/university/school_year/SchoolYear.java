@@ -1,6 +1,6 @@
 package com.example.manageruniversity.university.school_year;
 
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

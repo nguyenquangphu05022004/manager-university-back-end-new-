@@ -2,7 +2,7 @@ package com.example.manageruniversity.university.tuition.dal.dataobject;
 
 import com.example.manageruniversity.university.member.dal.entities.Student;
 import com.example.manageruniversity.university.school_year.SchoolYear;
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

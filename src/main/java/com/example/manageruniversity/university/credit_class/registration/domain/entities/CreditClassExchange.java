@@ -2,7 +2,7 @@ package com.example.manageruniversity.university.credit_class.registration.domai
 
 import com.example.manageruniversity.university.credit_class.self.CreditClass;
 import com.example.manageruniversity.university.member.dal.entities.Student;
-import com.example.manageruniversity.share.SubBaseEntity;
+import com.example.manageruniversity.common.base.SubBaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

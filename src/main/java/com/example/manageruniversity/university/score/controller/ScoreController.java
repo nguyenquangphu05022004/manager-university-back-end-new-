@@ -3,7 +3,7 @@ package com.example.manageruniversity.university.score.controller;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
 import com.example.manageruniversity.common.pojo.KeyPair;
-import com.example.manageruniversity.web.security.utils.SecurityUtils;
+import com.example.manageruniversity.security.utils.SecurityUtils;
 import com.example.manageruniversity.university.school_year.SchoolYearDto;
 import com.example.manageruniversity.university.score.controller.vo.ScoreResVO;
 import com.example.manageruniversity.university.score.dal.entity.Score;

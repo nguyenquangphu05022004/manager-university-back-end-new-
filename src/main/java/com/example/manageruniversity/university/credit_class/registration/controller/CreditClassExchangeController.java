@@ -1,7 +1,7 @@
 package com.example.manageruniversity.university.credit_class.registration.controller;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.web.security.utils.SecurityUtils;
+import com.example.manageruniversity.security.utils.SecurityUtils;
 import com.example.manageruniversity.university.credit_class.registration.domain.dto.request.CreditClassExchangeReqVO;
 import com.example.manageruniversity.university.credit_class.registration.domain.dto.response.CreditClassExchangeDto;
 import com.example.manageruniversity.university.credit_class.registration.service.CreditClassExchangeService;

@@ -1,6 +1,6 @@
 package com.example.manageruniversity.university.major;
 
-import com.example.manageruniversity.share.BaseEntity;
+import com.example.manageruniversity.common.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

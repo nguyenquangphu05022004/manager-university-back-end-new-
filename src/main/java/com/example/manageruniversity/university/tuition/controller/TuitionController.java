@@ -2,7 +2,7 @@ package com.example.manageruniversity.university.tuition.controller;
 
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.web.security.utils.SecurityUtils;
+import com.example.manageruniversity.security.utils.SecurityUtils;
 import com.example.manageruniversity.university.tuition.api.VNPayAPI;
 import com.example.manageruniversity.university.tuition.controller.vo.TuitionBaseResVO;
 import com.example.manageruniversity.university.tuition.service.tuition.TuitionService;

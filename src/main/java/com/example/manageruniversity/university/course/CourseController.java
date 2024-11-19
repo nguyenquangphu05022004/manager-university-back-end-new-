@@ -31,11 +31,13 @@ public class CourseController {
             description = "Tao khoa hoc moi khi co 1 dot tuyen sinh",
             summary = "Tao khoa hoc"
     )
+    @OperateLog
     public CommonResult<CourseDto> create(@RequestBody CourseRequest courseRequest) {
         return success(new CourseDto(this.courseService.update(courseRequest)));
     }
 
     @GetMapping
+    @OperateLog(describe = "Lay toan bo khoa hoc cua trong truong dai hoc")
     public CommonResult<List<CourseDto>> getAll() {
         return success(courseService.getAll(), CourseDto::new);
     }

@@ -43,6 +43,6 @@ public @interface OperateLog {
      * Log result after task completed
      * @return: true is log result else not
      */
-    boolean logResult() default true;
+    boolean logResult() default false;
 
 }

@@ -14,7 +14,7 @@ public class SecurityUtils {
 
     public static final String HEADER = "Authorization";
     public static final String TYPE_TOKEN = "Bearer ";
-
+    public static final String DEFAULT_USERNAME = "Anonymous";
 
     public static String obtainToken(HttpServletRequest request) {
         String header = request.getHeader(HEADER);

@@ -3,6 +3,7 @@ package com.example.manageruniversity.common.pojo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 
 import java.util.Collection;
 import java.util.List;
@@ -35,6 +36,7 @@ public class CommonResult<T> {
     public static <S, U> CommonResult<List<U>> success(Collection<S> list, Function<S, U> func) {
         return success(list.stream().map(func).toList());
     }
+
     public static <T> CommonResult<T> success(Integer code, T data) {
         return success(code, null, data);
     }

@@ -14,6 +14,10 @@ public class JpaAuditting {
 
     @Bean
     public AuditorAware<String> auditorProvider() {
-        return () -> Optional.of(SecurityUtils.getLoginUserUsername());
+        return () -> {
+            String loginUserUsername = SecurityUtils.getLoginUserUsername();
+            if(loginUserUsername == null) return Optional.of(SecurityUtils.DEFAULT_USERNAME);
+            return Optional.of(loginUserUsername);
+        };
     }
 }

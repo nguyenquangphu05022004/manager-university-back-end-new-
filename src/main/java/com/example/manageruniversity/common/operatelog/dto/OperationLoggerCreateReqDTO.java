@@ -3,11 +3,10 @@ package com.example.manageruniversity.common.operatelog.dto;
 import com.example.manageruniversity.common.operatelog.enums.OperateTypeEnum;
 import lombok.Data;
 
-import java.time.Duration;
 import java.util.Date;
 
 @Data
-public class OperateLogCreateReqDTO {
+public class OperationLoggerCreateReqDTO  {
     private Long userId;
     private String username;
 
@@ -39,9 +38,8 @@ public class OperateLogCreateReqDTO {
 
 
     private Date startLog;
-    private Duration duration;
+//    private Duration duration;
 
     private int resultCode;
     private String resultMessage;
-
 }

@@ -46,7 +46,7 @@ public class ServletUtils {
         if(request == null) {
             return null;
         }
-        return request.getRemoteUser();
+        return request.getRemoteAddr();
     }
 
 

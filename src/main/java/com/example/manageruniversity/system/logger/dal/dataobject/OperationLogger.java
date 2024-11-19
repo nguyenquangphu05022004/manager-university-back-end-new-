@@ -3,13 +3,11 @@ package com.example.manageruniversity.system.logger.dal.dataobject;
 
 import com.example.manageruniversity.common.base.SubBaseEntity;
 import com.example.manageruniversity.common.operatelog.enums.OperateTypeEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Date;
 
 @Table(name = "sys_operation_logger")
 @Entity
@@ -29,7 +27,8 @@ public class OperationLogger extends SubBaseEntity {
     /**
      * @link common.operatelog.enums.OperateTypeEnum
      */
-    private List<OperateTypeEnum> operateTypeEnums;
+    @Enumerated(EnumType.STRING)
+    private OperateTypeEnum operateTypeEnum;
 
     /**
      * Result if it is enabled log.
@@ -40,22 +39,17 @@ public class OperationLogger extends SubBaseEntity {
     /**
      * Write args under JSON,  if is enabled log.
      */
-    private List<String> args;
+    private String args;
+
+    private String clientIp;
+
+    private String userAgent;
 
 
-    public OperationLogger(Long userId,
-                           String username,
-                           String methodName,
-                           String description,
-                           List<OperateTypeEnum> operateTypeEnums,
-                           String result,
-                           List<String> args) {
-        this.userId = userId;
-        this.username = username;
-        this.methodName = methodName;
-        this.description = description;
-        this.operateTypeEnums = operateTypeEnums;
-        this.result = result;
-        this.args = args;
-    }
+    private Date startLog;
+//    private Duration duration;
+
+    private int resultCode;
+    private String resultMessage;
+
 }

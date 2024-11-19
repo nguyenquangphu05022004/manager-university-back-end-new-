@@ -2,8 +2,13 @@ package com.example.manageruniversity.common.servlet;
 
 import com.example.manageruniversity.common.json.JsonUtils;
 import com.example.manageruniversity.common.pojo.CommonResult;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 public class ServletUtils {
 
@@ -12,6 +17,38 @@ public class ServletUtils {
         String content = JsonUtils.write(object);
         write(response,object.getCode(), content, MediaType.APPLICATION_JSON_UTF8_VALUE);
     }
+
+
+    public static String getUserAgent(HttpServletRequest request) {
+        String ua = request.getHeader("User-Agent");
+        return ua != null ? ua : "";
+    }
+
+    public static String getUserAgent() {
+        HttpServletRequest request = getRequest();
+        if(request != null) {
+            return getUserAgent(request);
+        }
+        return null;
+    }
+
+    public static HttpServletRequest getRequest() {
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if(!(requestAttributes instanceof ServletRequestAttributes)) {
+            return null;
+        }
+        return ((ServletRequestAttributes) requestAttributes).getRequest();
+    }
+
+
+    public static String getIpClient() {
+        HttpServletRequest request = getRequest();
+        if(request == null) {
+            return null;
+        }
+        return request.getRemoteUser();
+    }
+
 
     private static void write(HttpServletResponse response, int code,  String content, String contentType) {
         response.setContentType(contentType);

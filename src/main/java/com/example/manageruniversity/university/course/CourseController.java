@@ -1,14 +1,20 @@
 package com.example.manageruniversity.university.course;
 
+import com.example.manageruniversity.common.collection.ListUtils;
+import com.example.manageruniversity.common.excel.utils.ExcelUtils;
+import com.example.manageruniversity.common.operatelog.annotation.OperateLog;
+import com.example.manageruniversity.common.operatelog.enums.OperateTypeEnum;
 import com.example.manageruniversity.common.pojo.CommonResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.example.manageruniversity.common.operatelog.enums.OperateTypeEnum.EXPORT;
 import static com.example.manageruniversity.common.pojo.CommonResult.success;
 
 @RestController
@@ -37,5 +43,18 @@ public class CourseController {
     @GetMapping("/{courseId}")
     public CommonResult<CourseDto> getById(@PathVariable("courseId") String courseId) {
         return success(new CourseDto(this.courseService.getById(courseId)));
+    }
+
+
+    @PostMapping("/export")
+    @Operation(summary = "export data Courses to file excel")
+    @OperateLog(type = EXPORT)
+    public CommonResult<Boolean> export(HttpServletResponse response) {
+        List<CourseDto> courses = ListUtils.convertToList(this.courseService.getAll(), CourseDto::new);
+        /**
+         * Custom util for write excel
+         */
+        ExcelUtils.write(response, "courses.xls", CourseDto.class, courses);
+        return CommonResult.success(true);
     }
 }

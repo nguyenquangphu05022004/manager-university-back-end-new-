@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.example.manageruniversity.common.pojo.CommonResult.success;
+import static com.example.manageruniversity.security.utils.SecurityUtils.getLoginUserId;
 
 @RestController
 @RequiredArgsConstructor

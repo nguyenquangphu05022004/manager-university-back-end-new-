@@ -16,7 +16,6 @@ public class SecurityUtils {
     public static final String TYPE_TOKEN = "Bearer ";
 
 
-
     public static String obtainToken(HttpServletRequest request) {
         String header = request.getHeader(HEADER);
         if(header == null) return null;

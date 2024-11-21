@@ -8,6 +8,7 @@ public class RoomDto {
     private String name;
     private House house;
     public RoomDto(Room room) {
+        if(room == null) return;
         this.id = room.getId();
         this.name = room.getCode();
         this.house = room.getHouse();

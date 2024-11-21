@@ -1,7 +1,6 @@
 package com.example.manageruniversity.university.instruction;
 
 import com.example.manageruniversity.common.pojo.CommonResult;
-import com.example.manageruniversity.filter.Condition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +27,13 @@ public class MajorSubjectSelectionController {
         return success(majorSubjectSelectionService.getAll(), MajorSubjectSelectionDto::new);
     }
 
-    @GetMapping("/get-all-by-condition")
-    public CommonResult<List<MajorSubjectSelectionDto>> getAllByCondition(@RequestBody Condition condition) {
-        return success(
-                majorSubjectSelectionService.findAllByCondition(condition),
-                MajorSubjectSelectionDto::new
-        );
-    }
+//    @GetMapping("/get-all-by-condition")
+//    public CommonResult<List<MajorSubjectSelectionDto>> getAllByCondition(@RequestBody Condition condition) {
+//        return success(
+//                majorSubjectSelectionService.findAllByCondition(condition),
+//                MajorSubjectSelectionDto::new
+//        );
+//    }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("@ss.hasPermission('major-selection-subject:delete')")

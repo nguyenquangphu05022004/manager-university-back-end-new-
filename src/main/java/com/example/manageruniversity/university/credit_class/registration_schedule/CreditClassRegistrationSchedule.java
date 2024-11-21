@@ -20,9 +20,11 @@ public class CreditClassRegistrationSchedule extends SubBaseEntity {
     @ManyToOne
     @JoinColumn(name = "school_year_id")
     private SchoolYear schoolYear;
+
     @ManyToOne
     @JoinColumn(name = "major_id")
     private Major major;
+
     private LocalDateTime start;
     private LocalDateTime end;
 

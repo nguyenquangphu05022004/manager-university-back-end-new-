@@ -1,7 +1,5 @@
 package com.example.manageruniversity.university.instruction;
 
-import com.example.manageruniversity.filter.Condition;
-
 import java.util.List;
 
 public interface MajorSubjectSelectionService {
@@ -13,7 +11,7 @@ public interface MajorSubjectSelectionService {
      * @param condition: combine all the keys major, schoolYear and course for filter
      * @return: result that we need
      */
-    List<MajorSubjectSelection> findAllByCondition(Condition condition);
+//    List<MajorSubjectSelection> findAllByCondition(Condition condition);
 
     void removeSubject(Long majorSelectionId, String subjectId);
     void addSubject(AddSubjectRequest request);

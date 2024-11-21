@@ -9,8 +9,6 @@ import com.example.manageruniversity.university.school_year.SchoolYear;
 import com.example.manageruniversity.university.school_year.SchoolYearService;
 import com.example.manageruniversity.university.subject.Subject;
 import com.example.manageruniversity.university.subject.SubjectService;
-import com.example.manageruniversity.filter.Condition;
-import com.example.manageruniversity.filter.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,10 +52,10 @@ public class MajorSubjectSelectionServiceImpl implements MajorSubjectSelectionSe
         this.majorSubjectSelectionRepository.deleteById(majorSSlId);
     }
 
-    @Override
-    public List<MajorSubjectSelection> findAllByCondition(Condition condition) {
-        return majorSubjectSelectionRepository.findAll(Filter.filterAllCondition(condition));
-    }
+//    @Override
+//    public List<MajorSubjectSelection> findAllByCondition(Condition condition) {
+//        return majorSubjectSelectionRepository.findAll(Filter.filterAllCondition(condition));
+//    }
 
     @Override
     public void removeSubject(Long majorSelectionId, String subjectId) {

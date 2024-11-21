@@ -1,7 +1,7 @@
 package com.example.manageruniversity.university.credit_class.self;
 
 import com.example.manageruniversity.common.collection.ListUtils;
-import com.example.manageruniversity.university.credit_class.time_table.TimeTableDto;
+import com.example.manageruniversity.university.credit_class.time_table.vo.TimeTableResVO;
 import com.example.manageruniversity.university.school_year.SchoolYearDto;
 import com.example.manageruniversity.university.subject.SubjectDto;
 import com.example.manageruniversity.university.member.domain.dto.response.TeacherDto;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 public class CreditClassDto {
-
+    private Long id;
     private Integer maxStudent;
     private TeacherDto teacher;
 
@@ -20,12 +20,14 @@ public class CreditClassDto {
     private SchoolYearDto schoolYear;
 
     private Integer studyGroup;
-    private List<TimeTableDto> timeTables;
+    private List<TimeTableResVO> timeTables;
     public CreditClassDto(CreditClass creditClass) {
+        this.id = creditClass.getId();
+        this.subject = new SubjectDto(creditClass.getSubject());
         this.maxStudent =creditClass.getMaxStudent();
         this.teacher = new TeacherDto(creditClass.getTeacher());
         this.schoolYear = new SchoolYearDto(creditClass.getSchoolYear());
         this.studyGroup = creditClass.getStudyGroup();
-        this.timeTables = ListUtils.convertToList(TimeTableDto.class, creditClass.getTimeTables());
+        this.timeTables = ListUtils.convertToList(creditClass.getTimeTables(), TimeTableResVO::new);
     }
 }

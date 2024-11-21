@@ -35,14 +35,12 @@ public class TimeTable extends SubBaseEntity {
     @JoinColumn(name  = "room_id")
     private Room room;
 
-    public TimeTable(Long id,
-                     LocalDate startDate, LocalDate endDate,
+    public TimeTable(LocalDate startDate, LocalDate endDate,
                      LocalTime startTime, LocalTime endTime,
                      Integer dayOfWeek,
                      TimeType timeType,
                      CreditClass creditClass,
                      Room room) {
-        setId(id);
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;

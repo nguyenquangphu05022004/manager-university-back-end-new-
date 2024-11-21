@@ -12,7 +12,8 @@ import static com.example.manageruniversity.common.pojo.CommonResult.success;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/credit-class")
+@RequestMapping("/api/credit-class")
+@CrossOrigin("*")
 public class CreditClassController {
     private final CreditClassService creditClassService;
 

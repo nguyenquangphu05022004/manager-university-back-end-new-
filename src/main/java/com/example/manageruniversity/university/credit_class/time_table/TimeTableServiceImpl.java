@@ -1,12 +1,14 @@
 package com.example.manageruniversity.university.credit_class.time_table;
 
 import com.example.manageruniversity.common.exception.ResourcesNotFoundException;
-import com.example.manageruniversity.common.object.ObjectUtils;
 import com.example.manageruniversity.university.credit_class.self.CreditClassService;
+import com.example.manageruniversity.university.credit_class.time_table.vo.TimeTableCreateReqVO;
 import com.example.manageruniversity.university.location.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,17 +18,8 @@ public class TimeTableServiceImpl implements TimeTableService{
     private final TimeTableRepository timeTableRepository;
     private final CreditClassService creditClassService;
     @Override
-    public TimeTable createOrUpdate(TimeTableRequest request) {
-        ObjectUtils.throwIfContainsAttributeIsNullOrEmpty(request, "id");
-        TimeTable timeTable = null;
-        try {
-            timeTable = getById(request.getId());
-        } catch (ResourcesNotFoundException exception) {
-            log.info("update timetable");
-        }
-
-        timeTable = new TimeTable(
-                ObjectUtils.isNull(timeTable) ? null : timeTable.getId(),
+    public TimeTable create(TimeTableCreateReqVO request) {
+        TimeTable timeTable  = new TimeTable(
                 request.getStartDate(), request.getEndDate(),
                 request.getStartTime(), request.getEndTime(),
                 request.getDayOfWeek(), request.getTimeType(),
@@ -51,5 +44,10 @@ public class TimeTableServiceImpl implements TimeTableService{
     @Override
     public void deleteByCreditClass(Long creditClassId) {
         this.timeTableRepository.deleteAllByCreditClassId(creditClassId);
+    }
+
+    @Override
+    public List<TimeTable> getAllByCreditClassId(Long creditClassId) {
+        return this.timeTableRepository.findAllByCreditClassId(creditClassId);
     }
 }

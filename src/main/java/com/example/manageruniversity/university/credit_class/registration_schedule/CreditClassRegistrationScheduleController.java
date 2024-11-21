@@ -9,14 +9,13 @@ import java.util.List;
 import static com.example.manageruniversity.common.pojo.CommonResult.success;
 
 @RestController
-@RequestMapping("/credit-class/registration-schedule")
+@RequestMapping("/api/registration-schedule")
 @RequiredArgsConstructor
 public class CreditClassRegistrationScheduleController {
     private final CreditClassRegistrationScheduleService creditClassRegistrationScheduleService;
 
 
     @PostMapping
-
     public CommonResult<CreditClassRegistrationScheduleDto> create(
             CreditClassRegistrationScheduleRequest request
     ) {
